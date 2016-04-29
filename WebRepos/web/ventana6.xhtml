@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html"/>
+        <title>Directorio de Carpetas</title>
+        <link rel="stylesheet" type="text/css" href="css/Estilo.css" media="screen"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandLink value="Regresar" action="index.xhtml"/>
+            <center><h1>Carpeta: <h:outputText value="#{access6.VerificarSubC()}"/></h1></center>
+            <br/>
+            <h:outputLink value="ventana61.xhtml" styleClass="enlace"> #{access6.repos1}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana62.xhtml" styleClass="enlace"> #{access6.repos2}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana63.xhtml" styleClass="enlace"> #{access6.repos3}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana64.xhtml" styleClass="enlace"> #{access6.repos4}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana65.xhtml" styleClass="enlace"> #{access6.repos5}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana66.xhtml" styleClass="enlace"> #{access6.repos6}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana67.xhtml" styleClass="enlace"> #{access6.repos7}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana68.xhtml" styleClass="enlace"> #{access6.repos8}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana69.xhtml" styleClass="enlace"> #{access6.repos9}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana70.xhtml" styleClass="enlace"> #{access6.repos10}</h:outputLink>
+            <br/>
+            <center>
+                <h:commandButton value="Ver repositorios" action="#{access6.ShowRepos()}"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

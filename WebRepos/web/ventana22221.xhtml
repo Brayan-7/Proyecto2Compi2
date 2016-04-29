@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html"/>
+        <title>Directorio de SubCarpetas</title>
+        <link rel="stylesheet" type="text/css" href="css/Estilo.css" media="screen"/>
+    </h:head>
+    <h:body>
+        <h:form><!--REPOSITORIO-> /P1EDD/JAVA/SRC/PROGRAMA-->
+            <h:commandLink value="Regresar" action="venatana221.xhtml"/>
+            <center><h1>Carpeta: <h:outputText value="#{accessNA1.VerificarSubA()}"/></h1></center>
+            <br/>
+            <h:outputLink value="ventanaA1.xhtml" styleClass="enlace"> #{accessNA1.a1}</h:outputLink><!--EJ1.PHP-->
+            <br/>
+            <h:outputLink value="ventanaA2.xhtml" styleClass="enlace"> #{accessNA1.a2}</h:outputLink><!--EJ2.PHP-->
+            <br/>
+            <h:outputLink value="ventanaA3.xhtml" styleClass="enlace"> #{accessNA1.a3}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA4.xhtml" styleClass="enlace"> #{accessNA1.a4}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA5.xhtml" styleClass="enlace"> #{accessNA1.a5}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA6.xhtml" styleClass="enlace"> #{accessNA1.a6}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA7.xhtml" styleClass="enlace"> #{accessNA1.a7}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA8.xhtml" styleClass="enlace"> #{accessNA1.a8}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA9.xhtml" styleClass="enlace"> #{accessNA1.a9}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA10.xhtml" styleClass="enlace"> #{accessNA1.a10}</h:outputLink>
+            <br/>
+            <center>
+                <h:commandButton value="Listado de Archivos" action="#{accessNA1.ShowAr()}"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

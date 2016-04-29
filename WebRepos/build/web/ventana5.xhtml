@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html"/>
+        <title>Directorio de Carpetas</title>
+        <link rel="stylesheet" type="text/css" href="css/Estilo.css" media="screen"/>
+    </h:head>
+    <h:body>
+        <h:form><!--REPOSITORIO VENTANA5-->
+            <h:commandLink value="Regresar" action="index.xhtml"/>
+            <center><h1>Carpeta: <h:outputText value="#{access5.VerificarSubC()}"/></h1></center>
+            <br/>
+            <h:outputLink value="ventana51.xhtml" styleClass="enlace"> #{access5.repos1}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana52.xhtml" styleClass="enlace"> #{access5.repos2}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana53.xhtml" styleClass="enlace"> #{access5.repos3}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana54.xhtml" styleClass="enlace"> #{access5.repos4}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana55.xhtml" styleClass="enlace"> #{access5.repos5}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana56.xhtml" styleClass="enlace"> #{access5.repos6}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana57.xhtml" styleClass="enlace"> #{access5.repos7}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana58.xhtml" styleClass="enlace"> #{access5.repos8}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana59.xhtml" styleClass="enlace"> #{access5.repos9}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana60.xhtml" styleClass="enlace"> #{access5.repos10}</h:outputLink>
+            <br/>
+            <center>
+                <h:commandButton value="Ver repositorios" action="#{access5.ShowRepos()}"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

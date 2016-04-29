@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html"/>
+        <title>Directorio de Carpetas</title>
+        <link rel="stylesheet" type="text/css" href="css/Estilo.css" media="screen"/>
+    </h:head>
+    <h:body>
+        <h:form> <!--REPOSITORIO /P1EDD/-->
+            <h:commandLink value="Regresar" action="index.xhtml"/>
+            <center><h1>Carpeta: <h:outputText value="#{access2.VerificarSubC()}"/></h1></center>
+            <br/>
+            <h:outputLink value="ventana21.xhtml" styleClass="enlace"> #{access2.repos1}</h:outputLink><!--JAVA-->
+            <br/>
+            <h:outputLink value="ventana22.xhtml" styleClass="enlace"> #{access2.repos2}</h:outputLink><!--C-->
+            <br/>
+            <h:outputLink value="ventana23.xhtml" styleClass="enlace"> #{access2.repos3}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana24.xhtml" styleClass="enlace"> #{access2.repos4}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana25.xhtml" styleClass="enlace"> #{access2.repos5}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana26.xhtml" styleClass="enlace"> #{access2.repos6}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana27.xhtml" styleClass="enlace"> #{access2.repos7}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana28.xhtml" styleClass="enlace"> #{access2.repos8}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana29.xhtml" styleClass="enlace"> #{access2.repos9}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana210.xhtml" styleClass="enlace"> #{access2.repos10}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana211.xhtml" styleClass="enlace"> #{access2.repos11}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana212.xhtml" styleClass="enlace"> #{access2.repos12}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana213.xhtml" styleClass="enlace"> #{access2.repos13}</h:outputLink>
+            <br/>
+            <center>
+                <h:commandButton value="Ver repositorios" action="#{access2.ShowRepos()}"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

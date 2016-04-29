@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html"/>
+        <title>Directorio de Carpetas</title>
+        <link rel="stylesheet" type="text/css" href="css/Estilo.css" media="screen"/>
+    </h:head>
+    <h:body>
+        <h:form><!--REPOSITORIO-> /P2EDD/-->
+            <h:commandLink value="Regresar" action="index.xhtml"/>
+            <center><h1>Carpeta: <h:outputText value="#{access3.VerificarSubC()}"/></h1></center>
+            <br/>
+            <h:outputLink value="ventana31.xhtml" styleClass="enlace"> #{access3.repos1}</h:outputLink><!--PAQUETE-->
+            <br/>
+            <h:outputLink value="ventana32.xhtml" styleClass="enlace"> #{access3.repos2}</h:outputLink><!--MANUALES-->
+            <br/>
+            <h:outputLink value="ventana33.xhtml" styleClass="enlace"> #{access3.repos3}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana34.xhtml" styleClass="enlace"> #{access3.repos4}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana35.xhtml" styleClass="enlace"> #{access3.repos5}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana36.xhtml" styleClass="enlace"> #{access3.repos6}</h:outputLink>
+            <br/>
+            <center>
+                <h:commandButton value="Ver repositorios" action="#{access3.ShowRepos()}"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

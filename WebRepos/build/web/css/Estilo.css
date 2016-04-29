@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 25/04/2016, 11:48:31 PM
+    Author     : brayan7
+*/
+
+.enlace{
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    text-decoration: none;
+    color: #0d0d0d;
+    border: 1px solid #FFFFFF;
+}
+
+.enlace:hover{
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    background-color: #FFCCFF;
+    text-decoration: none;
+    color: #FF0000;
+    border: 1px solid #FF0000;
+}
+
+body{
+    background-color: #5882f2;
+}
+
+.contenido{
+    background-color: #FFFFFF;
+}

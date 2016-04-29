@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html"/>
+        <title>Directorio de Carpetas</title>
+        <link rel="stylesheet" type="text/css" href="css/Estilo.css" media="screen"/>
+    </h:head>
+    <h:body>
+        <h:form><!--REPOSITORIO-> /COMPI1/-->
+            <h:commandLink value="Regresar" action="index.xhtml"/>
+            <center><h1>Carpeta: <h:outputText value="#{access4.VerificarSubC()}"/></h1></center>
+            <br/>
+            <h:outputLink value="ventana41.xhtml" styleClass="enlace"> #{access4.repos1}</h:outputLink><!--LIBERIA-->
+            <br/>
+            <h:outputLink value="ventana42.xhtml" styleClass="enlace"> #{access4.repos2}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana43.xhtml" styleClass="enlace"> #{access4.repos3}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana44.xhtml" styleClass="enlace"> #{access4.repos4}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana45.xhtml" styleClass="enlace"> #{access4.repos5}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana46.xhtml" styleClass="enlace"> #{access4.repos6}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana47.xhtml" styleClass="enlace"> #{access4.repos7}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana48.xhtml" styleClass="enlace"> #{access4.repos8}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana48.xhtml" styleClass="enlace"> #{access4.repos9}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana49.xhtml" styleClass="enlace"> #{access4.repos10}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana50.xhtml" styleClass="enlace"> #{access4.repos11}</h:outputLink>
+            <br/>
+            <center>
+                <h:commandButton value="Ver repositorios" action="#{access4.ShowRepos()}"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html"/>
+        <title>Directorio de SubCarpetas</title>
+        <link rel="stylesheet" type="text/css" href="css/Estilo.css" media="screen"/>
+    </h:head>
+    <h:body>
+        <h:form><!--REPOSITORIO-> /COMPI1/Libreria-->
+            <h:commandLink value="Regresar" action="ventana4.xhtml"/>
+            <center><h1>Carpeta: <h:outputText value="#{accessN4.VerificarSubA()}"/></h1></center>
+            <br/>
+            <h:outputLink value="ventanaA41.xhtml" styleClass="enlace"> #{accessN4.a1}</h:outputLink><!--L1.php-->
+            <br/>
+            <h:outputLink value="ventanaA42.xhtml" styleClass="enlace"> #{accessN4.a2}</h:outputLink><!--L2.php-->
+            <br/>
+            <h:outputLink value="ventanaA43.xhtml" styleClass="enlace"> #{accessN4.a3}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA44.xhtml" styleClass="enlace"> #{accessN4.a4}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA45.xhtml" styleClass="enlace"> #{accessN4.a5}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA46.xhtml" styleClass="enlace"> #{accessN4.a6}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA47.xhtml" styleClass="enlace"> #{accessN4.a7}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA48.xhtml" styleClass="enlace"> #{accessN4.a8}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA49.xhtml" styleClass="enlace"> #{accessN4.a9}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventanaA50.xhtml" styleClass="enlace"> #{accessN4.a10}</h:outputLink>
+            <br/>
+            <center>
+                <h:commandButton value="Ver repositorios" action="#{accessN4.ShowAr()}"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+

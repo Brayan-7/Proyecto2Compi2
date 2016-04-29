@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html"/>
+        <title>Directorio de SubCarpetas</title>
+        <link rel="stylesheet" type="text/css" href="css/Estilo.css" media="screen"/>
+    </h:head>
+    <h:body>
+        <h:form><!--REPOSITORIO-> /VENTANA6/CARPETA6/-->
+            <h:commandLink value="Regresar" action="ventana6.xhtml"/>
+            <center><h1>Carpeta: <h:outputText value="#{accessN60.VerificarSubC()}"/></h1></center>
+            <br/>
+            <h:outputLink value="ventana661.xhtml" styleClass="enlace"> #{accessN60.repos1}</h:outputLink><!--VENTANA661-->
+            <br/>
+            <h:outputLink value="ventana662.xhtml" styleClass="enlace"> #{accessN60.repos2}</h:outputLink><!--VENTANA662-->
+            <br/>
+            <h:outputLink value="ventana663.xhtml" styleClass="enlace"> #{accessN60.repos3}</h:outputLink><!--VENTANA663-->
+            <br/>
+            <h:outputLink value="ventana664.xhtml" styleClass="enlace"> #{accessN60.repos4}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana665.xhtml" styleClass="enlace"> #{accessN60.repos5}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana667.xhtml" styleClass="enlace"> #{accessN60.repos6}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana668.xhtml" styleClass="enlace"> #{accessN60.repos7}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana669.xhtml" styleClass="enlace"> #{accessN60.repos8}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana66.xhtml" styleClass="enlace"> #{accessN60.repos9}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana230.xhtml" styleClass="enlace"> #{accessN60.repos10}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana231.xhtml" styleClass="enlace"> #{accessN60.repos11}</h:outputLink>
+            <br/>
+            <h:outputLink value="ventana232.xhtml" styleClass="enlace"> #{accessN60.repos12}</h:outputLink>
+            <br/>
+            <center>
+                <h:commandButton value="Ver repositorios" action="#{accessN60.ShowRepos()}"/>
+            </center>
+        </h:form>
+    </h:body>
+</html>
+
