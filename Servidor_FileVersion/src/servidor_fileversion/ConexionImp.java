@@ -13,13 +13,14 @@ import java.util.logging.Logger;
  *
  * @author CLASH OF CLANS
  */
-public class ConexionImp implements conexion.Iface{   
+public class ConexionImp implements conexion.Iface{  
+    public VentanaFileVersion VFV = new VentanaFileVersion();
 
     @Override
     public String DoLog(String instruccion) throws TException {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String cuerpoLog ="";
-        cuerpoLog = cuerpoLog + instruccion;
+        cuerpoLog = cuerpoLog + instruccion +"\n";
         String ruta = "C:\\Users\\CLASH OF CLANS\\Desktop\\Grap\\LogFileServer.txt";
         File archivo = new File(ruta);
         BufferedWriter bw;
@@ -33,32 +34,53 @@ public class ConexionImp implements conexion.Iface{
         System.out.println("------LOG-----");
         System.out.println(">>> " + instruccion);
         System.out.println("--------------");
-        return "Sentencia LOG Recibida";
+        return "Sentencia LOG Recibida y almacenada";
     }
 
     @Override
     public String DoRepo(String repo) throws TException {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String resultado;
-        System.out.println("------CREAR-----");
+        System.out.println("------CREANDO-----");
         System.out.println(">>> " + repo);
         System.out.println("--------------");
-        resultado = "Se creo el repositorio " + repo +"exitosamente";
+        ///SE CREA LA CARPETA EN EL SERVIDOR
+        File folder1 = new File("A:\\FileVersionServer\\"+repo);
+        folder1.mkdir();
+        ///SE INGRESARA EL REPOSITORIO A LA BASE DE DATOS
+        VFV.InsertarDB1(repo);
+        System.out.println("Repositorio Creado..");
+        resultado = "Se creo el repositorio " + repo +"exitosamente, cuya clate es: "+VFV.LlaveU;
+        System.out.println(resultado);
         return resultado;
     }
 
     @Override
-    public String DelRepor(String repo) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String DelRepo(String repo) throws TException {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String rrepoD="", Resultado="";
+        //ELIMINANDO LA CARPETA RESPECTIVA AL REPOSITORIO
+        VFV.EliminarF(repo);
+        //ELIMINANDO EL REPOSITORIO DE LA BD
+        VFV.EliminarR(repo);
+        System.out.println("Repositorio Eliminado..");
+        Resultado = "El repositorio " + repo +"se elimino exitosamente";
+        System.out.println(Resultado);
+        return Resultado;
     }
 
     @Override
     public String SWRepo(String repoA, String repoN) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String Resultado="";
+        System.out.println("Repositorio Eliminado..");
+        Resultado = "El repositorio " + repoA +"se elimino exitosamente";
+        System.out.println(Resultado);
+        return Resultado;
     }
 
     @Override
-    public String UpFiles(String instruccion) throws TException {
+    public String UpFiles(int Llave, String instr) throws TException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -101,4 +123,5 @@ public class ConexionImp implements conexion.Iface{
     public String Release(String llaveU) throws TException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

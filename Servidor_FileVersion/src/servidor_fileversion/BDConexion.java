@@ -18,7 +18,7 @@ public class BDConexion {
     public Connection conexion(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conectar = DriverManager.getConnection("jdbc:mysql://localhost/dbrepos","root","root");
+            conectar = DriverManager.getConnection("jdbc:mysql://localhost/PruebasTablas","root","root");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("//////EXITE ERROR");

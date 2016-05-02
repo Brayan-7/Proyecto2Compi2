@@ -1,0 +1,9 @@
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\bin\Debug\Proyecto2_Compi2.exe.config
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\bin\Debug\Proyecto2_Compi2.exe
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\bin\Debug\Proyecto2_Compi2.pdb
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\obj\Debug\Proyecto2_Compi2.csprojResolveAssemblyReference.cache
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\obj\Debug\Proyecto2_Compi2.Form1.resources
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\obj\Debug\Proyecto2_Compi2.Properties.Resources.resources
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\obj\Debug\Proyecto2_Compi2.csproj.GenerateResource.Cache
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\obj\Debug\Proyecto2_Compi2.exe
+c:\users\clash of clans\documents\visual studio 2013\Projects\Proyecto2_Compi2\Proyecto2_Compi2\obj\Debug\Proyecto2_Compi2.pdb

@@ -18,6 +18,8 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransportException;
 import java.io.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,6 +27,7 @@ import java.sql.*;
  */
 public class VentanaFileVersion extends javax.swing.JFrame {
     BDConexion con = new BDConexion();
+    public static String LlaveU;
     
     /**
      * Creates new form VentanaFileVersion
@@ -95,7 +98,10 @@ public class VentanaFileVersion extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //ConsultaDB1("Datos1");
-        InsertarDB1("Datos2");
+        //InsertarDB1("Datos2");
+        //ConsultaLlave("<?php echo(\"Palabra\");?>");
+        //EliminarR("<?php echo(\"Cliente C# Repositorio: ProyectoWrite5()\");?>");        
+        EliminarF("Cancion");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //**CONEXIÓN CON ENTRE JAVA Y C# CON APACHE THRIFT
@@ -113,10 +119,45 @@ public class VentanaFileVersion extends javax.swing.JFrame {
     
     //***CREAR CARPETA PRINCIPAL DEL REPOSITORIO
     public void CarpetaPrincipal(){
-        File folder = new File("A:\\FileVersionServer");
+        File folder = new File("/home/brayan7/NetBeansProjects/Servidor_FileVersion/FileVersionServer");
         folder.mkdir();
         System.out.println("Carpeta Creada!!");
     }
+    
+    //***ELIMINAR CARPETA DEL REPOSITORIO
+    public void EliminarF(String carpeta){
+        deleteWC("/home/brayan7/NetBeansProjects/Servidor_FileVersion/"+carpeta);
+        System.out.println("Carpeta Eliminada Correctamente");
+    }
+    
+    //---------METOOD PARA ELIMINAR UNA CARPETA DEL SERVIDOR
+    public boolean deleteWC(String path){
+        File file = new File(path);
+        if(!file.exists()){
+            return true;
+        }
+        if(!file.isDirectory()){
+            return file.delete();
+        }
+        return this.deleteC(file) & file.delete();
+    }
+    
+    private boolean deleteC(File dir){
+        File[] children = dir.listFiles();
+        boolean childrenDeleted = true;
+        for(int i=0; children !=null && i<children.length; i++){
+            File child = children[i];
+            if(child.isDirectory()){
+                childrenDeleted = this.deleteC(child) && childrenDeleted;
+            }
+            if(child.exists()){
+                childrenDeleted = child.delete() && childrenDeleted;
+            }
+            
+        }
+        return childrenDeleted;
+    }
+    //---------
     
     //***CONSULTA A LA BASE DE DATOS POR MEDIO DE LA APP
     public void ConsultaDB1(String Repo){
@@ -141,21 +182,47 @@ public class VentanaFileVersion extends javax.swing.JFrame {
         }
     }
     
-    //*****INSERTAR DATOS A LA BASE DE DATOS
+    //***CONSULTA A LA BASE DE DATOS PARA OBTENER LA LLAVE PRIMARIA DE LA TABLA PROYECTO
+    public String ConsultaLlave(String Repo){
+        con = new BDConexion(); //INSTANCIAMOS LA CLASE QUE CONTIENE LA CONEXIÒN
+        String[] datos = new String[8]; String Valor="";
+        Connection cn = con.conexion(); //LLAMAMOS AL METODO PARA CONECTARNOS A LA BD
+        if (cn == null) {
+            System.out.println("*********ERROR AL CONECTAR A LA BD");
+        }else {
+            try {
+                Statement st1 = cn.createStatement();
+                ResultSet rs = st1.executeQuery("SELECT * FROM Proyecto WHERE Nombre ='"+ Repo+"'");
+                while (rs.next()) {
+                    datos[0] = rs.getString(1); datos[1] = rs.getString(2);
+                    Valor = datos[0];
+                    //System.out.println("D1>> "+datos[0]+" D2>> "+datos[1]);
+                    System.out.println(Valor);
+                }
+                System.out.println("++++++++++CONECTADO MetodoConsultaLlave+++++++++");
+            } catch (Exception e) {
+                e.printStackTrace(); System.out.println("ERROR!!");
+            }
+        }
+        return Valor;
+    }
+    
+    //*****INSERTAR DATOS A LA BASE DE DATOS A LA TABLA PROYECTO
     public void InsertarDB1(String Repo){
         con = new BDConexion();
         PreparedStatement st =null;
         Connection cn = con.conexion();
         if (cn==null) {
-            //JOptionPane.showMessageDialog(null, "EEROR AL CONECTAR AL BD");
             System.out.println("EEROR AL CONECTAR AL BD!!!!!!!");
         } else {
-            //System.out.println("SI ENTRO");
             try {
-                st = cn.prepareStatement("INSERT INTO ArchivoPhp (IdArchivo, Contenido) values(?,?);");
-                st.setString(1,"2" );
-                st.setString(2,"<?php echo(\"Palabra\");?>" );
+                st = cn.prepareStatement("INSERT INTO Proyecto (Nombre) values(?);");
+                st.setString(1, Repo );
+                //st.setString(2,"<?php echo(\""+Repo+"\");?>" );
                 st.executeUpdate();
+                LlaveU = ConsultaLlave(Repo);
+                System.out.println(LlaveU);
+                System.out.println("Exito en el INSERT del repositorio: "+Repo);
             } catch (Exception e) {
                 System.out.println("*********" + e.getMessage());
                 e.printStackTrace();
@@ -168,6 +235,59 @@ public class VentanaFileVersion extends javax.swing.JFrame {
                 }
             }
             System.out.println("////////TODO BIEN///////");
+        }
+    }
+    
+    //****BORRAR DATOS DE LA BASE DE DATOS DE LA TABLA PROYECTO
+    public void EliminarR(String Repo){
+        con = new BDConexion();
+        PreparedStatement st =null;
+        Connection cn = con.conexion();
+        if (cn==null) {
+            System.out.println("EEROR AL CONECTAR AL BD!!!!!!!");
+        } else {
+            try {
+                st = cn.prepareStatement("DELETE FROM ArchivoPhp WHERE Contenido =?");
+                st.setString(1,Repo);
+                //st.setString(2,"<?php echo(\""+Repo+"\");?>" );
+                st.execute();
+                System.out.println("Se Borro del repositorio: "+Repo);
+            } catch (Exception e) {
+                System.out.println("*********" + e.getMessage());
+                e.printStackTrace();
+            } finally{
+                try {
+                    st.close();
+                    cn.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("////////TODO BIEN///////");
+        }
+    }
+    
+    //*****ONSULTA A LA BASE DE DATOS PARA VERIFICAR SI EXISTE EL REPOSITORIO
+    public void SwitchR(int llave, String Repo){
+        con = new BDConexion(); //INSTANCIAMOS LA CLASE QUE CONTIENE LA CONEXIÒN
+        String[] datos = new String[8]; String Valor="";
+        Connection cn = con.conexion(); //LLAMAMOS AL METODO PARA CONECTARNOS A LA BD
+        if (cn == null) {
+            System.out.println("*********ERROR AL CONECTAR A LA BD");
+        }else {
+            try {
+                Statement st1 = cn.createStatement();
+                ResultSet rs = st1.executeQuery("SELECT * FROM Proyecto WHERE Nombre ='"+ Repo+"'");
+                while (rs.next()) {
+                    datos[0] = rs.getString(1); datos[1] = rs.getString(2);
+                    Valor = datos[0];
+                    //System.out.println("D1>> "+datos[0]+" D2>> "+datos[1]);
+                    System.out.println(Valor);
+                }
+                System.out.println("++++++++++CONECTADO MetodoConsultaLlave+++++++++");
+            } catch (Exception e) {
+                e.printStackTrace(); System.out.println("ERROR!!");
+            }
         }
     }
     
