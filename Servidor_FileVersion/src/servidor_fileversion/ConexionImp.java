@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  */
 public class ConexionImp implements conexion.Iface{  
     public VentanaFileVersion VFV = new VentanaFileVersion();
+    BDConexion con = new BDConexion();
 
     @Override
     public String DoLog(String instruccion) throws TException {
@@ -73,15 +74,28 @@ public class ConexionImp implements conexion.Iface{
     public String SWRepo(String repoA, String repoN) throws TException {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String Resultado="";
-        System.out.println("Repositorio Eliminado..");
-        Resultado = "El repositorio " + repoA +"se elimino exitosamente";
+        //METODO PARA VERIFICAR SI EXISTE EL REPO EN LA BD Y ENVIO
+        VFV.SwitchR(repoN, repoA);
+        System.out.println("Repositorio Enviado SW..");
+        Resultado = "El repositorio " + repoA +"Existe, Repositorio Enviado";
         System.out.println(Resultado);
         return Resultado;
     }
 
     @Override
-    public String UpFiles(int Llave, String instr) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String UpFiles(int Llave, String instr, String NomArch, String SubCarp, String Conten, String Proyecto, String SubCarp2) throws TException {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String Resultado = "";
+        //Verificar que exita el repositorio y sus carpetas
+        VFV.ComprobarCarpeta(SubCarp,SubCarp2,Proyecto);
+        //Insertar archivos a la tabla
+        VFV.InsertFile(NomArch,Conten);
+        //Realizacion de los datos a la tabla commit
+        VFV.InsertComm(Llave,Conten);
+        System.out.println("Se logro hacer el commmit de Repositorio" + Proyecto);
+        Resultado = "Se logro hacer el commmit de Repositorio" + Proyecto;
+        System.out.println(Resultado);
+        return Resultado;
     }
 
     @Override
@@ -123,5 +137,6 @@ public class ConexionImp implements conexion.Iface{
     public String Release(String llaveU) throws TException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
 }

@@ -39,9 +39,9 @@ namespace Proyecto2_Compi2
       IAsyncResult Begin_SWRepo(AsyncCallback callback, object state, string repoA, string repoN);
       string End_SWRepo(IAsyncResult asyncResult);
       #endif
-      string UpFiles(int Llave, string instr);
+      string UpFiles(int Llave, string instr, string NomArch, string SubCarp, string Conten, string Proyecto, string SubCarp2);
       #if SILVERLIGHT
-      IAsyncResult Begin_UpFiles(AsyncCallback callback, object state, int Llave, string instr);
+      IAsyncResult Begin_UpFiles(AsyncCallback callback, object state, int Llave, string instr, string NomArch, string SubCarp, string Conten, string Proyecto, string SubCarp2);
       string End_UpFiles(IAsyncResult asyncResult);
       #endif
       string Update(string repo);
@@ -393,9 +393,9 @@ namespace Proyecto2_Compi2
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_UpFiles(AsyncCallback callback, object state, int Llave, string instr)
+      public IAsyncResult Begin_UpFiles(AsyncCallback callback, object state, int Llave, string instr, string NomArch, string SubCarp, string Conten, string Proyecto, string SubCarp2)
       {
-        return send_UpFiles(callback, state, Llave, instr);
+        return send_UpFiles(callback, state, Llave, instr, NomArch, SubCarp, Conten, Proyecto, SubCarp2);
       }
 
       public string End_UpFiles(IAsyncResult asyncResult)
@@ -406,28 +406,33 @@ namespace Proyecto2_Compi2
 
       #endif
 
-      public string UpFiles(int Llave, string instr)
+      public string UpFiles(int Llave, string instr, string NomArch, string SubCarp, string Conten, string Proyecto, string SubCarp2)
       {
         #if !SILVERLIGHT
-        send_UpFiles(Llave, instr);
+        send_UpFiles(Llave, instr, NomArch, SubCarp, Conten, Proyecto, SubCarp2);
         return recv_UpFiles();
 
         #else
-        var asyncResult = Begin_UpFiles(null, null, Llave, instr);
+        var asyncResult = Begin_UpFiles(null, null, Llave, instr, NomArch, SubCarp, Conten, Proyecto, SubCarp2);
         return End_UpFiles(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_UpFiles(AsyncCallback callback, object state, int Llave, string instr)
+      public IAsyncResult send_UpFiles(AsyncCallback callback, object state, int Llave, string instr, string NomArch, string SubCarp, string Conten, string Proyecto, string SubCarp2)
       #else
-      public void send_UpFiles(int Llave, string instr)
+      public void send_UpFiles(int Llave, string instr, string NomArch, string SubCarp, string Conten, string Proyecto, string SubCarp2)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("UpFiles", TMessageType.Call, seqid_));
         UpFiles_args args = new UpFiles_args();
         args.Llave = Llave;
         args.Instr = instr;
+        args.NomArch = NomArch;
+        args.SubCarp = SubCarp;
+        args.Conten = Conten;
+        args.Proyecto = Proyecto;
+        args.SubCarp2 = SubCarp2;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
         #if SILVERLIGHT
@@ -1059,7 +1064,7 @@ namespace Proyecto2_Compi2
         args.Read(iprot);
         iprot.ReadMessageEnd();
         UpFiles_result result = new UpFiles_result();
-        result.Success = iface_.UpFiles(args.Llave, args.Instr);
+        result.Success = iface_.UpFiles(args.Llave, args.Instr, args.NomArch, args.SubCarp, args.Conten, args.Proyecto, args.SubCarp2);
         oprot.WriteMessageBegin(new TMessage("UpFiles", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
@@ -2092,6 +2097,11 @@ namespace Proyecto2_Compi2
     {
       private int _Llave;
       private string _instr;
+      private string _NomArch;
+      private string _SubCarp;
+      private string _Conten;
+      private string _Proyecto;
+      private string _SubCarp2;
 
       public int Llave
       {
@@ -2119,6 +2129,71 @@ namespace Proyecto2_Compi2
         }
       }
 
+      public string NomArch
+      {
+        get
+        {
+          return _NomArch;
+        }
+        set
+        {
+          __isset.NomArch = true;
+          this._NomArch = value;
+        }
+      }
+
+      public string SubCarp
+      {
+        get
+        {
+          return _SubCarp;
+        }
+        set
+        {
+          __isset.SubCarp = true;
+          this._SubCarp = value;
+        }
+      }
+
+      public string Conten
+      {
+        get
+        {
+          return _Conten;
+        }
+        set
+        {
+          __isset.Conten = true;
+          this._Conten = value;
+        }
+      }
+
+      public string Proyecto
+      {
+        get
+        {
+          return _Proyecto;
+        }
+        set
+        {
+          __isset.Proyecto = true;
+          this._Proyecto = value;
+        }
+      }
+
+      public string SubCarp2
+      {
+        get
+        {
+          return _SubCarp2;
+        }
+        set
+        {
+          __isset.SubCarp2 = true;
+          this._SubCarp2 = value;
+        }
+      }
+
 
       public Isset __isset;
       #if !SILVERLIGHT
@@ -2127,6 +2202,11 @@ namespace Proyecto2_Compi2
       public struct Isset {
         public bool Llave;
         public bool instr;
+        public bool NomArch;
+        public bool SubCarp;
+        public bool Conten;
+        public bool Proyecto;
+        public bool SubCarp2;
       }
 
       public UpFiles_args() {
@@ -2157,6 +2237,41 @@ namespace Proyecto2_Compi2
               case 2:
                 if (field.Type == TType.String) {
                   Instr = iprot.ReadString();
+                } else { 
+                  TProtocolUtil.Skip(iprot, field.Type);
+                }
+                break;
+              case 3:
+                if (field.Type == TType.String) {
+                  NomArch = iprot.ReadString();
+                } else { 
+                  TProtocolUtil.Skip(iprot, field.Type);
+                }
+                break;
+              case 4:
+                if (field.Type == TType.String) {
+                  SubCarp = iprot.ReadString();
+                } else { 
+                  TProtocolUtil.Skip(iprot, field.Type);
+                }
+                break;
+              case 5:
+                if (field.Type == TType.String) {
+                  Conten = iprot.ReadString();
+                } else { 
+                  TProtocolUtil.Skip(iprot, field.Type);
+                }
+                break;
+              case 6:
+                if (field.Type == TType.String) {
+                  Proyecto = iprot.ReadString();
+                } else { 
+                  TProtocolUtil.Skip(iprot, field.Type);
+                }
+                break;
+              case 7:
+                if (field.Type == TType.String) {
+                  SubCarp2 = iprot.ReadString();
                 } else { 
                   TProtocolUtil.Skip(iprot, field.Type);
                 }
@@ -2198,6 +2313,46 @@ namespace Proyecto2_Compi2
             oprot.WriteString(Instr);
             oprot.WriteFieldEnd();
           }
+          if (NomArch != null && __isset.NomArch) {
+            field.Name = "NomArch";
+            field.Type = TType.String;
+            field.ID = 3;
+            oprot.WriteFieldBegin(field);
+            oprot.WriteString(NomArch);
+            oprot.WriteFieldEnd();
+          }
+          if (SubCarp != null && __isset.SubCarp) {
+            field.Name = "SubCarp";
+            field.Type = TType.String;
+            field.ID = 4;
+            oprot.WriteFieldBegin(field);
+            oprot.WriteString(SubCarp);
+            oprot.WriteFieldEnd();
+          }
+          if (Conten != null && __isset.Conten) {
+            field.Name = "Conten";
+            field.Type = TType.String;
+            field.ID = 5;
+            oprot.WriteFieldBegin(field);
+            oprot.WriteString(Conten);
+            oprot.WriteFieldEnd();
+          }
+          if (Proyecto != null && __isset.Proyecto) {
+            field.Name = "Proyecto";
+            field.Type = TType.String;
+            field.ID = 6;
+            oprot.WriteFieldBegin(field);
+            oprot.WriteString(Proyecto);
+            oprot.WriteFieldEnd();
+          }
+          if (SubCarp2 != null && __isset.SubCarp2) {
+            field.Name = "SubCarp2";
+            field.Type = TType.String;
+            field.ID = 7;
+            oprot.WriteFieldBegin(field);
+            oprot.WriteString(SubCarp2);
+            oprot.WriteFieldEnd();
+          }
           oprot.WriteFieldStop();
           oprot.WriteStructEnd();
         }
@@ -2221,6 +2376,36 @@ namespace Proyecto2_Compi2
           __first = false;
           __sb.Append("Instr: ");
           __sb.Append(Instr);
+        }
+        if (NomArch != null && __isset.NomArch) {
+          if(!__first) { __sb.Append(", "); }
+          __first = false;
+          __sb.Append("NomArch: ");
+          __sb.Append(NomArch);
+        }
+        if (SubCarp != null && __isset.SubCarp) {
+          if(!__first) { __sb.Append(", "); }
+          __first = false;
+          __sb.Append("SubCarp: ");
+          __sb.Append(SubCarp);
+        }
+        if (Conten != null && __isset.Conten) {
+          if(!__first) { __sb.Append(", "); }
+          __first = false;
+          __sb.Append("Conten: ");
+          __sb.Append(Conten);
+        }
+        if (Proyecto != null && __isset.Proyecto) {
+          if(!__first) { __sb.Append(", "); }
+          __first = false;
+          __sb.Append("Proyecto: ");
+          __sb.Append(Proyecto);
+        }
+        if (SubCarp2 != null && __isset.SubCarp2) {
+          if(!__first) { __sb.Append(", "); }
+          __first = false;
+          __sb.Append("SubCarp2: ");
+          __sb.Append(SubCarp2);
         }
         __sb.Append(")");
         return __sb.ToString();

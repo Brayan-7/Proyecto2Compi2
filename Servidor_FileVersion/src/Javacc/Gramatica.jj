@@ -1,0 +1,36 @@
+options {
+	IGNORE_CASE = true;
+	STATIC = false;
+	ERROR_REPORTING = true;
+}
+
+PARSER_BEGIN(php)
+
+//package Javacc;
+
+import java.util.*;
+
+public class php{
+
+		public static void main(String[] args) throws ParseException{
+			try{
+				php analizador = new php(System.in);
+				analizador.ProgramaInicio();
+				System.out.println("*Variables: "+VarTipo);
+			}catch(ParseException e){
+				System.out.println(e.getMessage());
+				System.out.println("**Error Sintactico: Se ha encontrado errores en el Analisis");
+			}catch(TokenMgrError e){
+				System.out.println("**Ha ocurrido un Error Lexico");
+				System.out.println(e.getMessage());
+			}catch(Exception err){
+				System.out.println("**Posible Error Lexico");
+				System.out.println(err);
+			}
+		}
+}
+PARSER_END(php)
+
+SKIP:{
+	" "|"\n"|"\r"|"\r\n"|"\t"
+}
