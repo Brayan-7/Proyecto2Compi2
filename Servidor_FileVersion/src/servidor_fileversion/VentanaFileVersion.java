@@ -28,7 +28,7 @@ import java.util.Date;
  */
 public class VentanaFileVersion extends javax.swing.JFrame {
     BDConexion con = new BDConexion();
-    public static String LlaveU,PKFolder1,PKFolder2,PKProject,PKFile;
+    public static String LlaveU,PKFolder1,PKFolder2,PKProject,PKFile,PKKey;
     
     /**
      * Creates new form VentanaFileVersion
@@ -480,6 +480,31 @@ public class VentanaFileVersion extends javax.swing.JFrame {
         }
     }
     
+    public static String Namekey="";
+    //********VERIFICAR SI EXISTE EL COMMIT SOLICITADO EN LA BD
+    public void BuscarComm(String key){
+        con = new BDConexion(); //INSTANCIAMOS LA CLASE QUE CONTIENE LA CONEXIÒN
+        String[] datos = new String[8]; 
+        Connection cn = con.conexion(); //LLAMAMOS AL METODO PARA CONECTARNOS A LA BD
+        if (cn == null) {
+            System.out.println("*********ERROR AL CONECTAR A LA BD");
+        }else {
+            try {
+                Statement st1 = cn.createStatement();
+                ResultSet rs = st1.executeQuery("SELECT * FROM Commit WHERE LlaveCommit ="+ key+"");
+                while (rs.next()) {
+                    datos[0] = rs.getString(1); datos[1] = rs.getString(2);
+                    PKKey = datos[0];
+                    Namekey = datos[1];
+                    //System.out.println("D1>> "+datos[0]+" D2>> "+datos[1]);
+                    System.out.println(PKKey);
+                }
+                System.out.println("++++++++++CONECTADO MetodoConsultaLlave+++++++++");
+            } catch (Exception e) {
+                e.printStackTrace(); System.out.println("ERROR!!");
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */

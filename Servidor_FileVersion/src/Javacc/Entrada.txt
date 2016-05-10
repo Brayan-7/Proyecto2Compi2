@@ -1,0 +1,15 @@
+<?php 
+//java
+class Laura {
+	$a and $b;
+	function method(&$L,&$B){
+		$L = 10;
+		$B = $B . "mundo";
+	}
+	function __construct(){
+		echo "este es el constructor";
+		$a = new Clase1();
+		$b = new Clase2();
+	}
+}
+?>

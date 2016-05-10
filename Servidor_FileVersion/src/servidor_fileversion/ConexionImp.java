@@ -100,12 +100,27 @@ public class ConexionImp implements conexion.Iface{
 
     @Override
     public String Update(String repo) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String Resultado = "";
+        Resultado = "Se logro actuarlizar el Repositorio" + repo;
+        System.out.println(Resultado);
+        return Resultado;
     }
 
     @Override
     public String UpdateKey(String llave) throws TException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String Resultado = "";
+        //COMPROBAR QUE EXISTE EL COMMIT QUE SOLICITA EL USUARIO
+        VFV.BuscarComm(llave);
+        if(VFV.PKKey != null){
+            Resultado = "Se logro actuarlizar el Repositorio" + VFV.Namekey;
+            System.out.println(Resultado);
+        }else{
+            Resultado = "ERROR al actuarlizar el Repositorio" + VFV.Namekey;
+            System.out.println(Resultado);
+        }
+        return Resultado;
     }
 
     @Override

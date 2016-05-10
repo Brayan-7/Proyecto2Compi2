@@ -16,7 +16,6 @@ public class php{
 			try{
 				php analizador = new php(System.in);
 				analizador.ProgramaInicio();
-				System.out.println("*Variables: "+VarTipo);
 			}catch(ParseException e){
 				System.out.println(e.getMessage());
 				System.out.println("**Error Sintactico: Se ha encontrado errores en el Analisis");
@@ -33,4 +32,209 @@ PARSER_END(php)
 
 SKIP:{
 	" "|"\n"|"\r"|"\r\n"|"\t"
+}
+
+MORE: 
+{
+	 <"/*"~["/"]>{System.out.println("COMENTARIO_MULTI" );}: IN_FORMAL_COMMENT
+}
+
+<IN_FORMAL_COMMENT>
+TOKEN:
+{
+	<FORMAL_COMMENT: "*/">{System.out.println("COMENTARIO_MULTI" );} : DEFAULT
+}
+
+<IN_MULTI_LINE_COMMENT>
+TOKEN:
+{
+	<MULTI_LINE_COMMENT: "*/"> {System.out.println("COMENTARIO_MULTI" );} : DEFAULT 
+}
+
+TOKEN: 
+{
+	<SINGLE_LINE_COMMENT: "//" (~["\n","\r"])* ("\n" | "\r" |"\r\n")?>{System.out.println("COMENTARIOSim" );}
+}
+
+TOKEN:{
+	  <NUM : (["0"-"9"])+> {System.out.println("NUMERO -> "+ image + "\r\n");}
+    | <ID : <LETTER>(<LETTER>|<NUM>)*> {System.out.println("ID -> " + image + "\r\n");}
+    | <#LETTER: (["a"-"z","A"-"Z"])>
+    | <CADENA : ["a"-"z","A"-"Z","0"-"9"](["a"-"z","A"-"Z","0"-"9"])*> {System.out.println("CADENA -> " + image + "\r\n");}
+    | <DEC : (["0"-"9"])+"."(["0"-"9"])+> {System.out.println("DECIMAL -> "+ image + "\r\n");}
+    | <CARAC : ["a"-"z"]> {System.out.println("CARACTER -> "+ image + "\r\n");}
+}
+
+TOKEN:
+{
+	 <TAGINICIO: "<?php" > {System.out.println("InicioPro -> "+ image + "\r\n");}
+	|<TAGFIN: "?>"> {System.out.println("FinPro -> "+ image + "\r\n");}
+	|<PCLASS: "class "> {System.out.println("P_Class -> "+ image + "\r\n");}
+	|<PVAR: "var "> {System.out.println("P_VAR -> "+ image + "\r\n");}
+	|<PFUNCION: "function "> {System.out.println("P_FUCT -> "+ image + "\r\n");}
+	|<PFOR: "for "> {System.out.println("P_FOR -> "+ image + "\r\n");}
+	|<PECHO: "echo "> {System.out.println("P_ECHO -> "+ image + "\r\n");}
+	|<PRETURN: "return "> {System.out.println("P_RETU -> "+ image + "\r\n");}
+	|<PNEW: "new "> {System.out.println("P_NEW -> "+ image + "\r\n");}
+	|<PCONST: "function __construct"> {System.out.println("P_Constru -> "+ image + "\r\n");}
+}
+
+TOKEN:
+{
+	 <LLAVEA: "{"> {System.out.println("Llave_Abier -> "+ image + "\r\n");}
+	|<LLAVEC: "}"> {System.out.println("Llave_Cerra -> "+ image + "\r\n");}
+	|<IGUAL: "="> {System.out.println("Igual -> "+ image + "\r\n");}
+	|<PUNTOCOMA: ";"> {System.out.println("Punto_Coma -> "+ image + "\r\n");}
+	|<COMA: ","> {System.out.println("SigComa -> "+ image + "\r\n");}
+	|<DOLAR: "$"> {System.out.println("SigDolar -> "+ image + "\r\n");}
+	|<COMILLASIMPLE: "'"> {System.out.println("ComillaS -> "+ image + "\r\n");}
+	|<COMILLADOBLE: "\""> {System.out.println("ComillaD -> "+ image + "\r\n");}
+	|<PARA: "("> {System.out.println("Parente_Abier -> "+ image + "\r\n");}
+	|<PARC: ")"> {System.out.println("Parente_Cerra -> "+ image + "\r\n");}
+	|<MAYOR: ">"> {System.out.println("Mayor -> "+ image + "\r\n");}
+	|<MENOR: "<"> {System.out.println("Menor -> "+ image + "\r\n");}
+	|<DECR: "--"> {System.out.println("Decremento -> "+ image + "\r\n");}
+	|<INC: "++"> {System.out.println("Incremento -> "+ image + "\r\n");}
+	|<CORCHA: "["> {System.out.println("CorcheteA -> "+ image + "\r\n");}
+	|<CORCHC: "]"> {System.out.println("CorcheteC -> "+ image + "\r\n");}
+	|<POR: "*"> {System.out.println("SigPor -> "+ image + "\r\n");}
+	|<SUMA: "+"> {System.out.println("SigMas -> "+ image + "\r\n");}
+	|<RESTA: "-"> {System.out.println("SigMenos -> "+ image + "\r\n");}
+	|<DIV: "/"> {System.out.println("SigDiv -> "+ image + "\r\n");}
+	|<MOD: "%"> {System.out.println("SigMod -> "+ image + "\r\n");}
+	|<POTEN: "**"> {System.out.println("Potencia -> "+ image + "\r\n");}
+	|<IGUAL2: "=="> {System.out.println("Igualdad -> "+ image + "\r\n");}
+	|<IDENT: "==="> {System.out.println("SigIden -> "+ image + "\r\n");}
+	|<DIFE1: "!="> {System.out.println("Dif!= -> "+ image + "\r\n");}
+	|<DIFE2: "<>"> {System.out.println("Dif<> -> "+ image + "\r\n");}
+	|<NOIDE: "!=="> {System.out.println("Potencia -> "+ image + "\r\n");}
+	|<MENORI: "<="> {System.out.println("MenorQue -> "+ image + "\r\n");}
+	|<MAYORI: ">="> {System.out.println("MayorQue -> "+ image + "\r\n");}
+	|<LAND: "and "> {System.out.println("AND -> "+ image + "\r\n");}
+	|<LOR: "or "> {System.out.println("OR -> "+ image + "\r\n");}
+	|<LXOR: "xor "> {System.out.println("XOR -> "+ image + "\r\n");}
+	|<LNOT: "!"> {System.out.println("NOT -> "+ image + "\r\n");}
+	|<LAND2: "&&"> {System.out.println("AND&& -> "+ image + "\r\n");}
+	|<LOR2: "||"> {System.out.println("OR|| -> "+ image + "\r\n");}
+	|<AMP: "&"> {System.out.println("Amperston -> "+ image + "\r\n");}
+	|<ASIG: "->"> {System.out.println("Asignacion -> "+ image + "\r\n");}
+	|<PUNTO: "."> {System.out.println("Punto -> "+ image + "\r\n");}
+	|<BARRA: "\\"> {System.out.println("Barra -> "+ image + "\r\n");}
+	|<SALTO: "n "> {System.out.println("SaltoL -> "+ image + "\r\n");}
+}
+///INICIO DE GRAMATICA
+void ProgramaInicio():{} //Aqui se declaran variables y objetos de javacc
+{
+	<TAGINICIO>(CuerpoPrograma())+<TAGFIN>
+}
+
+void CuerpoPrograma():{}
+{
+	 CuerpoComentario()
+	|Clase()
+}
+
+void CuerpoComentario():{}
+{
+	<SINGLE_LINE_COMMENT>
+}
+
+void Clase():{}
+{
+	<PCLASS> <ID><LLAVEA>CuerpoClase() Constructor()<LLAVEC>
+}
+
+void CuerpoClase():{}
+{
+	 (CVariables())+
+}
+
+
+void CVariables():{}
+{
+	 <PVAR><DOLAR><ID>(TVariable())?(<COMA><DOLAR><ID>(TVariable())?)*  //VARIABLES GLOBALES
+	|<DOLAR><ID>(TVariable()|OAr()<PUNTOCOMA>|ORe()<PUNTOCOMA>|OLog()<PUNTOCOMA>)?(<COMA><DOLAR><ID>(TVariable())?)*   //VARIABLES LOCALES
+	|DecFunction()
+	|OperacionesArit1()
+	|Imprimir()
+}
+void TVariable():{}
+{
+	(AsignacionVar()|<PUNTOCOMA>)
+}
+void AsignacionVar():{}
+{
+	 <IGUAL>(<COMILLASIMPLE><ID><COMILLASIMPLE>|<PNEW> <ID><PARA><PARC>|<COMILLADOBLE><ID><COMILLADOBLE>|<NUM>(OAr())?|<DEC>(OAr())?|<DOLAR><ID>(OAr()|<PUNTO>(<COMILLADOBLE><ID><COMILLADOBLE>|<NUM>|<DEC>))?)<PUNTOCOMA>
+	|<ASIG><ID><PARA><DOLAR><ID>(<COMA><DOLAR><ID>)*<PARC><PUNTOCOMA>
+}
+
+void DecFunction():{}{
+	<PFUNCION><ID><PARA>(ParametrosFuction())?<PARC><LLAVEA>CuerpoFunction()<LLAVEC>
+}
+
+void CuerpoFunction():{}
+{
+	 ((CVariables())+(CuerpoReturn())?|CuerpoMatriz())
+	//|CuerpoMatriz()
+}
+///****DECLARACION DE MATRIZ******
+void CuerpoMatriz():{}
+{
+	 <PFOR><PARA>ParametrosFOR()<PARC><LLAVEA>(<PFOR><PARA>ParametrosFOR()<PARC><LLAVEA>CuerpoFor()<LLAVEC>|CuerpoVecFor()/*DEC. VEC.*/)<LLAVEC>AsignarMatVect()Imprimir()
+}
+void ParametrosFOR():{}
+{
+	<DOLAR><ID><IGUAL><NUM><PUNTOCOMA> <DOLAR><ID>(<MAYOR>|<MENOR>)<NUM><PUNTOCOMA> <DOLAR><ID>(<INC>|<DECR>)
+}
+
+void CuerpoFor():{}
+{
+	<DOLAR><ID><CORCHA><DOLAR><ID><CORCHC><CORCHA><DOLAR><ID><CORCHC><IGUAL><DOLAR><ID><POR><DOLAR><ID><PUNTOCOMA>
+}
+void CuerpoVecFor():{}
+{
+	<DOLAR><ID><CORCHA><DOLAR><ID><CORCHC><IGUAL><DOLAR><ID><PUNTOCOMA>
+}
+void AsignarMatVect():{}
+{
+	<DOLAR><ID><CORCHA><NUM><CORCHC>(<CORCHA><NUM><CORCHC>)?<IGUAL><NUM><PUNTOCOMA>
+}
+void Imprimir():{}
+{
+	<PECHO><DOLAR><ID>(<CORCHA><NUM><CORCHC>(<CORCHA><NUM><CORCHC>)?|(<PUNTO>(<COMILLADOBLE><BARRA><SALTO><COMILLADOBLE>|<DOLAR><ID>))*)<PUNTOCOMA>
+}
+///*******OPERACIONES ARITMETICAS
+void OperacionesArit1():{}
+{
+	 <RESTA><DOLAR><ID><PUNTOCOMA>
+	
+}
+void OAr():{}
+{
+	((<POR>|<SUMA>|<DIV>|<POTEN>|<MOD>|<RESTA>)(<DOLAR><ID>|<NUM>|<DEC>))+
+}
+
+void ORe():{}
+{
+	((<IGUAL2>|<IDENT>|<DIFE1>|<DIFE2>|<NOIDE>|<MENOR>|<MAYOR>|<MENORI>|<MAYORI>)(<DOLAR><ID>|<NUM>|<DEC>))+
+}
+
+void OLog():{}
+{
+	((<LAND>|<LOR>|<LXOR>|<LNOT>|<LAND2>|<LOR2>)<DOLAR><ID>)+
+}
+
+void ParametrosFuction():{}
+{
+	(<AMP>)?<DOLAR><ID>(<COMA>(<AMP>)?<DOLAR><ID>)*
+}
+
+void CuerpoReturn():{}
+{
+	 <PRETURN><DOLAR><ID><PUNTOCOMA>
+}
+
+void Constructor():{}
+{
+	<PCONST><PARA>(ParametrosFuction())?<PARC><LLAVEA><PECHO><COMILLADOBLE>(<ID>)+<COMILLADOBLE><PUNTOCOMA>(<DOLAR><ID><IGUAL><PNEW><ID><PARA><PARC><PUNTOCOMA>)*<LLAVEC>
 }
