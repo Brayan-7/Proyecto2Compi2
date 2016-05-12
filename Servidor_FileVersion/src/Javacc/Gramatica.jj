@@ -76,7 +76,20 @@ TOKEN:
 	|<PECHO: "echo "> {System.out.println("P_ECHO -> "+ image + "\r\n");}
 	|<PRETURN: "return "> {System.out.println("P_RETU -> "+ image + "\r\n");}
 	|<PNEW: "new "> {System.out.println("P_NEW -> "+ image + "\r\n");}
-	|<PCONST: "function __construct"> {System.out.println("P_Constru -> "+ image + "\r\n");}
+	|<PCONST: "construct "> {System.out.println("P_Constru -> "+ image + "\r\n");}
+	|<PINCL: "include "> {System.out.println("P_INCLUD -> "+ image + "\r\n");}
+	|<PPARENT: "parent "> {System.out.println("P_PARE -> "+ image + "\r\n");}
+	|<PTHIS: "this "> {System.out.println("P_THI -> "+ image + "\r\n");}
+	|<PEXT: "extends "> {System.out.println("P_EXT -> "+ image + "\r\n");}
+	|<PIF: "if "> {System.out.println("P_IF -> "+ image + "\r\n");}
+	|<PELSE: "else "> {System.out.println("P_ELSE -> "+ image + "\r\n");}
+	|<PCASE: "case "> {System.out.println("P_CASE -> "+ image + "\r\n");}
+	|<PSWIT: "switch "> {System.out.println("P_SWIT -> "+ image + "\r\n");}
+	|<PBREAK: "break "> {System.out.println("P_BREK -> "+ image + "\r\n");}
+	|<PDEFAULT: "default "> {System.out.println("P_DEFA -> "+ image + "\r\n");}
+	|<PWHI: "while "> {System.out.println("P_WHIL -> "+ image + "\r\n");}
+	|<PDO: "do "> {System.out.println("P_DO -> "+ image + "\r\n");}
+	|<PCONTI: "continue "> {System.out.println("P_CONT -> "+ image + "\r\n");}
 }
 
 TOKEN:
@@ -121,6 +134,9 @@ TOKEN:
 	|<PUNTO: "."> {System.out.println("Punto -> "+ image + "\r\n");}
 	|<BARRA: "\\"> {System.out.println("Barra -> "+ image + "\r\n");}
 	|<SALTO: "n "> {System.out.println("SaltoL -> "+ image + "\r\n");}
+	|<DOBLEP: "::"> {System.out.println("DoblePunto -> "+ image + "\r\n");}
+	|<GUIONB: "_"> {System.out.println("GuionBajo -> "+ image + "\r\n");}
+	|<DOSP: ":"> {System.out.println("Dos_Puntos -> "+ image + "\r\n");}
 }
 ///INICIO DE GRAMATICA
 void ProgramaInicio():{} //Aqui se declaran variables y objetos de javacc
@@ -131,7 +147,7 @@ void ProgramaInicio():{} //Aqui se declaran variables y objetos de javacc
 void CuerpoPrograma():{}
 {
 	 CuerpoComentario()
-	|Clase()
+	|(MInclude())*(Clase()|MetodoMain())
 }
 
 void CuerpoComentario():{}
@@ -141,7 +157,7 @@ void CuerpoComentario():{}
 
 void Clase():{}
 {
-	<PCLASS> <ID><LLAVEA>CuerpoClase() Constructor()<LLAVEC>
+	<PCLASS> <ID>(<PEXT><ID>)?<LLAVEA>Constructor() CuerpoClase() <LLAVEC>
 }
 
 void CuerpoClase():{}
@@ -157,6 +173,11 @@ void CVariables():{}
 	|DecFunction()
 	|OperacionesArit1()
 	|Imprimir()
+	|CuerpoIF()
+	|SentenciaSW()
+	|SentenciaWh()
+	|SentenciaDoWh()
+	|SentenciaFor()
 }
 void TVariable():{}
 {
@@ -175,7 +196,6 @@ void DecFunction():{}{
 void CuerpoFunction():{}
 {
 	 ((CVariables())+(CuerpoReturn())?|CuerpoMatriz())
-	//|CuerpoMatriz()
 }
 ///****DECLARACION DE MATRIZ******
 void CuerpoMatriz():{}
@@ -201,7 +221,7 @@ void AsignarMatVect():{}
 }
 void Imprimir():{}
 {
-	<PECHO><DOLAR><ID>(<CORCHA><NUM><CORCHC>(<CORCHA><NUM><CORCHC>)?|(<PUNTO>(<COMILLADOBLE><BARRA><SALTO><COMILLADOBLE>|<DOLAR><ID>))*)<PUNTOCOMA>
+	<PECHO><DOLAR><ID>(<CORCHA><NUM><CORCHC>(<CORCHA><NUM><CORCHC>)?|(<PUNTO>(<COMILLADOBLE><BARRA><SALTO><COMILLADOBLE>|<DOLAR><ID>))*|<COMILLADOBLE>(<ID>)+<COMILLADOBLE>)<PUNTOCOMA>
 }
 ///*******OPERACIONES ARITMETICAS
 void OperacionesArit1():{}
@@ -209,22 +229,22 @@ void OperacionesArit1():{}
 	 <RESTA><DOLAR><ID><PUNTOCOMA>
 	
 }
-void OAr():{}
+void OAr():{} /// OPERACIONES ARITMETICAS CON OPERANDOS
 {
 	((<POR>|<SUMA>|<DIV>|<POTEN>|<MOD>|<RESTA>)(<DOLAR><ID>|<NUM>|<DEC>))+
 }
 
-void ORe():{}
+void ORe():{}/// OPERACIONES RELACIONALES CON OPERANDOS
 {
-	((<IGUAL2>|<IDENT>|<DIFE1>|<DIFE2>|<NOIDE>|<MENOR>|<MAYOR>|<MENORI>|<MAYORI>)(<DOLAR><ID>|<NUM>|<DEC>))+
+	(<IGUAL2>|<IDENT>|<DIFE1>|<DIFE2>|<NOIDE>|<MENOR>|<MAYOR>|<MENORI>|<MAYORI>)(<DOLAR><ID>|<NUM>|<DEC>)
 }
 
-void OLog():{}
+void OLog():{}///OPERACIONES LOGICAS CON OPERANDOS
 {
 	((<LAND>|<LOR>|<LXOR>|<LNOT>|<LAND2>|<LOR2>)<DOLAR><ID>)+
 }
 
-void ParametrosFuction():{}
+void ParametrosFuction():{}//PARAMETROS DE LAS FUNCIONES
 {
 	(<AMP>)?<DOLAR><ID>(<COMA>(<AMP>)?<DOLAR><ID>)*
 }
@@ -236,5 +256,108 @@ void CuerpoReturn():{}
 
 void Constructor():{}
 {
-	<PCONST><PARA>(ParametrosFuction())?<PARC><LLAVEA><PECHO><COMILLADOBLE>(<ID>)+<COMILLADOBLE><PUNTOCOMA>(<DOLAR><ID><IGUAL><PNEW><ID><PARA><PARC><PUNTOCOMA>)*<LLAVEC>
+	<PFUNCION><GUIONB><GUIONB><PCONST><PARA>(ParametrosFuction())?<PARC><LLAVEA><PECHO><COMILLADOBLE>(<ID>)+<COMILLADOBLE><PUNTOCOMA>(<DOLAR>(<ID><IGUAL><PNEW><ID><PARA><PARC><PUNTOCOMA>|MetThis()))*(MetParent())*<LLAVEC>
+}
+
+void MInclude():{}
+{
+	<PINCL>(<PARA><COMILLASIMPLE><ID><PUNTO><ID><COMILLASIMPLE><PARC>|<COMILLADOBLE><ID><PUNTO><ID><COMILLADOBLE>)<PUNTOCOMA>
+}
+
+void MetParent():{}
+{
+	<PPARENT><DOBLEP>(<GUIONB><GUIONB><PCONST><PARA><PARC>|<ID><PARA><PARC>)<PUNTOCOMA>
+}
+void MetThis():{}
+{
+	<PTHIS><ASIG><ID><IGUAL>(<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>)<PUNTOCOMA>
+}
+//*****************SENTENCIAS IF*******************************
+void CuerpoIF():{}
+{
+	<PIF><PARA>ParametrosIF()<PARC><LLAVEA>SentenciasIF()<LLAVEC><PELSE>(Elseifs())?<LLAVEA>SentenciasIF()<LLAVEC>/*(<PELSE><LLAVEA><LLAVEC>)?*/
+}
+void Elseifs():{}
+{
+	(<PIF><PARA>ParametrosIF()<PARC><LLAVEA>SentenciasIF()<LLAVEC><PELSE>)+
+}
+
+void ParametrosIF():{}
+{
+	<DOLAR><ID>ORe2()(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>)(OLog2()<DOLAR><ID>ORe2()(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>))*
+}
+void NotParametros():{} //!($b==0)
+{
+	<LNOT><PARA><DOLAR><ID>ORe2()(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>)<PARC>
+}
+void ORe2():{} /// OPERACIONES RELACIONALES SIN OPERANDOS
+{
+	(<IGUAL2>|<IDENT>|<DIFE1>|<DIFE2>|<NOIDE>|<MENOR>|<MAYOR>|<MENORI>|<MAYORI>)
+}
+void OLog2():{} /// OPEACIONES LOGICAS SIN OPERENADOS
+{
+	(<LAND>|<LOR>|<LXOR>|<LNOT>|<LAND2>|<LOR2>)
+}
+void OAr2():{} /// OPERACIONES ARITMETICAS SIN OPERANDOS
+{
+	(<POR>|<SUMA>|<DIV>|<POTEN>|<MOD>|<RESTA>)
+}
+void SentenciasIF():{}
+{
+	(<DOLAR><ID>(<IGUAL>(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>)|(<INC>|<DECR>))|(<PBREAK>|<PCONTI>))<PUNTOCOMA>
+}
+
+//**************SENTENCIA SWITCH******************
+void SentenciaSW():{}
+{
+	<PSWIT><PARA><DOLAR><ID><PARC><LLAVEA>(SentCase())+<LLAVEC>
+}
+void SentCase():{}
+{
+	<PCASE><NUM><DOSP>CuerpoCase()(<PDEFAULT><DOSP>CuerpoCase())?
+}
+void CuerpoCase():{}
+{
+	 Imprimir2() ((<PBREAK>|<PCONTI>)<PUNTOCOMA>)?
+	|SentenciasIF() ((<PBREAK>|<PCONTI>)<PUNTOCOMA>)?
+	|CuerpoIF()
+}
+void Imprimir2():{}
+{
+	<PECHO>(<COMILLADOBLE>(<ID>|<NUM>)*<COMILLADOBLE>)<PUNTOCOMA>
+}
+//*****************SENTENCIA WHILE******************************
+void SentenciaWh():{}
+{
+	<PWHI><PARA>ParametrosIF()<PARC><LLAVEA>(CuerpoWh())+<LLAVEC>
+}
+void CuerpoWh():{}
+{
+	 <PECHO><DOLAR><ID><PUNTOCOMA>
+	|<DOLAR><ID>(<IGUAL><DOLAR><ID>OAr()|(<INC>|<DECR>))<PUNTOCOMA>
+	|(<PBREAK>|<PCONTI>)<PUNTOCOMA>
+	|CuerpoIF()
+	|SentenciaSW()
+}
+//***************SENTENCIA DO WHILE*****************************
+void SentenciaDoWh():{}
+{
+	<PDO><LLAVEA>(CuerpoWh())+<LLAVEC><PWHI><PARA>ParametrosIF()<PARC><PUNTOCOMA>
+}
+void SentenciaFor():{}
+{
+	<LNOT><PFOR><PARA>ParametrosFOR()<PARC><LLAVEA>(CuerpoFor2())+<LLAVEC>
+}
+void CuerpoFor2():{}
+{
+	<DOLAR><ID><IGUAL><DOLAR><ID>(OAr2()(<DOLAR><ID>|<NUM>|<DEC>))*<PUNTOCOMA>
+	|Imprimir()
+	|(<PBREAK>|<PCONTI>)<PUNTOCOMA>
+	|CuerpoIF()
+	|SentenciaSW()
+	|SentenciaWh()
+}
+void MetodoMain():{}
+{
+	<DOLAR><ID><IGUAL><PNEW><ID><PARA><PARC><PUNTOCOMA>
 }

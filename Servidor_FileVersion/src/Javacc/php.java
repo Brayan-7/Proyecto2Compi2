@@ -30,6 +30,8 @@ public class php implements phpConstants {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case SINGLE_LINE_COMMENT:
       case PCLASS:
+      case PINCL:
+      case DOLAR:
         ;
         break;
       default:
@@ -46,10 +48,35 @@ public class php implements phpConstants {
       CuerpoComentario();
       break;
     case PCLASS:
-      Clase();
+    case PINCL:
+    case DOLAR:
+      label_2:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case PINCL:
+          ;
+          break;
+        default:
+          jj_la1[1] = jj_gen;
+          break label_2;
+        }
+        MInclude();
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PCLASS:
+        Clase();
+        break;
+      case DOLAR:
+        MetodoMain();
+        break;
+      default:
+        jj_la1[2] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       break;
     default:
-      jj_la1[1] = jj_gen;
+      jj_la1[3] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -62,27 +89,41 @@ public class php implements phpConstants {
   final public void Clase() throws ParseException {
     jj_consume_token(PCLASS);
     jj_consume_token(ID);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PEXT:
+      jj_consume_token(PEXT);
+      jj_consume_token(ID);
+      break;
+    default:
+      jj_la1[4] = jj_gen;
+      ;
+    }
     jj_consume_token(LLAVEA);
-    CuerpoClase();
     Constructor();
+    CuerpoClase();
     jj_consume_token(LLAVEC);
   }
 
   final public void CuerpoClase() throws ParseException {
-    label_2:
+    label_3:
     while (true) {
       CVariables();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case PVAR:
       case PFUNCION:
       case PECHO:
+      case PIF:
+      case PSWIT:
+      case PWHI:
+      case PDO:
       case DOLAR:
       case RESTA:
+      case LNOT:
         ;
         break;
       default:
-        jj_la1[2] = jj_gen;
-        break label_2;
+        jj_la1[5] = jj_gen;
+        break label_3;
       }
     }
   }
@@ -100,18 +141,18 @@ public class php implements phpConstants {
         TVariable();
         break;
       default:
-        jj_la1[3] = jj_gen;
+        jj_la1[6] = jj_gen;
         ;
       }
-      label_3:
+      label_4:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case COMA:
           ;
           break;
         default:
-          jj_la1[4] = jj_gen;
-          break label_3;
+          jj_la1[7] = jj_gen;
+          break label_4;
         }
         jj_consume_token(COMA);
         jj_consume_token(DOLAR);
@@ -123,7 +164,7 @@ public class php implements phpConstants {
           TVariable();
           break;
         default:
-          jj_la1[5] = jj_gen;
+          jj_la1[8] = jj_gen;
           ;
         }
       }
@@ -193,24 +234,24 @@ public class php implements phpConstants {
           jj_consume_token(PUNTOCOMA);
           break;
         default:
-          jj_la1[6] = jj_gen;
+          jj_la1[9] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         break;
       default:
-        jj_la1[7] = jj_gen;
+        jj_la1[10] = jj_gen;
         ;
       }
-      label_4:
+      label_5:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case COMA:
           ;
           break;
         default:
-          jj_la1[8] = jj_gen;
-          break label_4;
+          jj_la1[11] = jj_gen;
+          break label_5;
         }
         jj_consume_token(COMA);
         jj_consume_token(DOLAR);
@@ -222,7 +263,7 @@ public class php implements phpConstants {
           TVariable();
           break;
         default:
-          jj_la1[9] = jj_gen;
+          jj_la1[12] = jj_gen;
           ;
         }
       }
@@ -236,8 +277,23 @@ public class php implements phpConstants {
     case PECHO:
       Imprimir();
       break;
+    case PIF:
+      CuerpoIF();
+      break;
+    case PSWIT:
+      SentenciaSW();
+      break;
+    case PWHI:
+      SentenciaWh();
+      break;
+    case PDO:
+      SentenciaDoWh();
+      break;
+    case LNOT:
+      SentenciaFor();
+      break;
     default:
-      jj_la1[10] = jj_gen;
+      jj_la1[13] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -253,7 +309,7 @@ public class php implements phpConstants {
       jj_consume_token(PUNTOCOMA);
       break;
     default:
-      jj_la1[11] = jj_gen;
+      jj_la1[14] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -292,7 +348,7 @@ public class php implements phpConstants {
           OAr();
           break;
         default:
-          jj_la1[12] = jj_gen;
+          jj_la1[15] = jj_gen;
           ;
         }
         break;
@@ -308,7 +364,7 @@ public class php implements phpConstants {
           OAr();
           break;
         default:
-          jj_la1[13] = jj_gen;
+          jj_la1[16] = jj_gen;
           ;
         }
         break;
@@ -347,24 +403,24 @@ public class php implements phpConstants {
               jj_consume_token(DEC);
               break;
             default:
-              jj_la1[14] = jj_gen;
+              jj_la1[17] = jj_gen;
               jj_consume_token(-1);
               throw new ParseException();
             }
             break;
           default:
-            jj_la1[15] = jj_gen;
+            jj_la1[18] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           break;
         default:
-          jj_la1[16] = jj_gen;
+          jj_la1[19] = jj_gen;
           ;
         }
         break;
       default:
-        jj_la1[17] = jj_gen;
+        jj_la1[20] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -376,15 +432,15 @@ public class php implements phpConstants {
       jj_consume_token(PARA);
       jj_consume_token(DOLAR);
       jj_consume_token(ID);
-      label_5:
+      label_6:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case COMA:
           ;
           break;
         default:
-          jj_la1[18] = jj_gen;
-          break label_5;
+          jj_la1[21] = jj_gen;
+          break label_6;
         }
         jj_consume_token(COMA);
         jj_consume_token(DOLAR);
@@ -394,7 +450,7 @@ public class php implements phpConstants {
       jj_consume_token(PUNTOCOMA);
       break;
     default:
-      jj_la1[19] = jj_gen;
+      jj_la1[22] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -410,7 +466,7 @@ public class php implements phpConstants {
       ParametrosFuction();
       break;
     default:
-      jj_la1[20] = jj_gen;
+      jj_la1[23] = jj_gen;
       ;
     }
     jj_consume_token(PARC);
@@ -424,22 +480,32 @@ public class php implements phpConstants {
     case PVAR:
     case PFUNCION:
     case PECHO:
+    case PIF:
+    case PSWIT:
+    case PWHI:
+    case PDO:
     case DOLAR:
     case RESTA:
-      label_6:
+    case LNOT:
+      label_7:
       while (true) {
         CVariables();
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case PVAR:
         case PFUNCION:
         case PECHO:
+        case PIF:
+        case PSWIT:
+        case PWHI:
+        case PDO:
         case DOLAR:
         case RESTA:
+        case LNOT:
           ;
           break;
         default:
-          jj_la1[21] = jj_gen;
-          break label_6;
+          jj_la1[24] = jj_gen;
+          break label_7;
         }
       }
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -447,7 +513,7 @@ public class php implements phpConstants {
         CuerpoReturn();
         break;
       default:
-        jj_la1[22] = jj_gen;
+        jj_la1[25] = jj_gen;
         ;
       }
       break;
@@ -455,7 +521,7 @@ public class php implements phpConstants {
       CuerpoMatriz();
       break;
     default:
-      jj_la1[23] = jj_gen;
+      jj_la1[26] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -482,7 +548,7 @@ public class php implements phpConstants {
       CuerpoVecFor();
       break;
     default:
-      jj_la1[24] = jj_gen;
+      jj_la1[27] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -507,7 +573,7 @@ public class php implements phpConstants {
       jj_consume_token(MENOR);
       break;
     default:
-      jj_la1[25] = jj_gen;
+      jj_la1[28] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -523,7 +589,7 @@ public class php implements phpConstants {
       jj_consume_token(DECR);
       break;
     default:
-      jj_la1[26] = jj_gen;
+      jj_la1[29] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -575,7 +641,7 @@ public class php implements phpConstants {
       jj_consume_token(CORCHC);
       break;
     default:
-      jj_la1[27] = jj_gen;
+      jj_la1[30] = jj_gen;
       ;
     }
     jj_consume_token(IGUAL);
@@ -599,21 +665,21 @@ public class php implements phpConstants {
         jj_consume_token(CORCHC);
         break;
       default:
-        jj_la1[28] = jj_gen;
+        jj_la1[31] = jj_gen;
         ;
       }
       break;
     default:
-      jj_la1[31] = jj_gen;
-      label_7:
+      jj_la1[35] = jj_gen;
+      label_8:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case PUNTO:
           ;
           break;
         default:
-          jj_la1[29] = jj_gen;
-          break label_7;
+          jj_la1[32] = jj_gen;
+          break label_8;
         }
         jj_consume_token(PUNTO);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -628,7 +694,7 @@ public class php implements phpConstants {
           jj_consume_token(ID);
           break;
         default:
-          jj_la1[30] = jj_gen;
+          jj_la1[33] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -646,7 +712,7 @@ public class php implements phpConstants {
   }
 
   final public void OAr() throws ParseException {
-    label_8:
+    label_10:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case POR:
@@ -668,7 +734,7 @@ public class php implements phpConstants {
         jj_consume_token(RESTA);
         break;
       default:
-        jj_la1[32] = jj_gen;
+        jj_la1[36] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -684,7 +750,7 @@ public class php implements phpConstants {
         jj_consume_token(DEC);
         break;
       default:
-        jj_la1[33] = jj_gen;
+        jj_la1[37] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -698,85 +764,66 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[34] = jj_gen;
-        break label_8;
+        jj_la1[38] = jj_gen;
+        break label_10;
       }
     }
   }
 
   final public void ORe() throws ParseException {
-    label_9:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case IGUAL2:
-        jj_consume_token(IGUAL2);
-        break;
-      case IDENT:
-        jj_consume_token(IDENT);
-        break;
-      case DIFE1:
-        jj_consume_token(DIFE1);
-        break;
-      case DIFE2:
-        jj_consume_token(DIFE2);
-        break;
-      case NOIDE:
-        jj_consume_token(NOIDE);
-        break;
-      case MENOR:
-        jj_consume_token(MENOR);
-        break;
-      case MAYOR:
-        jj_consume_token(MAYOR);
-        break;
-      case MENORI:
-        jj_consume_token(MENORI);
-        break;
-      case MAYORI:
-        jj_consume_token(MAYORI);
-        break;
-      default:
-        jj_la1[35] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case DOLAR:
-        jj_consume_token(DOLAR);
-        jj_consume_token(ID);
-        break;
-      case NUM:
-        jj_consume_token(NUM);
-        break;
-      case DEC:
-        jj_consume_token(DEC);
-        break;
-      default:
-        jj_la1[36] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case MAYOR:
-      case MENOR:
-      case IGUAL2:
-      case IDENT:
-      case DIFE1:
-      case DIFE2:
-      case NOIDE:
-      case MENORI:
-      case MAYORI:
-        ;
-        break;
-      default:
-        jj_la1[37] = jj_gen;
-        break label_9;
-      }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case IGUAL2:
+      jj_consume_token(IGUAL2);
+      break;
+    case IDENT:
+      jj_consume_token(IDENT);
+      break;
+    case DIFE1:
+      jj_consume_token(DIFE1);
+      break;
+    case DIFE2:
+      jj_consume_token(DIFE2);
+      break;
+    case NOIDE:
+      jj_consume_token(NOIDE);
+      break;
+    case MENOR:
+      jj_consume_token(MENOR);
+      break;
+    case MAYOR:
+      jj_consume_token(MAYOR);
+      break;
+    case MENORI:
+      jj_consume_token(MENORI);
+      break;
+    case MAYORI:
+      jj_consume_token(MAYORI);
+      break;
+    default:
+      jj_la1[39] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case DOLAR:
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      break;
+    case NUM:
+      jj_consume_token(NUM);
+      break;
+    case DEC:
+      jj_consume_token(DEC);
+      break;
+    default:
+      jj_la1[40] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
   final public void OLog() throws ParseException {
-    label_10:
+    label_11:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case LAND:
@@ -798,7 +845,7 @@ public class php implements phpConstants {
         jj_consume_token(LOR2);
         break;
       default:
-        jj_la1[38] = jj_gen;
+        jj_la1[41] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -814,8 +861,8 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[39] = jj_gen;
-        break label_10;
+        jj_la1[42] = jj_gen;
+        break label_11;
       }
     }
   }
@@ -826,20 +873,20 @@ public class php implements phpConstants {
       jj_consume_token(AMP);
       break;
     default:
-      jj_la1[40] = jj_gen;
+      jj_la1[43] = jj_gen;
       ;
     }
     jj_consume_token(DOLAR);
     jj_consume_token(ID);
-    label_11:
+    label_12:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case COMA:
         ;
         break;
       default:
-        jj_la1[41] = jj_gen;
-        break label_11;
+        jj_la1[44] = jj_gen;
+        break label_12;
       }
       jj_consume_token(COMA);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -847,7 +894,7 @@ public class php implements phpConstants {
         jj_consume_token(AMP);
         break;
       default:
-        jj_la1[42] = jj_gen;
+        jj_la1[45] = jj_gen;
         ;
       }
       jj_consume_token(DOLAR);
@@ -863,6 +910,9 @@ public class php implements phpConstants {
   }
 
   final public void Constructor() throws ParseException {
+    jj_consume_token(PFUNCION);
+    jj_consume_token(GUIONB);
+    jj_consume_token(GUIONB);
     jj_consume_token(PCONST);
     jj_consume_token(PARA);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -871,14 +921,14 @@ public class php implements phpConstants {
       ParametrosFuction();
       break;
     default:
-      jj_la1[43] = jj_gen;
+      jj_la1[46] = jj_gen;
       ;
     }
     jj_consume_token(PARC);
     jj_consume_token(LLAVEA);
     jj_consume_token(PECHO);
     jj_consume_token(COMILLADOBLE);
-    label_12:
+    label_13:
     while (true) {
       jj_consume_token(ID);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -886,32 +936,838 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[44] = jj_gen;
-        break label_12;
+        jj_la1[47] = jj_gen;
+        break label_13;
       }
     }
     jj_consume_token(COMILLADOBLE);
     jj_consume_token(PUNTOCOMA);
-    label_13:
+    label_14:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case DOLAR:
         ;
         break;
       default:
-        jj_la1[45] = jj_gen;
-        break label_13;
+        jj_la1[48] = jj_gen;
+        break label_14;
       }
       jj_consume_token(DOLAR);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case ID:
+        jj_consume_token(ID);
+        jj_consume_token(IGUAL);
+        jj_consume_token(PNEW);
+        jj_consume_token(ID);
+        jj_consume_token(PARA);
+        jj_consume_token(PARC);
+        jj_consume_token(PUNTOCOMA);
+        break;
+      case PTHIS:
+        MetThis();
+        break;
+      default:
+        jj_la1[49] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+    label_15:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PPARENT:
+        ;
+        break;
+      default:
+        jj_la1[50] = jj_gen;
+        break label_15;
+      }
+      MetParent();
+    }
+    jj_consume_token(LLAVEC);
+  }
+
+  final public void MInclude() throws ParseException {
+    jj_consume_token(PINCL);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PARA:
+      jj_consume_token(PARA);
+      jj_consume_token(COMILLASIMPLE);
       jj_consume_token(ID);
-      jj_consume_token(IGUAL);
-      jj_consume_token(PNEW);
+      jj_consume_token(PUNTO);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLASIMPLE);
+      jj_consume_token(PARC);
+      break;
+    case COMILLADOBLE:
+      jj_consume_token(COMILLADOBLE);
+      jj_consume_token(ID);
+      jj_consume_token(PUNTO);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLADOBLE);
+      break;
+    default:
+      jj_la1[51] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    jj_consume_token(PUNTOCOMA);
+  }
+
+  final public void MetParent() throws ParseException {
+    jj_consume_token(PPARENT);
+    jj_consume_token(DOBLEP);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case GUIONB:
+      jj_consume_token(GUIONB);
+      jj_consume_token(GUIONB);
+      jj_consume_token(PCONST);
+      jj_consume_token(PARA);
+      jj_consume_token(PARC);
+      break;
+    case ID:
       jj_consume_token(ID);
       jj_consume_token(PARA);
       jj_consume_token(PARC);
-      jj_consume_token(PUNTOCOMA);
+      break;
+    default:
+      jj_la1[52] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    jj_consume_token(PUNTOCOMA);
+  }
+
+  final public void MetThis() throws ParseException {
+    jj_consume_token(PTHIS);
+    jj_consume_token(ASIG);
+    jj_consume_token(ID);
+    jj_consume_token(IGUAL);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NUM:
+      jj_consume_token(NUM);
+      break;
+    case DEC:
+      jj_consume_token(DEC);
+      break;
+    case COMILLASIMPLE:
+      jj_consume_token(COMILLASIMPLE);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLASIMPLE);
+      break;
+    case COMILLADOBLE:
+      jj_consume_token(COMILLADOBLE);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLADOBLE);
+      break;
+    default:
+      jj_la1[53] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    jj_consume_token(PUNTOCOMA);
+  }
+
+//*****************SENTENCIAS IF*******************************
+  final public void CuerpoIF() throws ParseException {
+    jj_consume_token(PIF);
+    jj_consume_token(PARA);
+    ParametrosIF();
+    jj_consume_token(PARC);
+    jj_consume_token(LLAVEA);
+    SentenciasIF();
+    jj_consume_token(LLAVEC);
+    jj_consume_token(PELSE);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PIF:
+      Elseifs();
+      break;
+    default:
+      jj_la1[54] = jj_gen;
+      ;
+    }
+    jj_consume_token(LLAVEA);
+    SentenciasIF();
+    jj_consume_token(LLAVEC);
+  }
+
+  final public void Elseifs() throws ParseException {
+    label_16:
+    while (true) {
+      jj_consume_token(PIF);
+      jj_consume_token(PARA);
+      ParametrosIF();
+      jj_consume_token(PARC);
+      jj_consume_token(LLAVEA);
+      SentenciasIF();
+      jj_consume_token(LLAVEC);
+      jj_consume_token(PELSE);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PIF:
+        ;
+        break;
+      default:
+        jj_la1[55] = jj_gen;
+        break label_16;
+      }
+    }
+  }
+
+  final public void ParametrosIF() throws ParseException {
+    jj_consume_token(DOLAR);
+    jj_consume_token(ID);
+    ORe2();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case DOLAR:
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      break;
+    case NUM:
+      jj_consume_token(NUM);
+      break;
+    case DEC:
+      jj_consume_token(DEC);
+      break;
+    case COMILLASIMPLE:
+      jj_consume_token(COMILLASIMPLE);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLASIMPLE);
+      break;
+    case COMILLADOBLE:
+      jj_consume_token(COMILLADOBLE);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLADOBLE);
+      break;
+    default:
+      jj_la1[56] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    label_17:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LAND:
+      case LOR:
+      case LXOR:
+      case LNOT:
+      case LAND2:
+      case LOR2:
+        ;
+        break;
+      default:
+        jj_la1[57] = jj_gen;
+        break label_17;
+      }
+      OLog2();
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      ORe2();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case DOLAR:
+        jj_consume_token(DOLAR);
+        jj_consume_token(ID);
+        break;
+      case NUM:
+        jj_consume_token(NUM);
+        break;
+      case DEC:
+        jj_consume_token(DEC);
+        break;
+      case COMILLASIMPLE:
+        jj_consume_token(COMILLASIMPLE);
+        jj_consume_token(ID);
+        jj_consume_token(COMILLASIMPLE);
+        break;
+      case COMILLADOBLE:
+        jj_consume_token(COMILLADOBLE);
+        jj_consume_token(ID);
+        jj_consume_token(COMILLADOBLE);
+        break;
+      default:
+        jj_la1[58] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+  }
+
+  final public void NotParametros() throws ParseException {
+    jj_consume_token(LNOT);
+    jj_consume_token(PARA);
+    jj_consume_token(DOLAR);
+    jj_consume_token(ID);
+    ORe2();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case DOLAR:
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      break;
+    case NUM:
+      jj_consume_token(NUM);
+      break;
+    case DEC:
+      jj_consume_token(DEC);
+      break;
+    case COMILLASIMPLE:
+      jj_consume_token(COMILLASIMPLE);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLASIMPLE);
+      break;
+    case COMILLADOBLE:
+      jj_consume_token(COMILLADOBLE);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLADOBLE);
+      break;
+    default:
+      jj_la1[59] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    jj_consume_token(PARC);
+  }
+
+  final public void ORe2() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case IGUAL2:
+      jj_consume_token(IGUAL2);
+      break;
+    case IDENT:
+      jj_consume_token(IDENT);
+      break;
+    case DIFE1:
+      jj_consume_token(DIFE1);
+      break;
+    case DIFE2:
+      jj_consume_token(DIFE2);
+      break;
+    case NOIDE:
+      jj_consume_token(NOIDE);
+      break;
+    case MENOR:
+      jj_consume_token(MENOR);
+      break;
+    case MAYOR:
+      jj_consume_token(MAYOR);
+      break;
+    case MENORI:
+      jj_consume_token(MENORI);
+      break;
+    case MAYORI:
+      jj_consume_token(MAYORI);
+      break;
+    default:
+      jj_la1[60] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  final public void OLog2() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LAND:
+      jj_consume_token(LAND);
+      break;
+    case LOR:
+      jj_consume_token(LOR);
+      break;
+    case LXOR:
+      jj_consume_token(LXOR);
+      break;
+    case LNOT:
+      jj_consume_token(LNOT);
+      break;
+    case LAND2:
+      jj_consume_token(LAND2);
+      break;
+    case LOR2:
+      jj_consume_token(LOR2);
+      break;
+    default:
+      jj_la1[61] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  final public void OAr2() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case POR:
+      jj_consume_token(POR);
+      break;
+    case SUMA:
+      jj_consume_token(SUMA);
+      break;
+    case DIV:
+      jj_consume_token(DIV);
+      break;
+    case POTEN:
+      jj_consume_token(POTEN);
+      break;
+    case MOD:
+      jj_consume_token(MOD);
+      break;
+    case RESTA:
+      jj_consume_token(RESTA);
+      break;
+    default:
+      jj_la1[62] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  final public void SentenciasIF() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case DOLAR:
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IGUAL:
+        jj_consume_token(IGUAL);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case DOLAR:
+          jj_consume_token(DOLAR);
+          jj_consume_token(ID);
+          break;
+        case NUM:
+          jj_consume_token(NUM);
+          break;
+        case DEC:
+          jj_consume_token(DEC);
+          break;
+        case COMILLASIMPLE:
+          jj_consume_token(COMILLASIMPLE);
+          jj_consume_token(ID);
+          jj_consume_token(COMILLASIMPLE);
+          break;
+        case COMILLADOBLE:
+          jj_consume_token(COMILLADOBLE);
+          jj_consume_token(ID);
+          jj_consume_token(COMILLADOBLE);
+          break;
+        default:
+          jj_la1[63] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      case DECR:
+      case INC:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case INC:
+          jj_consume_token(INC);
+          break;
+        case DECR:
+          jj_consume_token(DECR);
+          break;
+        default:
+          jj_la1[64] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[65] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      break;
+    case PBREAK:
+    case PCONTI:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PBREAK:
+        jj_consume_token(PBREAK);
+        break;
+      case PCONTI:
+        jj_consume_token(PCONTI);
+        break;
+      default:
+        jj_la1[66] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      break;
+    default:
+      jj_la1[67] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    jj_consume_token(PUNTOCOMA);
+  }
+
+//**************SENTENCIA SWITCH******************
+  final public void SentenciaSW() throws ParseException {
+    jj_consume_token(PSWIT);
+    jj_consume_token(PARA);
+    jj_consume_token(DOLAR);
+    jj_consume_token(ID);
+    jj_consume_token(PARC);
+    jj_consume_token(LLAVEA);
+    label_18:
+    while (true) {
+      SentCase();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PCASE:
+        ;
+        break;
+      default:
+        jj_la1[68] = jj_gen;
+        break label_18;
+      }
     }
     jj_consume_token(LLAVEC);
+  }
+
+  final public void SentCase() throws ParseException {
+    jj_consume_token(PCASE);
+    jj_consume_token(NUM);
+    jj_consume_token(DOSP);
+    CuerpoCase();
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PDEFAULT:
+      jj_consume_token(PDEFAULT);
+      jj_consume_token(DOSP);
+      CuerpoCase();
+      break;
+    default:
+      jj_la1[69] = jj_gen;
+      ;
+    }
+  }
+
+  final public void CuerpoCase() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PECHO:
+      Imprimir2();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PBREAK:
+      case PCONTI:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case PBREAK:
+          jj_consume_token(PBREAK);
+          break;
+        case PCONTI:
+          jj_consume_token(PCONTI);
+          break;
+        default:
+          jj_la1[70] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        jj_consume_token(PUNTOCOMA);
+        break;
+      default:
+        jj_la1[71] = jj_gen;
+        ;
+      }
+      break;
+    case PBREAK:
+    case PCONTI:
+    case DOLAR:
+      SentenciasIF();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PBREAK:
+      case PCONTI:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case PBREAK:
+          jj_consume_token(PBREAK);
+          break;
+        case PCONTI:
+          jj_consume_token(PCONTI);
+          break;
+        default:
+          jj_la1[72] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        jj_consume_token(PUNTOCOMA);
+        break;
+      default:
+        jj_la1[73] = jj_gen;
+        ;
+      }
+      break;
+    case PIF:
+      CuerpoIF();
+      break;
+    default:
+      jj_la1[74] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  final public void Imprimir2() throws ParseException {
+    jj_consume_token(PECHO);
+    jj_consume_token(COMILLADOBLE);
+    label_19:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case NUM:
+      case ID:
+        ;
+        break;
+      default:
+        jj_la1[75] = jj_gen;
+        break label_19;
+      }
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case ID:
+        jj_consume_token(ID);
+        break;
+      case NUM:
+        jj_consume_token(NUM);
+        break;
+      default:
+        jj_la1[76] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
+    jj_consume_token(COMILLADOBLE);
+    jj_consume_token(PUNTOCOMA);
+  }
+
+//*****************SENTENCIA WHILE******************************
+  final public void SentenciaWh() throws ParseException {
+    jj_consume_token(PWHI);
+    jj_consume_token(PARA);
+    ParametrosIF();
+    jj_consume_token(PARC);
+    jj_consume_token(LLAVEA);
+    label_20:
+    while (true) {
+      CuerpoWh();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PECHO:
+      case PIF:
+      case PSWIT:
+      case PBREAK:
+      case PCONTI:
+      case DOLAR:
+        ;
+        break;
+      default:
+        jj_la1[77] = jj_gen;
+        break label_20;
+      }
+    }
+    jj_consume_token(LLAVEC);
+  }
+
+  final public void CuerpoWh() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PECHO:
+      jj_consume_token(PECHO);
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      jj_consume_token(PUNTOCOMA);
+      break;
+    case DOLAR:
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IGUAL:
+        jj_consume_token(IGUAL);
+        jj_consume_token(DOLAR);
+        jj_consume_token(ID);
+        OAr();
+        break;
+      case DECR:
+      case INC:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case INC:
+          jj_consume_token(INC);
+          break;
+        case DECR:
+          jj_consume_token(DECR);
+          break;
+        default:
+          jj_la1[78] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[79] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(PUNTOCOMA);
+      break;
+    case PBREAK:
+    case PCONTI:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PBREAK:
+        jj_consume_token(PBREAK);
+        break;
+      case PCONTI:
+        jj_consume_token(PCONTI);
+        break;
+      default:
+        jj_la1[80] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(PUNTOCOMA);
+      break;
+    case PIF:
+      CuerpoIF();
+      break;
+    case PSWIT:
+      SentenciaSW();
+      break;
+    default:
+      jj_la1[81] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+//***************SENTENCIA DO WHILE*****************************
+  final public void SentenciaDoWh() throws ParseException {
+    jj_consume_token(PDO);
+    jj_consume_token(LLAVEA);
+    label_21:
+    while (true) {
+      CuerpoWh();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PECHO:
+      case PIF:
+      case PSWIT:
+      case PBREAK:
+      case PCONTI:
+      case DOLAR:
+        ;
+        break;
+      default:
+        jj_la1[82] = jj_gen;
+        break label_21;
+      }
+    }
+    jj_consume_token(LLAVEC);
+    jj_consume_token(PWHI);
+    jj_consume_token(PARA);
+    ParametrosIF();
+    jj_consume_token(PARC);
+    jj_consume_token(PUNTOCOMA);
+  }
+
+  final public void SentenciaFor() throws ParseException {
+    jj_consume_token(LNOT);
+    jj_consume_token(PFOR);
+    jj_consume_token(PARA);
+    ParametrosFOR();
+    jj_consume_token(PARC);
+    jj_consume_token(LLAVEA);
+    label_22:
+    while (true) {
+      CuerpoFor2();
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PECHO:
+      case PIF:
+      case PSWIT:
+      case PBREAK:
+      case PWHI:
+      case PCONTI:
+      case DOLAR:
+        ;
+        break;
+      default:
+        jj_la1[83] = jj_gen;
+        break label_22;
+      }
+    }
+    jj_consume_token(LLAVEC);
+  }
+
+  final public void CuerpoFor2() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case DOLAR:
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      jj_consume_token(IGUAL);
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      label_23:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case POR:
+        case SUMA:
+        case RESTA:
+        case DIV:
+        case MOD:
+        case POTEN:
+          ;
+          break;
+        default:
+          jj_la1[84] = jj_gen;
+          break label_23;
+        }
+        OAr2();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case DOLAR:
+          jj_consume_token(DOLAR);
+          jj_consume_token(ID);
+          break;
+        case NUM:
+          jj_consume_token(NUM);
+          break;
+        case DEC:
+          jj_consume_token(DEC);
+          break;
+        default:
+          jj_la1[85] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      }
+      jj_consume_token(PUNTOCOMA);
+      break;
+    case PECHO:
+      Imprimir();
+      break;
+    case PBREAK:
+    case PCONTI:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PBREAK:
+        jj_consume_token(PBREAK);
+        break;
+      case PCONTI:
+        jj_consume_token(PCONTI);
+        break;
+      default:
+        jj_la1[86] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(PUNTOCOMA);
+      break;
+    case PIF:
+      CuerpoIF();
+      break;
+    case PSWIT:
+      SentenciaSW();
+      break;
+    case PWHI:
+      SentenciaWh();
+      break;
+    default:
+      jj_la1[87] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  final public void MetodoMain() throws ParseException {
+    jj_consume_token(DOLAR);
+    jj_consume_token(ID);
+    jj_consume_token(IGUAL);
+    jj_consume_token(PNEW);
+    jj_consume_token(ID);
+    jj_consume_token(PARA);
+    jj_consume_token(PARC);
+    jj_consume_token(PUNTOCOMA);
   }
 
   /** Generated Token Manager. */
@@ -923,7 +1779,7 @@ public class php implements phpConstants {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[46];
+  final private int[] jj_la1 = new int[88];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -933,13 +1789,13 @@ public class php implements phpConstants {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x40200,0x40200,0x80580000,0x30000000,0x40000000,0x30000000,0x30000000,0x30000000,0x40000000,0x30000000,0x80580000,0x30000000,0x0,0x0,0x4400,0x0,0x0,0x81004400,0x40000000,0x10000000,0x80000000,0x80580000,0x800000,0x80780000,0x80200000,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x80004400,0x0,0x0,0x80004400,0x0,0x0,0x0,0x0,0x40000000,0x0,0x80000000,0x800,0x80000000,};
+      jj_la1_0 = new int[] {0x4040200,0x4000000,0x40000,0x4040200,0x20000000,0x40580000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40580000,0x0,0x0,0x0,0x4400,0x0,0x0,0x1004400,0x0,0x0,0x0,0x40580000,0x800000,0x40780000,0x200000,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x0,0x4400,0x0,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x10000800,0x8000000,0x0,0x800,0x4400,0x40000000,0x40000000,0x4400,0x0,0x4400,0x4400,0x0,0x0,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40400000,0xc00,0xc00,0x40400000,0x0,0x0,0x0,0x40400000,0x40400000,0x40400000,0x0,0x4400,0x0,0x40400000,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x1000,0x40000000,0x0,0x40000000,0x5ffffc30,0x5ffffc30,0x0,0x40000000,0x1000,0x40000000,0xfc00,0xfc00,0x2,0x8000fc00,0x8000fc00,0x3,0x0,0x40000000,0x20000000,0x1000,0x0,0x1000,0x0,0x30,0xc0,0x100,0x100,0x80000000,0x2,0x100,0xfc00,0x0,0xfc00,0x7f0030,0x0,0x7f0030,0x1f800000,0x1f800000,0x20000000,0x0,0x20000000,0x20000000,0x0,0x0,};
+      jj_la1_1 = new int[] {0x1000,0x0,0x1000,0x1000,0x0,0x2001032,0x600,0x800,0x600,0xff860600,0xff860600,0x800,0x600,0x2001032,0x600,0x1f800000,0x1f800000,0x4000,0x1f800000,0x1f800000,0x7000,0x800,0x200,0x1000,0x2001032,0x0,0x2001032,0x1000,0x60000,0x180000,0x200000,0x200000,0x0,0x5000,0x0,0x200000,0x1f800000,0x1000,0x1f800000,0xe0060000,0x1000,0x0,0x0,0x0,0x800,0x0,0x1000,0x0,0x1000,0x0,0x0,0xc000,0x0,0x6000,0x0,0x0,0x7000,0x0,0x7000,0x7000,0xe0060000,0x0,0x1f800000,0x7000,0x180000,0x180200,0x44,0x1044,0x1,0x8,0x44,0x44,0x44,0x44,0x1044,0x0,0x0,0x1046,0x180000,0x180200,0x44,0x1046,0x1046,0x1056,0x1f800000,0x1000,0x44,0x1056,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x80,0x800,0x0,0x800,0xbff,0xbff,0x0,0x800,0x80,0x800,0x0,0x0,0x0,0x1000,0x1000,0x0,0x0,0x800,0x400,0x80,0x0,0x80,0x0,0x0,0x0,0x0,0x0,0x1000,0x0,0x0,0x0,0x0,0x0,0x0,0xf,0x0,0x3f0,0x3f0,0x400,0x0,0x400,0x400,0x0,0x0,0x0,0x0,0x0,0x10000,0x0,0x0,0x0,0x0,0x3f0,0x0,0x0,0xf,0x3f0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -953,7 +1809,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 46; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 88; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -967,7 +1823,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 46; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 88; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -977,7 +1833,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 46; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 88; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -987,7 +1843,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 46; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 88; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -996,7 +1852,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 46; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 88; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1005,7 +1861,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 46; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 88; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -1056,12 +1912,12 @@ public class php implements phpConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[66];
+    boolean[] la1tokens = new boolean[82];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 46; i++) {
+    for (int i = 0; i < 88; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -1076,7 +1932,7 @@ public class php implements phpConstants {
         }
       }
     }
-    for (int i = 0; i < 66; i++) {
+    for (int i = 0; i < 82; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

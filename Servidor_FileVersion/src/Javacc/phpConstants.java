@@ -47,85 +47,117 @@ public interface phpConstants {
   /** RegularExpression Id. */
   int PCONST = 25;
   /** RegularExpression Id. */
-  int LLAVEA = 26;
+  int PINCL = 26;
   /** RegularExpression Id. */
-  int LLAVEC = 27;
+  int PPARENT = 27;
   /** RegularExpression Id. */
-  int IGUAL = 28;
+  int PTHIS = 28;
   /** RegularExpression Id. */
-  int PUNTOCOMA = 29;
+  int PEXT = 29;
   /** RegularExpression Id. */
-  int COMA = 30;
+  int PIF = 30;
   /** RegularExpression Id. */
-  int DOLAR = 31;
+  int PELSE = 31;
   /** RegularExpression Id. */
-  int COMILLASIMPLE = 32;
+  int PCASE = 32;
   /** RegularExpression Id. */
-  int COMILLADOBLE = 33;
+  int PSWIT = 33;
   /** RegularExpression Id. */
-  int PARA = 34;
+  int PBREAK = 34;
   /** RegularExpression Id. */
-  int PARC = 35;
+  int PDEFAULT = 35;
   /** RegularExpression Id. */
-  int MAYOR = 36;
+  int PWHI = 36;
   /** RegularExpression Id. */
-  int MENOR = 37;
+  int PDO = 37;
   /** RegularExpression Id. */
-  int DECR = 38;
+  int PCONTI = 38;
   /** RegularExpression Id. */
-  int INC = 39;
+  int LLAVEA = 39;
   /** RegularExpression Id. */
-  int CORCHA = 40;
+  int LLAVEC = 40;
   /** RegularExpression Id. */
-  int CORCHC = 41;
+  int IGUAL = 41;
   /** RegularExpression Id. */
-  int POR = 42;
+  int PUNTOCOMA = 42;
   /** RegularExpression Id. */
-  int SUMA = 43;
+  int COMA = 43;
   /** RegularExpression Id. */
-  int RESTA = 44;
+  int DOLAR = 44;
   /** RegularExpression Id. */
-  int DIV = 45;
+  int COMILLASIMPLE = 45;
   /** RegularExpression Id. */
-  int MOD = 46;
+  int COMILLADOBLE = 46;
   /** RegularExpression Id. */
-  int POTEN = 47;
+  int PARA = 47;
   /** RegularExpression Id. */
-  int IGUAL2 = 48;
+  int PARC = 48;
   /** RegularExpression Id. */
-  int IDENT = 49;
+  int MAYOR = 49;
   /** RegularExpression Id. */
-  int DIFE1 = 50;
+  int MENOR = 50;
   /** RegularExpression Id. */
-  int DIFE2 = 51;
+  int DECR = 51;
   /** RegularExpression Id. */
-  int NOIDE = 52;
+  int INC = 52;
   /** RegularExpression Id. */
-  int MENORI = 53;
+  int CORCHA = 53;
   /** RegularExpression Id. */
-  int MAYORI = 54;
+  int CORCHC = 54;
   /** RegularExpression Id. */
-  int LAND = 55;
+  int POR = 55;
   /** RegularExpression Id. */
-  int LOR = 56;
+  int SUMA = 56;
   /** RegularExpression Id. */
-  int LXOR = 57;
+  int RESTA = 57;
   /** RegularExpression Id. */
-  int LNOT = 58;
+  int DIV = 58;
   /** RegularExpression Id. */
-  int LAND2 = 59;
+  int MOD = 59;
   /** RegularExpression Id. */
-  int LOR2 = 60;
+  int POTEN = 60;
   /** RegularExpression Id. */
-  int AMP = 61;
+  int IGUAL2 = 61;
   /** RegularExpression Id. */
-  int ASIG = 62;
+  int IDENT = 62;
   /** RegularExpression Id. */
-  int PUNTO = 63;
+  int DIFE1 = 63;
   /** RegularExpression Id. */
-  int BARRA = 64;
+  int DIFE2 = 64;
   /** RegularExpression Id. */
-  int SALTO = 65;
+  int NOIDE = 65;
+  /** RegularExpression Id. */
+  int MENORI = 66;
+  /** RegularExpression Id. */
+  int MAYORI = 67;
+  /** RegularExpression Id. */
+  int LAND = 68;
+  /** RegularExpression Id. */
+  int LOR = 69;
+  /** RegularExpression Id. */
+  int LXOR = 70;
+  /** RegularExpression Id. */
+  int LNOT = 71;
+  /** RegularExpression Id. */
+  int LAND2 = 72;
+  /** RegularExpression Id. */
+  int LOR2 = 73;
+  /** RegularExpression Id. */
+  int AMP = 74;
+  /** RegularExpression Id. */
+  int ASIG = 75;
+  /** RegularExpression Id. */
+  int PUNTO = 76;
+  /** RegularExpression Id. */
+  int BARRA = 77;
+  /** RegularExpression Id. */
+  int SALTO = 78;
+  /** RegularExpression Id. */
+  int DOBLEP = 79;
+  /** RegularExpression Id. */
+  int GUIONB = 80;
+  /** RegularExpression Id. */
+  int DOSP = 81;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -161,7 +193,20 @@ public interface phpConstants {
     "\"echo \"",
     "\"return \"",
     "\"new \"",
-    "\"function __construct\"",
+    "\"construct \"",
+    "\"include \"",
+    "\"parent \"",
+    "\"this \"",
+    "\"extends \"",
+    "\"if \"",
+    "\"else \"",
+    "\"case \"",
+    "\"switch \"",
+    "\"break \"",
+    "\"default \"",
+    "\"while \"",
+    "\"do \"",
+    "\"continue \"",
     "\"{\"",
     "\"}\"",
     "\"=\"",
@@ -202,6 +247,9 @@ public interface phpConstants {
     "\".\"",
     "\"\\\\\"",
     "\"n \"",
+    "\"::\"",
+    "\"_\"",
+    "\":\"",
   };
 
 }
