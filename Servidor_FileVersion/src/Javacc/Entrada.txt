@@ -1,7 +1,15 @@
 <?php 
 include "prueba.php";
-$obj = new clase2();
-$obb = new clase3();
-$obl = new clase4();
-$obf = new clase5();
+class c1{
+	function __construct (){
+		echo "este es el constructor";
+	}
+	var $a = 10;
+	var $b = 100;
+	function Method1(){
+		$a++;
+		
+		echo $a;
+	}
+}
 ?>

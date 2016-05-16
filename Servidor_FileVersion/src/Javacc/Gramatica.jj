@@ -5,17 +5,41 @@ options {
 }
 
 PARSER_BEGIN(php)
-
-//package Javacc;
+package Javacc;
 
 import java.util.*;
+import servidor_fileversion.Propiedades;
+import servidor_fileversion.TablaSimbolos;
+import java.io.StringReader;
 
 public class php{
-
+		public Propiedades propiedad = new Propiedades();
+		public TablaSimbolos TS = new TablaSimbolos();
+		///Variables NORMALES
+		public static String VerVar="" ,VerVar2="",VerVar3="",VerVar4="",VerVar5="",VerVar6="",VerVar7="",VerVar8="",VerVar9="",VerVar10="", VerVar11="" ,VerVar12="",VerVar13="",VerVar14="",VerVar15="",VerVar16="",VerVar17="",VerVar18="",VerVar19="",VerVar20="",VerVar21="",VerVar22="",VerVar23="",VerVar24="",VerVar25="";
+		public static String OperadorAr="", OperandoAr="", OperadorRe="", OperandoRe="", OperadorLo="", OperandoLo="", OperadorRe2="", OperadorAr2="", OperadorLo2="";
+		public static String ValorAsig1="", ValorAsig2="", ValorAsig3="", ValorAsig4="", Simb="";
+		public static String ResulVar1="";
+		public static String VerVar30 ="";
+		public static String cadenaCa ="";
 		public static void main(String[] args) throws ParseException{
 			try{
-				php analizador = new php(System.in);
+				php analizador = new php(new StringReader(""
+                                        + "<?php include \"prueba.php\"; "
+                                        + "class c1{"
+                                        + "function __construct (){"
+                                        + "echo \"este es el constructor\";"
+                                        + "}\n" +"var $a =10;"
+                                        + "var $b =100;"
+                                        +"function Method1(){"
+                                        +"$a++;"
+                                        +"$b++;"
+                                        +"echo $a;"
+                                        +"echo $b;"
+                                        +"}}"
+                                        + "?>"));
 				analizador.ProgramaInicio();
+				System.out.println("------Correctamente Analizado------");
 			}catch(ParseException e){
 				System.out.println(e.getMessage());
 				System.out.println("**Error Sintactico: Se ha encontrado errores en el Analisis");
@@ -144,7 +168,7 @@ void ProgramaInicio():{} //Aqui se declaran variables y objetos de javacc
 	<TAGINICIO>(CuerpoPrograma())+<TAGFIN>
 }
 
-void CuerpoPrograma():{}
+void CuerpoPrograma():{Token T1;}
 {
 	 CuerpoComentario()
 	|(MInclude())*(Clase()|MetodoMain())
@@ -155,7 +179,7 @@ void CuerpoComentario():{}
 	<SINGLE_LINE_COMMENT>
 }
 
-void Clase():{}
+void Clase():{Token T2;}
 {
 	<PCLASS> <ID>(<PEXT><ID>)?<LLAVEA>Constructor() CuerpoClase() <LLAVEC>
 }
@@ -166,10 +190,81 @@ void CuerpoClase():{}
 }
 
 
-void CVariables():{}
+void CVariables():{Token Ids, InDe=null;}
 {
-	 <PVAR><DOLAR><ID>(TVariable())?(<COMA><DOLAR><ID>(TVariable())?)*  //VARIABLES GLOBALES
-	|<DOLAR><ID>(TVariable()|OAr()<PUNTOCOMA>|ORe()<PUNTOCOMA>|OLog()<PUNTOCOMA>)?(<COMA><DOLAR><ID>(TVariable())?)*   //VARIABLES LOCALES
+	 <PVAR><DOLAR> Ids = <ID> {propiedad.setNombre(Ids.image); if(Ids.image.equals("a")){VerVar=Ids.image;} if(Ids.image.equals("b")){VerVar2=Ids.image;} if(Ids.image.equals("c")){VerVar3=Ids.image;} 
+	 														   if(Ids.image.equals("d")){VerVar4=Ids.image;} if(Ids.image.equals("e")){VerVar5=Ids.image;} if(Ids.image.equals("f")){VerVar6=Ids.image;} 
+	 														   if(Ids.image.equals("g")){VerVar7=Ids.image;} if(Ids.image.equals("h")){VerVar8=Ids.image;} if(Ids.image.equals("i")){VerVar9=Ids.image;} 
+	 														   if(Ids.image.equals("j")){VerVar10=Ids.image;} if(Ids.image.equals("k")){VerVar11=Ids.image;} if(Ids.image.equals("l")){VerVar12=Ids.image;} 
+	 														   if(Ids.image.equals("m")){VerVar13=Ids.image;} if(Ids.image.equals("n")){VerVar14=Ids.image;} if(Ids.image.equals("o")){VerVar15=Ids.image;} 
+	 														   if(Ids.image.equals("p")){VerVar16=Ids.image;} if(Ids.image.equals("q")){VerVar17=Ids.image;} if(Ids.image.equals("r")){VerVar18=Ids.image;} 
+	 														   if(Ids.image.equals("s")){VerVar19=Ids.image;} if(Ids.image.equals("t")){VerVar20=Ids.image;} if(Ids.image.equals("u")){VerVar21=Ids.image;} 
+	 														   if(Ids.image.equals("w")){VerVar22=Ids.image;} if(Ids.image.equals("x")){VerVar23=Ids.image;} if(Ids.image.equals("y")){VerVar24=Ids.image;} 
+	 														   if(Ids.image.equals("z")){VerVar25=Ids.image;} 
+	 						  }
+	 											(TVariable())? 
+	 											(<COMA><DOLAR> Ids =<ID>(TVariable())?)*  //VARIABLES GLOBALES 
+	|<DOLAR> Ids = <ID> (TVariable() {VerVar30=Ids.image;}
+						|OAr()<PUNTOCOMA>
+						|ORe()<PUNTOCOMA>
+						|OLog()<PUNTOCOMA>
+						|(InDe = <INC>  
+							|InDe = <DECR>)<PUNTOCOMA>)? {Simb=InDe.image; if(Simb.equals("++")){
+																				//System.out.println("**"+ValorAsig1+"**"+ValorAsig2+"**");
+																				if(VerVar != ""){
+																					int variableL = Integer.parseInt(ValorAsig1);
+																					System.out.println("*********DEC-INC1++********"); 
+																					int RES = variableL + 1;
+																			   		System.out.println(VerVar +" = "+ Simb + "-->" + RES); 
+																			   		System.out.println("*******************");
+																				}if(VerVar2 != ""){
+																					int variableL = Integer.parseInt(ValorAsig2);
+																					System.out.println("*********DEC-INC2++********"); 
+																					int RES = variableL + 1;
+																			   		System.out.println(VerVar2 +" = "+ Simb + "-->" + RES); 
+																			   		System.out.println("*******************");
+																				}if(VerVar3 != ""){
+																					int variableL = Integer.parseInt(ValorAsig3);
+																					System.out.println("*********DEC-INC3++********"); 
+																					int RES = variableL + 1;
+																			   		System.out.println(VerVar3 +" = "+ Simb + "-->" + RES); 
+																			   		System.out.println("*******************");
+																				}if(VerVar4 != ""){
+																					int variableL = Integer.parseInt(ValorAsig4);
+																					System.out.println("*********DEC-INC4++********"); 
+																					int RES = variableL + 1;
+																			   		System.out.println(VerVar4 +" = "+ Simb + "-->" + RES); 
+																			   		System.out.println("*******************");
+																				}
+																			}if(Simb.equals("--")){
+																				if(VerVar != ""){
+																					int variableL = Integer.parseInt(ValorAsig1);
+																					System.out.println("*********DEC-INC1--********"); 
+																					int RES = variableL - 1;
+																			   		System.out.println(VerVar +" = "+ Simb + "-->" + RES); 
+																			   		System.out.println("*******************");
+																				}if(VerVar2 != ""){
+																					int variableL = Integer.parseInt(ValorAsig2);
+																					System.out.println("*********DEC-INC2--********"); 
+																					int RES = variableL - 1;
+																			   		System.out.println(VerVar2 +" = "+ Simb + "-->" + RES); 
+																			   		System.out.println("*******************");
+																				}	if(VerVar3 != ""){
+																					int variableL = Integer.parseInt(ValorAsig3);
+																					System.out.println("*********DEC-INC3--********"); 
+																					int RES = variableL + 1;
+																			   		System.out.println(VerVar3 +" = "+ Simb + "-->" + RES); 
+																			   		System.out.println("*******************");
+																				}if(VerVar4 != ""){
+																					int variableL = Integer.parseInt(ValorAsig4);
+																					System.out.println("*********DEC-INC4--********"); 
+																					int RES = variableL + 1;
+																			   		System.out.println(VerVar4 +" = "+ Simb + "-->" + RES); 
+																			   		System.out.println("*******************");
+																				}																			
+																			}
+														  }
+						(<COMA><DOLAR><ID>(TVariable())?)*   //VARIABLES LOCALES             
 	|DecFunction()
 	|OperacionesArit1()
 	|Imprimir()
@@ -183,13 +278,33 @@ void TVariable():{}
 {
 	(AsignacionVar()|<PUNTOCOMA>)
 }
-void AsignacionVar():{}
+void AsignacionVar():{Token IdAsgi, ValAsig;}
 {
-	 <IGUAL>(<COMILLASIMPLE><ID><COMILLASIMPLE>|<PNEW> <ID><PARA><PARC>|<COMILLADOBLE><ID><COMILLADOBLE>|<NUM>(OAr())?|<DEC>(OAr())?|<DOLAR><ID>(OAr()|<PUNTO>(<COMILLADOBLE><ID><COMILLADOBLE>|<NUM>|<DEC>))?)<PUNTOCOMA>
+	 <IGUAL>(<COMILLASIMPLE>IdAsgi=<ID><COMILLASIMPLE>{ValorAsig1=IdAsgi.image; System.out.println("*********VAR********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");}
+	 	     |<PNEW> <ID><PARA><PARC>
+	 	     |<COMILLADOBLE>IdAsgi=<ID><COMILLADOBLE>{ValorAsig1=IdAsgi.image; System.out.println("*********VAR********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");}
+	 	     |ValAsig=<NUM>(OAr())? {if(ValorAsig5.equals("") && ValorAsig4 != ""){
+	 	     							ValorAsig5=ValAsig.image;
+	 	     							System.out.println("**"+ValorAsig1+"**");
+	 	     						 }if(ValorAsig4.equals("") && ValorAsig3 != ""){
+	 	     							ValorAsig4=ValAsig.image;
+	 	     							System.out.println("**"+ValorAsig1+"**");
+	 	     						 }if(ValorAsig3.equals("") && ValorAsig2 != ""){
+	 	     							ValorAsig3=ValAsig.image;
+	 	     							System.out.println("**"+ValorAsig2+"**");
+	 	     						 }if(ValorAsig2.equals("") && ValorAsig1 != ""){
+	 	     							ValorAsig2=ValAsig.image;
+	 	     						 }if(ValorAsig1.equals("")){
+	 	     							ValorAsig1=ValAsig.image;
+	 	     						 }
+	 	     													System.out.println("*********VAR********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");}
+	 	     |ValAsig=<DEC>(OAr())? {ValorAsig1=ValAsig.image; System.out.println("*********VAR********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");}
+	 	     |<DOLAR>IdAsgi=<ID>(OAr()
+	 	     				|<PUNTO>(<COMILLADOBLE><ID><COMILLADOBLE>|<NUM>|<DEC>))?)<PUNTOCOMA>
 	|<ASIG><ID><PARA><DOLAR><ID>(<COMA><DOLAR><ID>)*<PARC><PUNTOCOMA>
 }
 
-void DecFunction():{}{
+void DecFunction():{}{ //DEFINICION DE METODOS Y FUNCIONES
 	<PFUNCION><ID><PARA>(ParametrosFuction())?<PARC><LLAVEA>CuerpoFunction()<LLAVEC>
 }
 
@@ -229,19 +344,44 @@ void OperacionesArit1():{}
 	 <RESTA><DOLAR><ID><PUNTOCOMA>
 	
 }
-void OAr():{} /// OPERACIONES ARITMETICAS CON OPERANDOS
+void OAr():{Token OperA; Token OperandA;} /// OPERACIONES ARITMETICAS CON OPERANDOS
 {
-	((<POR>|<SUMA>|<DIV>|<POTEN>|<MOD>|<RESTA>)(<DOLAR><ID>|<NUM>|<DEC>))+
+	((OperA=<POR>{OperadorAr=OperA.image;}
+	|OperA=<SUMA>{OperadorAr=OperA.image;}
+	|OperA=<DIV>{OperadorAr=OperA.image;}
+	|OperA=<POTEN>{OperadorAr=OperA.image;}
+	|OperA=<MOD>{OperadorAr=OperA.image;}
+	|OperA=<RESTA>{OperadorAr=OperA.image;})
+		(<DOLAR> OperandA=<ID>{OperandoAr=OperandA.image;}
+			|OperandA=<NUM>{OperandoAr=OperandA.image;}
+			|OperandA=<DEC>{OperandoAr=OperandA.image;}))+
 }
 
-void ORe():{}/// OPERACIONES RELACIONALES CON OPERANDOS
+void ORe():{Token OperR, OperandR;}/// OPERACIONES RELACIONALES CON OPERANDOS
 {
-	(<IGUAL2>|<IDENT>|<DIFE1>|<DIFE2>|<NOIDE>|<MENOR>|<MAYOR>|<MENORI>|<MAYORI>)(<DOLAR><ID>|<NUM>|<DEC>)
+	(OperR=<IGUAL2>{OperadorRe=OperR.image;}
+	|OperR=<IDENT>{OperadorRe=OperR.image;}
+	|OperR=<DIFE1>{OperadorRe=OperR.image;}
+	|OperR=<DIFE2>{OperadorRe=OperR.image;}
+	|OperR=<NOIDE>{OperadorRe=OperR.image;}
+	|OperR=<MENOR>{OperadorRe=OperR.image;}
+	|OperR=<MAYOR>{OperadorRe=OperR.image;}
+	|OperR=<MENORI>{OperadorRe=OperR.image;}
+	|OperR=<MAYORI>{OperadorRe=OperR.image;})
+		(<DOLAR>OperandR=<ID>{OperandoRe =OperandR.image;}
+			   |OperandR=<NUM>{OperandoRe =OperandR.image;}
+			   |OperandR=<DEC>{OperandoRe =OperandR.image;})
 }
 
-void OLog():{}///OPERACIONES LOGICAS CON OPERANDOS
+void OLog():{Token OperL, OperandL;}///OPERACIONES LOGICAS CON OPERANDOS
 {
-	((<LAND>|<LOR>|<LXOR>|<LNOT>|<LAND2>|<LOR2>)<DOLAR><ID>)+
+	((OperL=<LAND>{OperadorLo=OperL.image;}
+	 |OperL=<LOR>{OperadorLo=OperL.image;}
+	 |OperL=<LXOR>{OperadorLo=OperL.image;}
+	 |OperL=<LNOT>{OperadorLo=OperL.image;}
+	 |OperL=<LAND2>{OperadorLo=OperL.image;}
+	 |OperL=<LOR2>{OperadorLo=OperL.image;}
+	    )<DOLAR>OperandL=<ID>{OperandoLo=OperandL.image;})+
 }
 
 void ParametrosFuction():{}//PARAMETROS DE LAS FUNCIONES
@@ -254,9 +394,11 @@ void CuerpoReturn():{}
 	 <PRETURN><DOLAR><ID><PUNTOCOMA>
 }
 
-void Constructor():{}
+void Constructor():{Token IdsCons, NumCons;}
 {
-	<PFUNCION><GUIONB><GUIONB><PCONST><PARA>(ParametrosFuction())?<PARC><LLAVEA><PECHO><COMILLADOBLE>(<ID>)+<COMILLADOBLE><PUNTOCOMA>(<DOLAR>(<ID><IGUAL><PNEW><ID><PARA><PARC><PUNTOCOMA>|MetThis()))*(MetParent())*<LLAVEC>
+	<PFUNCION><GUIONB><GUIONB><PCONST><PARA>(ParametrosFuction())?<PARC><LLAVEA>
+						<PECHO><COMILLADOBLE>(IdsCons=<ID>{cadenaCa= cadenaCa + IdsCons.image +" ";})+<COMILLADOBLE><PUNTOCOMA>
+						(<DOLAR>(<ID><IGUAL><PNEW><ID><PARA><PARC><PUNTOCOMA>|MetThis()))*(MetParent())*<LLAVEC> {System.out.println("*******ECHO CONST*******"); System.out.println(cadenaCa); System.out.println("****************");}
 }
 
 void MInclude():{}
@@ -290,9 +432,17 @@ void NotParametros():{} //!($b==0)
 {
 	<LNOT><PARA><DOLAR><ID>ORe2()(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>)<PARC>
 }
-void ORe2():{} /// OPERACIONES RELACIONALES SIN OPERANDOS
+void ORe2():{Token OperadorR2;} /// OPERACIONES RELACIONALES SIN OPERANDOS
 {
-	(<IGUAL2>|<IDENT>|<DIFE1>|<DIFE2>|<NOIDE>|<MENOR>|<MAYOR>|<MENORI>|<MAYORI>)
+	(OperadorR2=<IGUAL2>{OperadorRe2=OperadorR2.image;}
+	|OperadorR2=<IDENT>
+	|OperadorR2=<DIFE1>
+	|OperadorR2=<DIFE2>
+	|OperadorR2=<NOIDE>
+	|OperadorR2=<MENOR>
+	|OperadorR2=<MAYOR>
+	|OperadorR2=<MENORI>
+	|OperadorR2=<MAYORI>)
 }
 void OLog2():{} /// OPEACIONES LOGICAS SIN OPERENADOS
 {
@@ -322,9 +472,11 @@ void CuerpoCase():{}
 	|SentenciasIF() ((<PBREAK>|<PCONTI>)<PUNTOCOMA>)?
 	|CuerpoIF()
 }
-void Imprimir2():{}
+void Imprimir2():{Token IdsImp2; Token NumImp2;}
 {
-	<PECHO>(<COMILLADOBLE>(<ID>|<NUM>)*<COMILLADOBLE>)<PUNTOCOMA>
+	<PECHO>(<COMILLADOBLE>(IdsImp2=<ID> {System.out.println("**************"); System.out.println(IdsImp2.image); System.out.println("**************");}
+		|NumImp2=<NUM> {System.out.println("**************"); System.out.println(NumImp2.image); System.out.println("**************");}
+		)*<COMILLADOBLE>)<PUNTOCOMA>
 }
 //*****************SENTENCIA WHILE******************************
 void SentenciaWh():{}
