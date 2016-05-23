@@ -29,7 +29,46 @@ public class RecorridoArbol implements phpTreeConstants{
             case JJTPROGRAMAINICIO:
                 FillTable((SimpleNode) ActNode.children[0], "-----");
                 break;
+            case JJTCUERPOPROGRAMA:
+                //
+                break;
+            case JJTMINCLUDE:
+                String rutaInclude = ((SimpleNode) ActNode.children[0]).Nombre;
+                Readfile(rutaInclude);
+                break;
+            case JJTMETODOMAIN:
+            case JJTCLASE:
+                String ClaseN = ((SimpleNode) ActNode.children[0]).Nombre;
+                if(NoChildAct > 1){
+                }
+                break;
+            case JJTCONSTRUCTOR:
+            case JJTCUERPOCLASE:
+            case JJTCVARIABLES:
+            case JJTASIGNACIONVAR:
+            case JJTDECFUNCTION:
+            case JJTCUERPOMATRIZ:
+            case JJTPARAMETROSFOR:
+            case JJTCUERPOFOR:
+            case JJTCUERPOVECFOR:
+            case JJTASIGNARMATVECT:
+            case JJTIMPRIMIR:
+            case JJTOPERACIONESARIT1:
+            case JJTPARAMETROSFUCTION:
+            case JJTCUERPOCONSTRUCTOR:
+            case JJTMETPARENT:
+            case JJTMETTHIS:
+            case JJTPARAMETROSIF:
+            case JJTSENTENCIASIF:
+            case JJTCUERPOIF:
+            case JJTIMPRIMIR2:
+            case JJTCUERPOWH:
+            case JJTCUERPOFOR2:
+            case JJTPARAMETROSMAIN:
         }
     } 
+    
+    public void Readfile(String Archivo){
+    }
     
 }

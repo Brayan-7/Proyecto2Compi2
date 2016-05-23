@@ -45,7 +45,7 @@ public class php{
 								+"$b = 8.5;"
 								+"$c = 10;  $f;"
 								+"while (true ){"
-								+"if ($a != 5.5){ $f= 60 + 60;"
+								+"if ($a < 10){ $f= 60 + 60;"
 								+"break ;}"
 								+"-$a; -$b;  echo $a;   echo $b; echo $f;"
 								+"echo \"color\" . $this ->b . \" marca \". $this ->c . \" anio \" . $this ->d . \" recorrido \".$this ->a . \" \\n \";"
@@ -987,9 +987,54 @@ void OAr2():{Token OperadorA2;} /// OPERACIONES ARITMETICAS SIN OPERANDOS
 	|OperadorA2=<MOD> {OperadorAr2 = OperadorA2.image;}
 	|OperadorA2=<RESTA> {OperadorAr2 = OperadorA2.image;})
 }
-void SentenciasIF():{Token IdIf1, IdIf2, IdIf3, IdIf4, IdIf5=null, NumIf1, DecIf1, NumIf2, DecIf2, InDecIf, NumIf3, DecIf3, NumIf4 =null;}
+void SentenciasIF():{Token IdIf1, IdIf2, IdIf3, IdIf4, IdIf5=null, NumIf1=null, DecIf1=null, NumIf2=null, DecIf2=null, InDecIf, NumIf3, DecIf3, NumIf4 =null;}
 {
-	(<DOLAR><ID>(<IGUAL>(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>|(OAr2()(<DOLAR><ID>|<NUM>|<DEC>))*)|(<INC>|<DECR>))|(<PBREAK>|<PCONTI>))<PUNTOCOMA>
+	//(<DOLAR><ID>(<IGUAL>(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>|(OAr2()(<DOLAR><ID>|<NUM>|<DEC>))*)|(<INC>|<DECR>))|(<PBREAK>|<PCONTI>))<PUNTOCOMA>
+	<DOLAR>IdIf1=<ID>(<IGUAL>(((NumIf1=<NUM>|DecIf1=<DEC>)(OAr2()(NumIf2=<NUM>|DecIf2=<DEC>))*)))<PUNTOCOMA>{if(OperadorAr2.equals("+")){
+																												if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+																													int ResuFin = Integer.parseInt(NumIf1.image) + Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT1**** " + ResuFin +" ******");
+																												}if(NumIf1.image != "" /*&& NumIf2.image.equals("") */&& DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+																													float ResuFin = Integer.parseInt(NumIf1.image) + Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT2**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) + Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT3**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) + Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT4**** " + ResuFin +" ******");
+																												}
+																											}if(OperadorAr2.equals("-")){
+																												if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+																													int ResuFin = Integer.parseInt(NumIf1.image) - Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT1**** " + ResuFin +" ******");
+																												}if(NumIf1.image != "" /*&& NumIf2.image.equals("")*/ && DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+																													float ResuFin = Integer.parseInt(NumIf1.image) - Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT2**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) - Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT3**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) - Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT4**** " + ResuFin +" ******");
+																												}
+																											}if(OperadorAr2.equals("*")){
+																												if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+																													int ResuFin = Integer.parseInt(NumIf1.image) * Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT1**** " + ResuFin +" ******");
+																												}if(NumIf1.image != "" /*&& NumIf2.image.equals("")*/ && DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+																													float ResuFin = Integer.parseInt(NumIf1.image) * Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT2**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) * Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT3**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) * Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT4**** " + ResuFin +" ******");
+																												}
+																											}
+																										}
+	|(<PBREAK>|<PCONTI>)<PUNTOCOMA>
 }
 
 //**************SENTENCIA SWITCH******************

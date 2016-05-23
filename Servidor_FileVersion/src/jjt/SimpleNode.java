@@ -7,6 +7,7 @@ class SimpleNode implements Node {
 
   protected Node parent;
   public Node[] children;
+  public String Nombre;
   protected int id;
   protected Object value;
   protected php parser;

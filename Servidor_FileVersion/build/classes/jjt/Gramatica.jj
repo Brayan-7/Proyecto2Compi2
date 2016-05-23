@@ -49,7 +49,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants/*@egen*/{/*@bgen(jj
 								+"$b = 8.5;"
 								+"$c = 10;  $f;"
 								+"while (true ){"
-								+"if ($a != 5.5){ $f= 60 + 60;"
+								+"if ($a < 10){ $f= 60 + 60;"
 								+"break ;}"
 								+"-$a; -$b;  echo $a;   echo $b; echo $f;"
 								+"echo \"color\" . $this ->b . \" marca \". $this ->c . \" anio \" . $this ->d . \" recorrido \".$this ->a . \" \\n \";"
@@ -1781,31 +1781,61 @@ void SentenciasIF():{/*@bgen(jjtree) SentenciasIF */
                      SimpleNode jjtn000 = new SimpleNode(JJTSENTENCIASIF);
                      boolean jjtc000 = true;
                      jjtree.openNodeScope(jjtn000);
-/*@egen*/Token IdIf1, IdIf2, IdIf3, IdIf4, IdIf5=null, NumIf1, DecIf1, NumIf2, DecIf2, InDecIf, NumIf3, DecIf3, NumIf4 =null;}
+/*@egen*/Token IdIf1, IdIf2, IdIf3, IdIf4, IdIf5=null, NumIf1=null, DecIf1=null, NumIf2=null, DecIf2=null, InDecIf, NumIf3, DecIf3, NumIf4 =null;}
 {/*@bgen(jjtree) SentenciasIF */
         try {
 /*@egen*/
-	(<DOLAR>IdIf1=<ID>{ValIF1=IdIf1.image;}(<IGUAL>(<DOLAR>IdIf2=<ID>{ValIF2=IdIf2.image;}(OAr2()(<DOLAR>IdIf3=<ID>{ValIF3=IdIf3.image;}|NumIf1=<NUM>|DecIf1=<DEC>))* /*{if(OperadorAr2.equals("+")){
-																																											int FinalOut;
-
-																																										}if(OperadorAr2.equals("-")){
-																																											//
-																																										}if(OperadorAr2.equals("/")){
-																																											//
-																																										}if(OperadorAr2.equals("*")){
-																																											//
-																																										}if(OperadorAr2.equals("%")){
-																																											//
-																																										}if(OperadorAr2.equals("**")){}
-																																									   }*/
-														|NumIf2=<NUM>{ValIF4=NumIf2.image;}
-														|DecIf2=<DEC> {ValIF5=DecIf2.image;}
-														|<COMILLASIMPLE>IdIf4=<ID><COMILLASIMPLE> //{ValIF6=IdIf4.image;}
-														|<COMILLADOBLE>IdIf5=<ID><COMILLADOBLE>
-														))
-									|(InDecIf=<INC>|InDecIf=<DECR>){ValInDecIf=InDecIf.image; })<PUNTOCOMA>
-	|(<PBREAK>|<PCONTI>)?<PUNTOCOMA>
-	|<DOLAR><ID>(<IGUAL>(<NUM>|<DEC>)(OAr2()(<NUM>|<DEC>))*)<PUNTOCOMA>/*@bgen(jjtree)*/
+	//(<DOLAR><ID>(<IGUAL>(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>|(OAr2()(<DOLAR><ID>|<NUM>|<DEC>))*)|(<INC>|<DECR>))|(<PBREAK>|<PCONTI>))<PUNTOCOMA>
+	<DOLAR>IdIf1=<ID>(<IGUAL>(((NumIf1=<NUM>|DecIf1=<DEC>)(OAr2()(NumIf2=<NUM>|DecIf2=<DEC>))*)))<PUNTOCOMA>/*@bgen(jjtree)*/
+                                                                                                                {
+                                                                                                                  jjtree.closeNodeScope(jjtn000, true);
+                                                                                                                  jjtc000 = false;
+                                                                                                                }
+/*@egen*/{if(OperadorAr2.equals("+")){
+																												if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+																													int ResuFin = Integer.parseInt(NumIf1.image) + Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT1**** " + ResuFin +" ******");
+																												}if(NumIf1.image != "" /*&& NumIf2.image.equals("") */&& DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+																													float ResuFin = Integer.parseInt(NumIf1.image) + Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT2**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) + Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT3**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) + Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT4**** " + ResuFin +" ******");
+																												}
+																											}if(OperadorAr2.equals("-")){
+																												if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+																													int ResuFin = Integer.parseInt(NumIf1.image) - Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT1**** " + ResuFin +" ******");
+																												}if(NumIf1.image != "" /*&& NumIf2.image.equals("")*/ && DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+																													float ResuFin = Integer.parseInt(NumIf1.image) - Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT2**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) - Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT3**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) - Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT4**** " + ResuFin +" ******");
+																												}
+																											}if(OperadorAr2.equals("*")){
+																												if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+																													int ResuFin = Integer.parseInt(NumIf1.image) * Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT1**** " + ResuFin +" ******");
+																												}if(NumIf1.image != "" /*&& NumIf2.image.equals("")*/ && DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+																													float ResuFin = Integer.parseInt(NumIf1.image) * Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT2**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) * Integer.parseInt(NumIf2.image);
+																													System.out.println("*****RESULT3**** " + ResuFin +" ******");
+																												}if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+																													float ResuFin = Float.parseFloat(DecIf1.image) * Float.parseFloat(DecIf2.image);
+																													System.out.println("*****RESULT4**** " + ResuFin +" ******");
+																												}
+																											}
+																										}
+	|(<PBREAK>|<PCONTI>)<PUNTOCOMA>/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);

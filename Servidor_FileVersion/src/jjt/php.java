@@ -38,7 +38,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
                                                                 +"$b = 8.5;"
                                                                 +"$c = 10;  $f;"
                                                                 +"while (true ){"
-                                                                +"if ($a != 5.5){ $f= 60 + 60;"
+                                                                +"if ($a < 10){ $f= 60 + 60;"
                                                                 +"break ;}"
                                                                 +"-$a; -$b;  echo $a;   echo $b; echo $f;"
                                                                 +"echo \u005c"color\u005c" . $this ->b . \u005c" marca \u005c". $this ->c . \u005c" anio \u005c" . $this ->d . \u005c" recorrido \u005c".$this ->a . \u005c" \u005c\u005cn \u005c";"
@@ -2759,93 +2759,100 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
                      /*@bgen(jjtree) SentenciasIF */
                      SimpleNode jjtn000 = new SimpleNode(JJTSENTENCIASIF);
                      boolean jjtc000 = true;
-                     jjtree.openNodeScope(jjtn000);Token IdIf1, IdIf2, IdIf3, IdIf4, IdIf5=null, NumIf1, DecIf1, NumIf2, DecIf2, InDecIf, NumIf3, DecIf3, NumIf4 =null;
+                     jjtree.openNodeScope(jjtn000);Token IdIf1, IdIf2, IdIf3, IdIf4, IdIf5=null, NumIf1=null, DecIf1=null, NumIf2=null, DecIf2=null, InDecIf, NumIf3, DecIf3, NumIf4 =null;
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case DOLAR:
         jj_consume_token(DOLAR);
-        jj_consume_token(ID);
+        IdIf1 = jj_consume_token(ID);
+        jj_consume_token(IGUAL);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case IGUAL:
-          jj_consume_token(IGUAL);
-          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-          case DOLAR:
-            jj_consume_token(DOLAR);
-            jj_consume_token(ID);
-            break;
-          case NUM:
-            jj_consume_token(NUM);
-            break;
-          case DEC:
-            jj_consume_token(DEC);
-            break;
-          case COMILLASIMPLE:
-            jj_consume_token(COMILLASIMPLE);
-            jj_consume_token(ID);
-            jj_consume_token(COMILLASIMPLE);
-            break;
-          case COMILLADOBLE:
-            jj_consume_token(COMILLADOBLE);
-            jj_consume_token(ID);
-            jj_consume_token(COMILLADOBLE);
-            break;
-          default:
-            jj_la1[74] = jj_gen;
-            label_21:
-            while (true) {
-              switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-              case POR:
-              case SUMA:
-              case RESTA:
-              case DIV:
-              case MOD:
-              case POTEN:
-                ;
-                break;
-              default:
-                jj_la1[72] = jj_gen;
-                break label_21;
-              }
-              OAr2();
-              switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-              case DOLAR:
-                jj_consume_token(DOLAR);
-                jj_consume_token(ID);
-                break;
-              case NUM:
-                jj_consume_token(NUM);
-                break;
-              case DEC:
-                jj_consume_token(DEC);
-                break;
-              default:
-                jj_la1[73] = jj_gen;
-                jj_consume_token(-1);
-                throw new ParseException();
-              }
-            }
-          }
+        case NUM:
+          NumIf1 = jj_consume_token(NUM);
           break;
-        case DECR:
-        case INC:
-          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-          case INC:
-            jj_consume_token(INC);
-            break;
-          case DECR:
-            jj_consume_token(DECR);
-            break;
-          default:
-            jj_la1[75] = jj_gen;
-            jj_consume_token(-1);
-            throw new ParseException();
-          }
+        case DEC:
+          DecIf1 = jj_consume_token(DEC);
           break;
         default:
-          jj_la1[76] = jj_gen;
+          jj_la1[72] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
+        label_21:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case POR:
+          case SUMA:
+          case RESTA:
+          case DIV:
+          case MOD:
+          case POTEN:
+            ;
+            break;
+          default:
+            jj_la1[73] = jj_gen;
+            break label_21;
+          }
+          OAr2();
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case NUM:
+            NumIf2 = jj_consume_token(NUM);
+            break;
+          case DEC:
+            DecIf2 = jj_consume_token(DEC);
+            break;
+          default:
+            jj_la1[74] = jj_gen;
+            jj_consume_token(-1);
+            throw new ParseException();
+          }
+        }
+        jj_consume_token(PUNTOCOMA);
+                                                                                                                  jjtree.closeNodeScope(jjtn000, true);
+                                                                                                                  jjtc000 = false;
+                                                                                                                 if(OperadorAr2.equals("+")){
+                                                                                                                                                                                                                                if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+                                                                                                                                                                                                                                        int ResuFin = Integer.parseInt(NumIf1.image) + Integer.parseInt(NumIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT1**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(NumIf1.image != "" /*&& NumIf2.image.equals("") */&& DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+                                                                                                                                                                                                                                        float ResuFin = Integer.parseInt(NumIf1.image) + Float.parseFloat(DecIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT2**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+                                                                                                                                                                                                                                        float ResuFin = Float.parseFloat(DecIf1.image) + Integer.parseInt(NumIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT3**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+                                                                                                                                                                                                                                        float ResuFin = Float.parseFloat(DecIf1.image) + Float.parseFloat(DecIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT4**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                        }if(OperadorAr2.equals("-")){
+                                                                                                                                                                                                                                if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+                                                                                                                                                                                                                                        int ResuFin = Integer.parseInt(NumIf1.image) - Integer.parseInt(NumIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT1**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(NumIf1.image != "" /*&& NumIf2.image.equals("")*/ && DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+                                                                                                                                                                                                                                        float ResuFin = Integer.parseInt(NumIf1.image) - Float.parseFloat(DecIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT2**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+                                                                                                                                                                                                                                        float ResuFin = Float.parseFloat(DecIf1.image) - Integer.parseInt(NumIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT3**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+                                                                                                                                                                                                                                        float ResuFin = Float.parseFloat(DecIf1.image) - Float.parseFloat(DecIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT4**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                        }if(OperadorAr2.equals("*")){
+                                                                                                                                                                                                                                if(NumIf1.image != "" && NumIf2.image != "" /*&& DecIf2.image.equals("") && DecIf1.image.equals("")*/){
+                                                                                                                                                                                                                                        int ResuFin = Integer.parseInt(NumIf1.image) * Integer.parseInt(NumIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT1**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(NumIf1.image != "" /*&& NumIf2.image.equals("")*/ && DecIf2.image != "" /*&& DecIf1.image.equals("")*/){
+                                                                                                                                                                                                                                        float ResuFin = Integer.parseInt(NumIf1.image) * Float.parseFloat(DecIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT2**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(/*NumIf1.image.equals("") &&*/ NumIf2.image != "" /*&& DecIf2.image.equals("")*/ && DecIf1.image != ""){
+                                                                                                                                                                                                                                        float ResuFin = Float.parseFloat(DecIf1.image) * Integer.parseInt(NumIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT3**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }if(/*NumIf1.image.equals("") &&  NumIf2.image.equals("") &&*/ DecIf2.image != "" && DecIf1.image != ""){
+                                                                                                                                                                                                                                        float ResuFin = Float.parseFloat(DecIf1.image) * Float.parseFloat(DecIf2.image);
+                                                                                                                                                                                                                                        System.out.println("*****RESULT4**** " + ResuFin +" ******");
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                        }
         break;
       case PBREAK:
       case PCONTI:
@@ -2857,17 +2864,17 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           jj_consume_token(PCONTI);
           break;
         default:
-          jj_la1[77] = jj_gen;
+          jj_la1[75] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
+        jj_consume_token(PUNTOCOMA);
         break;
       default:
-        jj_la1[78] = jj_gen;
+        jj_la1[76] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
-      jj_consume_token(PUNTOCOMA);
     } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -2910,7 +2917,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           ;
           break;
         default:
-          jj_la1[79] = jj_gen;
+          jj_la1[77] = jj_gen;
           break label_22;
         }
       }
@@ -2953,7 +2960,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
         CuerpoCase();
         break;
       default:
-        jj_la1[80] = jj_gen;
+        jj_la1[78] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -2997,14 +3004,14 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
             jj_consume_token(PCONTI);
             break;
           default:
-            jj_la1[81] = jj_gen;
+            jj_la1[79] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           jj_consume_token(PUNTOCOMA);
           break;
         default:
-          jj_la1[82] = jj_gen;
+          jj_la1[80] = jj_gen;
           ;
         }
         break;
@@ -3023,14 +3030,14 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
             jj_consume_token(PCONTI);
             break;
           default:
-            jj_la1[83] = jj_gen;
+            jj_la1[81] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           jj_consume_token(PUNTOCOMA);
           break;
         default:
-          jj_la1[84] = jj_gen;
+          jj_la1[82] = jj_gen;
           ;
         }
         break;
@@ -3038,7 +3045,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
         CuerpoIF();
         break;
       default:
-        jj_la1[85] = jj_gen;
+        jj_la1[83] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3079,7 +3086,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           ;
           break;
         default:
-          jj_la1[86] = jj_gen;
+          jj_la1[84] = jj_gen;
           break label_23;
         }
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -3092,7 +3099,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
                                                                 VarNumImp2 = VarNumImp2 + NumImp2.image;
           break;
         default:
-          jj_la1[87] = jj_gen;
+          jj_la1[85] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3135,7 +3142,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           ;
           break;
         default:
-          jj_la1[88] = jj_gen;
+          jj_la1[86] = jj_gen;
           break label_24;
         }
       }
@@ -3255,7 +3262,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
             IdIm2 = jj_consume_token(ID);
             break;
           default:
-            jj_la1[89] = jj_gen;
+            jj_la1[87] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -3271,7 +3278,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
               ;
               break;
             default:
-              jj_la1[90] = jj_gen;
+              jj_la1[88] = jj_gen;
               break label_25;
             }
             jj_consume_token(PUNTO);
@@ -3287,7 +3294,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
                 jj_consume_token(SALTO);
                 break;
               default:
-                jj_la1[91] = jj_gen;
+                jj_la1[89] = jj_gen;
                 jj_consume_token(-1);
                 throw new ParseException();
               }
@@ -3300,14 +3307,14 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
               IdIm5 = jj_consume_token(ID);
               break;
             default:
-              jj_la1[92] = jj_gen;
+              jj_la1[90] = jj_gen;
               jj_consume_token(-1);
               throw new ParseException();
             }
           }
           break;
         default:
-          jj_la1[93] = jj_gen;
+          jj_la1[91] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3333,13 +3340,13 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
             jj_consume_token(DECR);
             break;
           default:
-            jj_la1[94] = jj_gen;
+            jj_la1[92] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           break;
         default:
-          jj_la1[95] = jj_gen;
+          jj_la1[93] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3355,7 +3362,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           jj_consume_token(PCONTI);
           break;
         default:
-          jj_la1[96] = jj_gen;
+          jj_la1[94] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3371,7 +3378,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
         SentenciaSW();
         break;
       default:
-        jj_la1[97] = jj_gen;
+        jj_la1[95] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3419,7 +3426,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           ;
           break;
         default:
-          jj_la1[98] = jj_gen;
+          jj_la1[96] = jj_gen;
           break label_26;
         }
       }
@@ -3476,7 +3483,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           ;
           break;
         default:
-          jj_la1[99] = jj_gen;
+          jj_la1[97] = jj_gen;
           break label_27;
         }
       }
@@ -3527,7 +3534,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
             ;
             break;
           default:
-            jj_la1[100] = jj_gen;
+            jj_la1[98] = jj_gen;
             break label_28;
           }
           OAr2();
@@ -3543,7 +3550,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
             jj_consume_token(DEC);
             break;
           default:
-            jj_la1[101] = jj_gen;
+            jj_la1[99] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -3563,7 +3570,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           jj_consume_token(PCONTI);
           break;
         default:
-          jj_la1[102] = jj_gen;
+          jj_la1[100] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3579,7 +3586,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
         SentenciaWh();
         break;
       default:
-        jj_la1[103] = jj_gen;
+        jj_la1[101] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3635,13 +3642,13 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
             ParametrosMain();
             break;
           default:
-            jj_la1[104] = jj_gen;
+            jj_la1[102] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           break;
         default:
-          jj_la1[105] = jj_gen;
+          jj_la1[103] = jj_gen;
           ;
         }
         jj_consume_token(PARC);
@@ -3668,19 +3675,19 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
             jj_consume_token(ID);
             break;
           default:
-            jj_la1[106] = jj_gen;
+            jj_la1[104] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           break;
         default:
-          jj_la1[107] = jj_gen;
+          jj_la1[105] = jj_gen;
           ;
         }
         jj_consume_token(PARC);
         break;
       default:
-        jj_la1[108] = jj_gen;
+        jj_la1[106] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3725,7 +3732,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
         jj_consume_token(COMILLADOBLE);
         break;
       default:
-        jj_la1[109] = jj_gen;
+        jj_la1[107] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -3736,7 +3743,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           ;
           break;
         default:
-          jj_la1[110] = jj_gen;
+          jj_la1[108] = jj_gen;
           break label_29;
         }
         jj_consume_token(COMA);
@@ -3753,7 +3760,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
           jj_consume_token(COMILLADOBLE);
           break;
         default:
-          jj_la1[111] = jj_gen;
+          jj_la1[109] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -3774,7 +3781,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[112];
+  final private int[] jj_la1 = new int[110];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -3784,13 +3791,13 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x4040200,0x4000000,0x40000,0x4040200,0x20000000,0x180000,0x40580000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40580000,0x0,0x0,0x0,0x4400,0x0,0x0,0x1004400,0x0,0x0,0x0,0x40580000,0x800000,0x40780000,0x200000,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x0,0x4400,0x0,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x80000,0x0,0x18400000,0x800,0x4400,0x10000800,0x18400000,0x0,0x800,0x4400,0x0,0x40000000,0x0,0x80000000,0x0,0x40000000,0x4400,0x0,0x4400,0x0,0x4400,0x0,0x0,0x0,0x0,0x4400,0x4400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40400000,0xc00,0xc00,0x40400000,0x10000800,0x0,0x800,0x0,0x0,0x0,0x0,0x0,0x40400000,0x40400000,0x40400000,0x0,0x4400,0x0,0x40400000,0x4c00,0x4c00,0xc00,0xc00,0x0,0x4400,0x0,0x4400,};
+      jj_la1_0 = new int[] {0x4040200,0x4000000,0x40000,0x4040200,0x20000000,0x180000,0x40580000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40580000,0x0,0x0,0x0,0x4400,0x0,0x0,0x1004400,0x0,0x0,0x0,0x40580000,0x800000,0x40780000,0x200000,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x0,0x4400,0x0,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x80000,0x0,0x18400000,0x800,0x4400,0x10000800,0x18400000,0x0,0x800,0x4400,0x0,0x40000000,0x0,0x80000000,0x0,0x40000000,0x4400,0x0,0x4400,0x0,0x4400,0x0,0x0,0x0,0x4400,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40400000,0xc00,0xc00,0x40400000,0x10000800,0x0,0x800,0x0,0x0,0x0,0x0,0x0,0x40400000,0x40400000,0x40400000,0x0,0x4400,0x0,0x40400000,0x4c00,0x4c00,0xc00,0xc00,0x0,0x4400,0x0,0x4400,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x8000,0x0,0x8000,0x8000,0x0,0x0,0x10008032,0x3000,0x4000,0x3000,0xc00000,0xfcf03000,0xfcf03000,0x4000,0x3000,0x10008032,0x3000,0xfc000000,0xfc000000,0x20000,0xfc000000,0xfc000000,0x38000,0x4000,0x1000,0x8000,0x10008032,0x0,0x10008032,0x8000,0x300000,0xc00000,0x1000000,0x1000000,0x0,0x28000,0x0,0x1000000,0xfc000000,0x8000,0xfc000000,0x300000,0x8000,0x0,0x0,0x0,0x4000,0x0,0x0,0x8000,0x8000,0x0,0x8080,0x0,0x8000,0x60000,0x0,0x30000,0x8044,0x0,0x8044,0x0,0x8044,0x0,0x38000,0x0,0x38000,0x8300,0x38000,0x300000,0x0,0xfc000000,0xfc000000,0x8000,0x38000,0xc00000,0xc01000,0x44,0x8044,0x1,0x8,0x44,0x44,0x44,0x44,0x8044,0x0,0x0,0x10008046,0x0,0x0,0x0,0x28000,0x28000,0xc00000,0xc01000,0x44,0x10008046,0x10008046,0x8056,0xfc000000,0x8000,0x44,0x8056,0x20000,0x20000,0x8000,0x8000,0x1000,0x20000,0x4000,0x20000,};
+      jj_la1_1 = new int[] {0x8000,0x0,0x8000,0x8000,0x0,0x0,0x10008032,0x3000,0x4000,0x3000,0xc00000,0xfcf03000,0xfcf03000,0x4000,0x3000,0x10008032,0x3000,0xfc000000,0xfc000000,0x20000,0xfc000000,0xfc000000,0x38000,0x4000,0x1000,0x8000,0x10008032,0x0,0x10008032,0x8000,0x300000,0xc00000,0x1000000,0x1000000,0x0,0x28000,0x0,0x1000000,0xfc000000,0x8000,0xfc000000,0x300000,0x8000,0x0,0x0,0x0,0x4000,0x0,0x0,0x8000,0x8000,0x0,0x8080,0x0,0x8000,0x60000,0x0,0x30000,0x8044,0x0,0x8044,0x0,0x8044,0x0,0x38000,0x0,0x38000,0x8300,0x38000,0x300000,0x0,0xfc000000,0x0,0xfc000000,0x0,0x44,0x8044,0x1,0x8,0x44,0x44,0x44,0x44,0x8044,0x0,0x0,0x10008046,0x0,0x0,0x0,0x28000,0x28000,0xc00000,0xc01000,0x44,0x10008046,0x10008046,0x8056,0xfc000000,0x8000,0x44,0x8056,0x20000,0x20000,0x8000,0x8000,0x1000,0x20000,0x4000,0x20000,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x4000,0x0,0x4000,0x0,0x5fff,0x5fff,0x0,0x4000,0x400,0x4000,0x0,0x0,0x0,0x8000,0x8000,0x0,0x0,0x4000,0x2000,0x400,0x0,0x400,0x0,0x0,0x0,0x0,0x0,0x8000,0x0,0x0,0x0,0x0,0x0,0x0,0x7f,0x0,0x1f80,0x1f80,0x2000,0x0,0x2000,0x0,0x2000,0x0,0x0,0x0,0x0,0x0,0x0,0x80000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1f80,0x0,0x0,0x0,0x7f,0x1f80,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8000,0x10000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4000,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x4000,0x0,0x4000,0x0,0x5fff,0x5fff,0x0,0x4000,0x400,0x4000,0x0,0x0,0x0,0x8000,0x8000,0x0,0x0,0x4000,0x2000,0x400,0x0,0x400,0x0,0x0,0x0,0x0,0x0,0x8000,0x0,0x0,0x0,0x0,0x0,0x0,0x7f,0x0,0x1f80,0x1f80,0x2000,0x0,0x2000,0x0,0x2000,0x0,0x0,0x0,0x0,0x0,0x0,0x80000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1f80,0x0,0x0,0x0,0x7f,0x1f80,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8000,0x10000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4000,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -3804,7 +3811,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 112; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 110; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -3819,7 +3826,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 112; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 110; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -3829,7 +3836,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 112; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 110; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -3840,7 +3847,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 112; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 110; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -3849,7 +3856,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 112; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 110; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -3859,7 +3866,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 112; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 110; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -3915,7 +3922,7 @@ public class php/*@bgen(jjtree)*/implements phpTreeConstants, phpConstants {/*@b
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 112; i++) {
+    for (int i = 0; i < 110; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
