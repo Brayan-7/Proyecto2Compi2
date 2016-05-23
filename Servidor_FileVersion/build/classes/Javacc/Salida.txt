@@ -1,0 +1,83 @@
+InicioPro -> <?php
+
+P_INCLUD -> include 
+
+ComillaD -> "
+
+ID -> prueba
+
+Punto -> .
+
+ID -> php
+
+ComillaD -> "
+
+Punto_Coma -> ;
+
+SigDolar -> $
+
+ID -> obj
+
+Igual -> =
+
+P_NEW -> new 
+
+ID -> clase2
+
+Parente_Abier -> (
+
+Parente_Cerra -> )
+
+Punto_Coma -> ;
+
+SigDolar -> $
+
+ID -> obb
+
+Igual -> =
+
+P_NEW -> new 
+
+ID -> clase3
+
+Parente_Abier -> (
+
+Parente_Cerra -> )
+
+Punto_Coma -> ;
+
+SigDolar -> $
+
+ID -> obl
+
+Igual -> =
+
+P_NEW -> new 
+
+ID -> clase4
+
+Parente_Abier -> (
+
+Parente_Cerra -> )
+
+Punto_Coma -> ;
+
+SigDolar -> $
+
+ID -> obf
+
+Igual -> =
+
+P_NEW -> new 
+
+ID -> clase5
+
+Parente_Abier -> (
+
+Parente_Cerra -> )
+
+Punto_Coma -> ;
+
+FinPro -> ?>
+
+Correctamente Analizado

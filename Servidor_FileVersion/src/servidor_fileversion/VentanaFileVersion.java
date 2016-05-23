@@ -104,7 +104,10 @@ public class VentanaFileVersion extends javax.swing.JFrame {
         //EliminarR("<?php echo(\"Cliente C# Repositorio: ProyectoWrite5()\");?>");        
         //SwitchR("2", "<?php echo(\"Palabra\");?>");
         //ArchivosEnCarpeta();
-        InsertComm(6, "<?php echo(\"Palabra\"); if($file){}?>");
+        //InsertComm(6, "<?php echo(\"Palabra\"); if($file){}?>");
+        String ValorAsigF2="";
+            float variableL2 = Float.parseFloat(ValorAsigF2);
+        System.out.println("----"+variableL2);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     //**CONEXIÓN CON ENTRE JAVA Y C# CON APACHE THRIFT

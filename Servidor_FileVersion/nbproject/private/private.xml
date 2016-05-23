@@ -4,8 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/brayan7/NetBeansProjects/Servidor_FileVersion/src/servidor_fileversion/VentanaFileVersion.java</file>
-            <file>file:/home/brayan7/NetBeansProjects/Servidor_FileVersion/src/servidor_fileversion/BDConexion.java</file>
-            <file>file:/home/brayan7/NetBeansProjects/Servidor_FileVersion/src/servidor_fileversion/ConexionImp.java</file>
+            <file>file:/home/brayan7/NetBeansProjects/Servidor_FileVersion/src/jjt/php.java</file>
+            <file>file:/home/brayan7/NetBeansProjects/Servidor_FileVersion/src/servidor_fileversion/Propiedades.java</file>
+            <file>file:/home/brayan7/NetBeansProjects/Servidor_FileVersion/src/servidor_fileversion/RecorridoArbol.java</file>
         </group>
     </open-files>
 </project-private>

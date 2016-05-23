@@ -7,44 +7,52 @@ import servidor_fileversion.TablaSimbolos;
 import java.io.StringReader;
 
 public class php implements phpConstants {
-                public Propiedades propiedad = new Propiedades();
-                public TablaSimbolos TS = new TablaSimbolos();
-                ///Variables NORMALES
-                public static String VerVar="" ,VerVar2="",VerVar3="",VerVar4="",VerVar5="",VerVar6="",VerVar7="",VerVar8="",VerVar9="",VerVar10="", VerVar11="" ,VerVar12="",VerVar13="",VerVar14="",VerVar15="",VerVar16="",VerVar17="",VerVar18="",VerVar19="",VerVar20="",VerVar21="",VerVar22="",VerVar23="",VerVar24="",VerVar25="";
-                public static String OperadorAr="", OperandoAr="", OperadorRe="", OperandoRe="", OperadorLo="", OperandoLo="", OperadorRe2="", OperadorAr2="", OperadorLo2="";
-                public static String ValorAsig1="", ValorAsig2="", ValorAsig3="", ValorAsig4="", Simb="";
-                public static String ResulVar1="";
-                public static String VerVar30 ="";
-                public static String cadenaCa ="";
-                public static void main(String[] args) throws ParseException{
-                        try{
-                                php analizador = new php(new StringReader(""
-                                        + "<?php include \u005c"prueba.php\u005c"; "
-                                        + "class c1{"
-                                        + "function __construct (){"
-                                        + "echo \u005c"este es el constructor\u005c";"
-                                        + "}\u005cn" +"var $a =10;"
-                                        + "var $b =100;"
-                                        +"function Method1(){"
-                                        +"$a++;"
-                                        +"$b++;"
-                                        +"echo $a;"
-                                        +"echo $b;"
-                                        +"}}"
-                                        + "?>"));
-                                analizador.ProgramaInicio();
-                                System.out.println("------Correctamente Analizado------");
-                        }catch(ParseException e){
-                                System.out.println(e.getMessage());
-                                System.out.println("**Error Sintactico: Se ha encontrado errores en el Analisis");
-                        }catch(TokenMgrError e){
-                                System.out.println("**Ha ocurrido un Error Lexico");
-                                System.out.println(e.getMessage());
-                        }catch(Exception err){
-                                System.out.println("**Posible Error Lexico");
-                                System.out.println(err);
-                        }
+        public Propiedades propiedad = new Propiedades();
+        public TablaSimbolos TS = new TablaSimbolos();
+        ///Variables NORMALES
+        public static String VerVar="" ,VerVar2="",VerVar3="",VerVar4="",VerVar5="",VerVar6="",VerVar7="",VerVar8="",VerVar9="",VerVar10="", VerVar11="" ,VerVar12="",VerVar13="",VerVar14="",VerVar15="",VerVar16="",VerVar17="",VerVar18="",VerVar19="",VerVar20="",VerVar21="",VerVar22="",VerVar23="",VerVar24="",VerVar25="", VerVarOtr="";
+        public static String OperadorAr="", OperandoAr="", OperadorRe="", OperandoRe="", OperadorLo="", OperandoLo="", OperadorRe2="", OperadorAr2="", OperadorLo2="";
+        //NUMEROS ENTEROS
+        public static String ValorAsig1="", ValorAsig2="", ValorAsig3="", ValorAsig4="", ValorAsig5="", ValorAsig6="", ValorAsig7="", ValorAsig8="", ValorAsig9="", ValorAsig10="", ValorAsig11="", ValorAsig12="", ValorAsig13="", ValorAsig14="", ValorAsig15="", ValorAsig16="", ValorAsig17="", Simb="";
+        //NUMEROS PUNTO FLOTANTE
+        public static String ValorAsigF1="", ValorAsigF2="", ValorAsigF3="", ValorAsigF4="", ValorAsigF5="", ValorAsigF6="", ValorAsigF7="", ValorAsigF8="", ValorAsigF9="", ValorAsigF10="", ValorAsigF11="", ValorAsigF12="", ValorAsigF13="", ValorAsigF14="", ValorAsigF15="", ValorAsigF16="";
+        public static String ResulVar1="", ValorIdEcho="", VarIdImp2="", VarNumImp2="";
+        //VARIABLES PARA ALMACENAR PARAMETROS DEL IF
+        public static String ValorP1="", ValorP2="", ValorP3="", ValorP4="", ValorP5="", ValorP6="", ValorP7="", ValorP8="", ValorP9="", ValorP10="";
+        public static String VerVar30 ="";
+        //VARIABLES PARA ID+
+        public static String cadenaCa ="", cadenaCa2="";
+        public static void main(String[] args) throws ParseException{
+                try{
+                        php analizador = new php(new StringReader("<?php"
+                                                                +"include (\u005c"caracteristicas.php\u005c");"
+                                                                + "class auto extends caracteristicas{"
+                                                                +"var $a;"
+                                                                +"function __construct ($a, $b, $c, $d){"
+                                                                +"parent ::__construct ($b, $c, $d);"
+                                                                +"$this ->a = $a; }"
+                                                                +"function imprimir(){"
+                                                                +"$a = 9;"
+                                                                +"while (true ){"
+                                                                +"if ($a < 10){break ;}"
+                                                                +"echo \u005c"color\u005c" . $this ->b . \u005c" marca \u005c". $this ->c . \u005c" anio \u005c" . $this ->d . \u005c" recorrido \u005c".$this ->a . \u005c" \u005c\u005cn \u005c";"
+                                                                +"$a ++;}"
+                                                                +"}"
+                                                                +"} "
+                                                                +"?>"));
+                        analizador.ProgramaInicio();
+                        System.out.println("------Correctamente Analizado------");
+                }catch(ParseException e){
+                        System.out.println(e.getMessage());
+                        System.out.println("**Error Sintactico: Se ha encontrado errores en el Analisis");
+                }catch(TokenMgrError e){
+                        System.out.println("**Ha ocurrido un Error Lexico");
+                        System.out.println(e.getMessage());
+                }catch(Exception err){
+                        System.out.println(err);
+                        System.out.println("**Posible Error Semantico");
                 }
+        }
 
 ///INICIO DE GRAMATICA
   final public void ProgramaInicio() throws ParseException {
@@ -126,15 +134,17 @@ public class php implements phpConstants {
       ;
     }
     jj_consume_token(LLAVEA);
-    Constructor();
-    CuerpoClase();
-    jj_consume_token(LLAVEC);
-  }
-
-  final public void CuerpoClase() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PVAR:
+    case PFUNCION:
+      Constructor();
+      break;
+    default:
+      jj_la1[5] = jj_gen;
+      ;
+    }
     label_3:
     while (true) {
-      CVariables();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case PVAR:
       case PFUNCION:
@@ -149,10 +159,16 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[5] = jj_gen;
+        jj_la1[6] = jj_gen;
         break label_3;
       }
+      CuerpoClase();
     }
+    jj_consume_token(LLAVEC);
+  }
+
+  final public void CuerpoClase() throws ParseException {
+    CVariables();
   }
 
   final public void CVariables() throws ParseException {
@@ -162,7 +178,7 @@ public class php implements phpConstants {
       jj_consume_token(PVAR);
       jj_consume_token(DOLAR);
       Ids = jj_consume_token(ID);
-                                   propiedad.setNombre(Ids.image); if(Ids.image.equals("a")){VerVar=Ids.image;} if(Ids.image.equals("b")){VerVar2=Ids.image;} if(Ids.image.equals("c")){VerVar3=Ids.image;}
+                                   /*propiedad.setNombre(Ids.image);*/ if(Ids.image.equals("a")){VerVar=Ids.image;} if(Ids.image.equals("b")){VerVar2=Ids.image;} if(Ids.image.equals("c")){VerVar3=Ids.image;}
                                                                                                                            if(Ids.image.equals("d")){VerVar4=Ids.image;} if(Ids.image.equals("e")){VerVar5=Ids.image;} if(Ids.image.equals("f")){VerVar6=Ids.image;}
                                                                                                                            if(Ids.image.equals("g")){VerVar7=Ids.image;} if(Ids.image.equals("h")){VerVar8=Ids.image;} if(Ids.image.equals("i")){VerVar9=Ids.image;}
                                                                                                                            if(Ids.image.equals("j")){VerVar10=Ids.image;} if(Ids.image.equals("k")){VerVar11=Ids.image;} if(Ids.image.equals("l")){VerVar12=Ids.image;}
@@ -170,7 +186,7 @@ public class php implements phpConstants {
                                                                                                                            if(Ids.image.equals("p")){VerVar16=Ids.image;} if(Ids.image.equals("q")){VerVar17=Ids.image;} if(Ids.image.equals("r")){VerVar18=Ids.image;}
                                                                                                                            if(Ids.image.equals("s")){VerVar19=Ids.image;} if(Ids.image.equals("t")){VerVar20=Ids.image;} if(Ids.image.equals("u")){VerVar21=Ids.image;}
                                                                                                                            if(Ids.image.equals("w")){VerVar22=Ids.image;} if(Ids.image.equals("x")){VerVar23=Ids.image;} if(Ids.image.equals("y")){VerVar24=Ids.image;}
-                                                                                                                           if(Ids.image.equals("z")){VerVar25=Ids.image;}
+                                                                                                                           if(Ids.image.equals("z")){VerVar25=Ids.image;} else {VerVarOtr=Ids.image;}
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IGUAL:
       case PUNTOCOMA:
@@ -178,7 +194,7 @@ public class php implements phpConstants {
         TVariable();
         break;
       default:
-        jj_la1[6] = jj_gen;
+        jj_la1[7] = jj_gen;
         ;
       }
       label_4:
@@ -188,7 +204,7 @@ public class php implements phpConstants {
           ;
           break;
         default:
-          jj_la1[7] = jj_gen;
+          jj_la1[8] = jj_gen;
           break label_4;
         }
         jj_consume_token(COMA);
@@ -201,7 +217,7 @@ public class php implements phpConstants {
           TVariable();
           break;
         default:
-          jj_la1[8] = jj_gen;
+          jj_la1[9] = jj_gen;
           ;
         }
       }
@@ -241,7 +257,15 @@ public class php implements phpConstants {
         case PUNTOCOMA:
         case ASIG:
           TVariable();
-                                          VerVar30=Ids.image;
+                                          if(Ids.image.equals("a")){VerVar=Ids.image;} if(Ids.image.equals("b")){VerVar2=Ids.image;} if(Ids.image.equals("c")){VerVar3=Ids.image;}
+                                                                                if(Ids.image.equals("d")){VerVar4=Ids.image;} if(Ids.image.equals("e")){VerVar5=Ids.image;} if(Ids.image.equals("f")){VerVar6=Ids.image;}
+                                                                                if(Ids.image.equals("g")){VerVar7=Ids.image;} if(Ids.image.equals("h")){VerVar8=Ids.image;} if(Ids.image.equals("i")){VerVar9=Ids.image;}
+                                                                                if(Ids.image.equals("j")){VerVar10=Ids.image;} if(Ids.image.equals("k")){VerVar11=Ids.image;} if(Ids.image.equals("l")){VerVar12=Ids.image;}
+                                                                                if(Ids.image.equals("m")){VerVar13=Ids.image;} if(Ids.image.equals("n")){VerVar14=Ids.image;} if(Ids.image.equals("o")){VerVar15=Ids.image;}
+                                                                                if(Ids.image.equals("p")){VerVar16=Ids.image;} if(Ids.image.equals("q")){VerVar17=Ids.image;} if(Ids.image.equals("r")){VerVar18=Ids.image;}
+                                                                                if(Ids.image.equals("s")){VerVar19=Ids.image;} if(Ids.image.equals("t")){VerVar20=Ids.image;} if(Ids.image.equals("u")){VerVar21=Ids.image;}
+                                                                                if(Ids.image.equals("w")){VerVar22=Ids.image;} if(Ids.image.equals("x")){VerVar23=Ids.image;} if(Ids.image.equals("y")){VerVar24=Ids.image;}
+                                                                                if(Ids.image.equals("z")){VerVar25=Ids.image;} else {VerVarOtr=Ids.image;}
           break;
         case POR:
         case SUMA:
@@ -281,78 +305,195 @@ public class php implements phpConstants {
             break;
           case DECR:
             InDe = jj_consume_token(DECR);
+                                                                       Simb = InDe.image; System.out.println("---PASA_AQUI--"); if(Simb.equals("++")){
+                                                                                                                                                                System.out.println("%%%%%%%%%%"+Simb);
+                                                                                                                                                                if(VerVar != ""){
+                                                                                                                                                                        if(ValorAsig1 != ""){
+                                                                                                                                                                                int variableL = Integer.parseInt(ValorAsig1); System.out.println("*********DEC-INC1++********");
+                                                                                                                                                                                int RES = variableL + 1;
+                                                                                                                                                                                System.out.println(VerVar +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                        }if(ValorAsigF1 != ""){
+                                                                                                                                                                                float variableL2 = Float.parseFloat(ValorAsigF1);
+                                                                                                                                                                                System.out.println("*********DEC-INC1++********");
+                                                                                                                                                                                float RES = variableL2 + 1;
+                                                                                                                                                                                System.out.println(VerVar +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                        }
+                                                                                                                                                                }/*if(VerVar2 != ""){
+																				  	if(ValorAsig2 != ""){
+																						int variableL = Integer.parseInt(ValorAsig2); System.out.println("*********DEC-INC2++********"); 
+																						int RES = variableL + 1;
+																						System.out.println(VerVar2 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}if(ValorAsigF2 != ""){
+																						float variableL2 = Float.parseFloat(ValorAsigF2); System.out.println("*********DEC-INC2++********"); 
+																						float RES = variableL2 + 1;
+																						System.out.println(VerVar2 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}
+																				}if(VerVar3 != ""){
+																					if(ValorAsig3 != ""){
+																						int variableL = Integer.parseInt(ValorAsig3); System.out.println("*********DEC-INC3++********"); 
+																						int RES = variableL + 1;
+																						System.out.println(VerVar3 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}if(ValorAsigF3 != ""){
+																						float variableL2 = Float.parseFloat(ValorAsigF3); System.out.println("*********DEC-INC3++********"); 
+																						float RES = variableL2 + 1;
+																						System.out.println(VerVar3 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}
+																				}if(VerVar4 != ""){
+																					if(ValorAsig4 != ""){
+																						int variableL = Integer.parseInt(ValorAsig4); System.out.println("*********DEC-INC4++********"); 
+																						int RES = variableL + 1;
+																						System.out.println(VerVar4 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}if(ValorAsigF4 != ""){
+																						float variableL2 = Float.parseFloat(ValorAsigF4); System.out.println("*********DEC-INC4++********"); 
+																						float RES = variableL2 + 1;
+																						System.out.println(VerVar4 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}
+																				}if(VerVar5 != ""){
+																					if(ValorAsig5 != ""){
+																						int variableL = Integer.parseInt(ValorAsig5); System.out.println("*********DEC-INC5++********"); 
+																						int RES = variableL + 1;
+																						System.out.println(VerVar5 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}if(ValorAsigF5 != ""){
+																						float variableL2 = Float.parseFloat(ValorAsigF5); System.out.println("*********DEC-INC5++********"); 
+																						float RES = variableL2 + 1;
+																						System.out.println(VerVar5 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}
+																				}if(VerVar6 != ""){
+																					if(ValorAsig6 != ""){
+																						int variableL = Integer.parseInt(ValorAsig6); System.out.println("*********DEC-INC6++********"); 
+																						int RES = variableL + 1;
+																						System.out.println(VerVar6 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}if(ValorAsigF6 != ""){
+																						float variableL2 = Float.parseFloat(ValorAsigF6); System.out.println("*********DEC-INC6++********"); 
+																						float RES = variableL2 + 1;
+																						System.out.println(VerVar6 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}
+																				}if(VerVar7 != ""){
+																					if(ValorAsig7 != ""){
+																						int variableL = Integer.parseInt(ValorAsig7); System.out.println("*********DEC-INC7++********"); 
+																						int RES = variableL + 1;
+																						System.out.println(VerVar7 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}if(ValorAsigF7 != ""){
+																						float variableL2 = Float.parseFloat(ValorAsigF7);  System.out.println("*********DEC-INC7++********"); 
+																						float RES = variableL2 + 1;
+																						System.out.println(VerVar7 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}
+																				}if(VerVar8 != ""){
+																					if(ValorAsig8 != ""){
+																						int variableL = Integer.parseInt(ValorAsig8); System.out.println("*********DEC-INC7++********"); 
+																						int RES = variableL + 1;
+																						System.out.println(VerVar8 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}if(ValorAsigF8 != ""){
+																						float variableL2 = Float.parseFloat(ValorAsigF8);  System.out.println("*********DEC-INC7++********"); 
+																						float RES = variableL2 + 1;
+																						System.out.println(VerVar8 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+																					}
+																				}if(VerVarOtr != ""){
+																					System.out.println("----------> " +VerVarOtr);
+																				}*/
+                                                                                                                                                        }if(Simb.equals("--")){
+                                                                                                                                                                        System.out.println("%%%%%%%%%%"+Simb);
+                                                                                                                                                                        if(VerVar != ""){
+                                                                                                                                                                                if(ValorAsig1 != ""){
+                                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig1); System.out.println("*********DEC-INC1++********");
+                                                                                                                                                                                        int RES = variableL - 1;
+                                                                                                                                                                                        System.out.println(VerVar +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }if(ValorAsigF1 != ""){
+                                                                                                                                                                                        float variableL2 = Float.parseFloat(ValorAsigF1);
+                                                                                                                                                                                        System.out.println("*********DEC-INC1--********");
+                                                                                                                                                                                        float RES = variableL2 - 1;
+                                                                                                                                                                                        System.out.println(VerVar +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(VerVar2 != ""){
+                                                                                                                                                                                if(ValorAsig2 != ""){
+                                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig2); System.out.println("*********DEC-INC2++********");
+                                                                                                                                                                                        int RES = variableL - 1;
+                                                                                                                                                                                        System.out.println(VerVar2 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }if(ValorAsigF2 != ""){
+                                                                                                                                                                                        float variableL2 = Float.parseFloat(ValorAsigF2); System.out.println("*********DEC-INC2++********");
+                                                                                                                                                                                        float RES = variableL2 - 1;
+                                                                                                                                                                                        System.out.println(VerVar2 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(VerVar3 != ""){
+                                                                                                                                                                                if(ValorAsig3 != ""){
+                                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig3); System.out.println("*********DEC-INC3++********");
+                                                                                                                                                                                        int RES = variableL - 1;
+                                                                                                                                                                                        System.out.println(VerVar3 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }if(ValorAsigF3 != ""){
+                                                                                                                                                                                        float variableL2 = Float.parseFloat(ValorAsigF3); System.out.println("*********DEC-INC3++********");
+                                                                                                                                                                                        float RES = variableL2 - 1;
+                                                                                                                                                                                        System.out.println(VerVar3 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(VerVar4 != ""){
+                                                                                                                                                                                if(ValorAsig4 != ""){
+                                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig4); System.out.println("*********DEC-INC4++********");
+                                                                                                                                                                                        int RES = variableL - 1;
+                                                                                                                                                                                        System.out.println(VerVar4 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }if(ValorAsigF4 != ""){
+                                                                                                                                                                                        float variableL2 = Float.parseFloat(ValorAsigF4); System.out.println("*********DEC-INC4++********");
+                                                                                                                                                                                        float RES = variableL2 - 1;
+                                                                                                                                                                                        System.out.println(VerVar4 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(VerVar5 != ""){
+                                                                                                                                                                                if(ValorAsig5 != ""){
+                                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig5); System.out.println("*********DEC-INC5++********");
+                                                                                                                                                                                        int RES = variableL - 1;
+                                                                                                                                                                                        System.out.println(VerVar5 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }if(ValorAsigF5 != ""){
+                                                                                                                                                                                        float variableL2 = Float.parseFloat(ValorAsigF5); System.out.println("*********DEC-INC5++********");
+                                                                                                                                                                                        float RES = variableL2 - 1;
+                                                                                                                                                                                        System.out.println(VerVar5 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(VerVar6 != ""){
+                                                                                                                                                                                if(ValorAsig6 != ""){
+                                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig6); System.out.println("*********DEC-INC6++********");
+                                                                                                                                                                                        int RES = variableL - 1;
+                                                                                                                                                                                        System.out.println(VerVar6 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }if(ValorAsigF6 != ""){
+                                                                                                                                                                                        float variableL2 = Float.parseFloat(ValorAsigF6); System.out.println("*********DEC-INC6++********");
+                                                                                                                                                                                        float RES = variableL2 - 1;
+                                                                                                                                                                                        System.out.println(VerVar6 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(VerVar7 != ""){
+                                                                                                                                                                                if(ValorAsig7 != ""){
+                                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig7); System.out.println("*********DEC-INC7++********");
+                                                                                                                                                                                        int RES = variableL - 1;
+                                                                                                                                                                                        System.out.println(VerVar7 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }if(ValorAsigF7 != ""){
+                                                                                                                                                                                        float variableL2 = Float.parseFloat(ValorAsigF7);  System.out.println("*********DEC-INC7++********");
+                                                                                                                                                                                        float RES = variableL2 - 1;
+                                                                                                                                                                                        System.out.println(VerVar7 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(VerVar8 != ""){
+                                                                                                                                                                                if(ValorAsig8 != ""){
+                                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig8); System.out.println("*********DEC-INC7++********");
+                                                                                                                                                                                        int RES = variableL + 1;
+                                                                                                                                                                                        System.out.println(VerVar8 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }if(ValorAsigF8 != ""){
+                                                                                                                                                                                        float variableL2 = Float.parseFloat(ValorAsigF8);  System.out.println("*********DEC-INC7++********");
+                                                                                                                                                                                        float RES = variableL2 + 1;
+                                                                                                                                                                                        System.out.println(VerVar8 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
+                                                                                                                                                                                }
+                                                                                                                                                                        }
+                                                                                                                                                                }
             break;
           default:
-            jj_la1[9] = jj_gen;
+            jj_la1[10] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           jj_consume_token(PUNTOCOMA);
           break;
         default:
-          jj_la1[10] = jj_gen;
+          jj_la1[11] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         break;
       default:
-        jj_la1[11] = jj_gen;
+        jj_la1[12] = jj_gen;
         ;
       }
-                                                                                      Simb=InDe.image; if(Simb.equals("++")){
-                                                                                                                                                                //System.out.println("**"+ValorAsig1+"**"+ValorAsig2+"**");
-                                                                                                                                                                if(VerVar != ""){
-                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig1);
-                                                                                                                                                                        System.out.println("*********DEC-INC1++********");
-                                                                                                                                                                        int RES = variableL + 1;
-                                                                                                                                                                        System.out.println(VerVar +" = "+ Simb + "-->" + RES);
-                                                                                                                                                                        System.out.println("*******************");
-                                                                                                                                                                }if(VerVar2 != ""){
-                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig2);
-                                                                                                                                                                        System.out.println("*********DEC-INC2++********");
-                                                                                                                                                                        int RES = variableL + 1;
-                                                                                                                                                                        System.out.println(VerVar2 +" = "+ Simb + "-->" + RES);
-                                                                                                                                                                        System.out.println("*******************");
-                                                                                                                                                                }if(VerVar3 != ""){
-                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig3);
-                                                                                                                                                                        System.out.println("*********DEC-INC3++********");
-                                                                                                                                                                        int RES = variableL + 1;
-                                                                                                                                                                        System.out.println(VerVar3 +" = "+ Simb + "-->" + RES);
-                                                                                                                                                                        System.out.println("*******************");
-                                                                                                                                                                }if(VerVar4 != ""){
-                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig4);
-                                                                                                                                                                        System.out.println("*********DEC-INC4++********");
-                                                                                                                                                                        int RES = variableL + 1;
-                                                                                                                                                                        System.out.println(VerVar4 +" = "+ Simb + "-->" + RES);
-                                                                                                                                                                        System.out.println("*******************");
-                                                                                                                                                                }
-                                                                                                                                                        }if(Simb.equals("--")){
-                                                                                                                                                                if(VerVar != ""){
-                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig1);
-                                                                                                                                                                        System.out.println("*********DEC-INC1--********");
-                                                                                                                                                                        int RES = variableL - 1;
-                                                                                                                                                                        System.out.println(VerVar +" = "+ Simb + "-->" + RES);
-                                                                                                                                                                        System.out.println("*******************");
-                                                                                                                                                                }if(VerVar2 != ""){
-                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig2);
-                                                                                                                                                                        System.out.println("*********DEC-INC2--********");
-                                                                                                                                                                        int RES = variableL - 1;
-                                                                                                                                                                        System.out.println(VerVar2 +" = "+ Simb + "-->" + RES);
-                                                                                                                                                                        System.out.println("*******************");
-                                                                                                                                                                }       if(VerVar3 != ""){
-                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig3);
-                                                                                                                                                                        System.out.println("*********DEC-INC3--********");
-                                                                                                                                                                        int RES = variableL + 1;
-                                                                                                                                                                        System.out.println(VerVar3 +" = "+ Simb + "-->" + RES);
-                                                                                                                                                                        System.out.println("*******************");
-                                                                                                                                                                }if(VerVar4 != ""){
-                                                                                                                                                                        int variableL = Integer.parseInt(ValorAsig4);
-                                                                                                                                                                        System.out.println("*********DEC-INC4--********");
-                                                                                                                                                                        int RES = variableL + 1;
-                                                                                                                                                                        System.out.println(VerVar4 +" = "+ Simb + "-->" + RES);
-                                                                                                                                                                        System.out.println("*******************");
-                                                                                                                                                                }
-                                                                                                                                                        }
       label_5:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -360,7 +501,7 @@ public class php implements phpConstants {
           ;
           break;
         default:
-          jj_la1[12] = jj_gen;
+          jj_la1[13] = jj_gen;
           break label_5;
         }
         jj_consume_token(COMA);
@@ -373,7 +514,7 @@ public class php implements phpConstants {
           TVariable();
           break;
         default:
-          jj_la1[13] = jj_gen;
+          jj_la1[14] = jj_gen;
           ;
         }
       }
@@ -403,7 +544,7 @@ public class php implements phpConstants {
       SentenciaFor();
       break;
     default:
-      jj_la1[14] = jj_gen;
+      jj_la1[15] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -419,7 +560,7 @@ public class php implements phpConstants {
       jj_consume_token(PUNTOCOMA);
       break;
     default:
-      jj_la1[15] = jj_gen;
+      jj_la1[16] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -435,7 +576,7 @@ public class php implements phpConstants {
         jj_consume_token(COMILLASIMPLE);
         IdAsgi = jj_consume_token(ID);
         jj_consume_token(COMILLASIMPLE);
-                                                           ValorAsig1=IdAsgi.image; System.out.println("*********VAR********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");
+                                                           ValorAsig1=IdAsgi.image; System.out.println("*********VAR IDS SIM********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");
         break;
       case PNEW:
         jj_consume_token(PNEW);
@@ -447,7 +588,7 @@ public class php implements phpConstants {
         jj_consume_token(COMILLADOBLE);
         IdAsgi = jj_consume_token(ID);
         jj_consume_token(COMILLADOBLE);
-                                                              ValorAsig1=IdAsgi.image; System.out.println("*********VAR********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");
+                                                              ValorAsig1=IdAsgi.image; System.out.println("*********VAR IDS DOB********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");
         break;
       case NUM:
         ValAsig = jj_consume_token(NUM);
@@ -461,21 +602,44 @@ public class php implements phpConstants {
           OAr();
           break;
         default:
-          jj_la1[16] = jj_gen;
+          jj_la1[17] = jj_gen;
           ;
         }
-                                             if(ValorAsig4.equals("") && ValorAsig3 != ""){
+                                             if(ValorAsig16.equals("") && ValorAsig15 != ""){
+                                                                        ValorAsig16=ValAsig.image;
+                                                                 }if(ValorAsig15.equals("") && ValorAsig14 != ""){
+                                                                        ValorAsig15=ValAsig.image;
+                                                                 }if(ValorAsig14.equals("") && ValorAsig13 != ""){
+                                                                        ValorAsig14=ValAsig.image;
+                                                                 }if(ValorAsig13.equals("") && ValorAsig12 != ""){
+                                                                        ValorAsig13=ValAsig.image;
+                                                                 }if(ValorAsig12.equals("") && ValorAsig11 != ""){
+                                                                        ValorAsig12=ValAsig.image;
+                                                                 }if(ValorAsig11.equals("") && ValorAsig10 != ""){
+                                                                        ValorAsig11=ValAsig.image;
+                                                                 }if(ValorAsig10.equals("") && ValorAsig9 != ""){
+                                                                        ValorAsig10=ValAsig.image;
+                                                                 }if(ValorAsig9.equals("") && ValorAsig8 != ""){
+                                                                        ValorAsig9=ValAsig.image;
+                                                                 }if(ValorAsig8.equals("") && ValorAsig7 != ""){
+                                                                        ValorAsig8=ValAsig.image;
+                                                                 }if(ValorAsig7.equals("") && ValorAsig6 != ""){
+                                                                        ValorAsig7=ValAsig.image;
+                                                                 }if(ValorAsig6.equals("") && ValorAsig5 != ""){
+                                                                        ValorAsig6=ValAsig.image;
+                                                                 }if(ValorAsig5.equals("") && ValorAsig4 != ""){
+                                                                        ValorAsig5=ValAsig.image;
+                                                                 }if(ValorAsig4.equals("") && ValorAsig3 != ""){
                                                                         ValorAsig4=ValAsig.image;
-                                                                        System.out.println("**"+ValorAsig1+"**");
                                                                  }if(ValorAsig3.equals("") && ValorAsig2 != ""){
                                                                         ValorAsig3=ValAsig.image;
-                                                                        System.out.println("**"+ValorAsig2+"**");
                                                                  }if(ValorAsig2.equals("") && ValorAsig1 != ""){
                                                                         ValorAsig2=ValAsig.image;
                                                                  }if(ValorAsig1.equals("")){
-                                                                        ValorAsig1=ValAsig.image;
+                                                                        ValorAsig1=ValAsig.image; System.out.println("%%%%%%"+VerVar);
                                                                  }
-                                                                                                                        System.out.println("*********VAR********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");
+                                                            System.out.println("*********VAR NUM********"); System.out.println(VerVar +" = "+ ValorAsig1); //System.out.println(VerVar3 +" = "+ ValorAsig2); 
+                                                            System.out.println("*******************");
         break;
       case DEC:
         ValAsig = jj_consume_token(DEC);
@@ -489,10 +653,32 @@ public class php implements phpConstants {
           OAr();
           break;
         default:
-          jj_la1[17] = jj_gen;
+          jj_la1[18] = jj_gen;
           ;
         }
-                                             ValorAsig1=ValAsig.image; System.out.println("*********VAR********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");
+                                             if(ValorAsigF10.equals("") && ValorAsigF9 != "" && ValorAsig10 != ""){
+                                                                        ValorAsigF10=ValAsig.image;
+                                                                 }if(ValorAsigF9.equals("") && ValorAsigF8 != "" && ValorAsig9 != ""){
+                                                                        ValorAsigF9=ValAsig.image;
+                                                                 }if(ValorAsigF8.equals("") && ValorAsigF7 != "" && ValorAsig8 != ""){
+                                                                        ValorAsigF8=ValAsig.image;
+                                                                 }if(ValorAsigF7.equals("") && ValorAsigF6 != "" && ValorAsig7 != ""){
+                                                                        ValorAsigF7=ValAsig.image;
+                                                                 }if(ValorAsigF6.equals("") && ValorAsigF5 != "" && ValorAsig6 != ""){
+                                                                        ValorAsigF6=ValAsig.image;
+                                                                 }if(ValorAsigF5.equals("") && ValorAsigF4 != "" && ValorAsig5 != ""){
+                                                                        ValorAsigF5=ValAsig.image;
+                                                                 }if(ValorAsigF4.equals("") && ValorAsigF3 != "" && ValorAsig4 != ""){
+                                                                        ValorAsigF4=ValAsig.image;
+                                                                 }if(ValorAsigF3.equals("") && ValorAsigF2 != "" && ValorAsig3 != ""){
+                                                                        ValorAsigF3=ValAsig.image;
+                                                                 }if(ValorAsigF2.equals("") && ValorAsigF1 != "" && ValorAsig2 != ""){
+                                                                        ValorAsigF2=ValAsig.image;
+                                                                 }if(ValorAsigF1.equals("") && ValorAsig1 != ""){
+                                                                        ValorAsigF1=ValAsig.image;
+                                                                 }
+                                                            System.out.println("*********VAR FLOAT********"); System.out.println(VerVar2 +" = "+ ValorAsigF1);
+                                                            System.out.println("*******************");
         break;
       case DOLAR:
         jj_consume_token(DOLAR);
@@ -529,24 +715,24 @@ public class php implements phpConstants {
               jj_consume_token(DEC);
               break;
             default:
-              jj_la1[18] = jj_gen;
+              jj_la1[19] = jj_gen;
               jj_consume_token(-1);
               throw new ParseException();
             }
             break;
           default:
-            jj_la1[19] = jj_gen;
+            jj_la1[20] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           break;
         default:
-          jj_la1[20] = jj_gen;
+          jj_la1[21] = jj_gen;
           ;
         }
         break;
       default:
-        jj_la1[21] = jj_gen;
+        jj_la1[22] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -565,7 +751,7 @@ public class php implements phpConstants {
           ;
           break;
         default:
-          jj_la1[22] = jj_gen;
+          jj_la1[23] = jj_gen;
           break label_6;
         }
         jj_consume_token(COMA);
@@ -576,7 +762,7 @@ public class php implements phpConstants {
       jj_consume_token(PUNTOCOMA);
       break;
     default:
-      jj_la1[23] = jj_gen;
+      jj_la1[24] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -592,7 +778,7 @@ public class php implements phpConstants {
       ParametrosFuction();
       break;
     default:
-      jj_la1[24] = jj_gen;
+      jj_la1[25] = jj_gen;
       ;
     }
     jj_consume_token(PARC);
@@ -630,7 +816,7 @@ public class php implements phpConstants {
           ;
           break;
         default:
-          jj_la1[25] = jj_gen;
+          jj_la1[26] = jj_gen;
           break label_7;
         }
       }
@@ -639,7 +825,7 @@ public class php implements phpConstants {
         CuerpoReturn();
         break;
       default:
-        jj_la1[26] = jj_gen;
+        jj_la1[27] = jj_gen;
         ;
       }
       break;
@@ -647,7 +833,7 @@ public class php implements phpConstants {
       CuerpoMatriz();
       break;
     default:
-      jj_la1[27] = jj_gen;
+      jj_la1[28] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -674,7 +860,7 @@ public class php implements phpConstants {
       CuerpoVecFor();
       break;
     default:
-      jj_la1[28] = jj_gen;
+      jj_la1[29] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -699,7 +885,7 @@ public class php implements phpConstants {
       jj_consume_token(MENOR);
       break;
     default:
-      jj_la1[29] = jj_gen;
+      jj_la1[30] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -715,7 +901,7 @@ public class php implements phpConstants {
       jj_consume_token(DECR);
       break;
     default:
-      jj_la1[30] = jj_gen;
+      jj_la1[31] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -767,7 +953,7 @@ public class php implements phpConstants {
       jj_consume_token(CORCHC);
       break;
     default:
-      jj_la1[31] = jj_gen;
+      jj_la1[32] = jj_gen;
       ;
     }
     jj_consume_token(IGUAL);
@@ -776,6 +962,7 @@ public class php implements phpConstants {
   }
 
   final public void Imprimir() throws ParseException {
+                 Token CIds, VIds=null;
     jj_consume_token(PECHO);
     jj_consume_token(DOLAR);
     jj_consume_token(ID);
@@ -791,12 +978,12 @@ public class php implements phpConstants {
         jj_consume_token(CORCHC);
         break;
       default:
-        jj_la1[32] = jj_gen;
+        jj_la1[33] = jj_gen;
         ;
       }
       break;
     default:
-      jj_la1[36] = jj_gen;
+      jj_la1[37] = jj_gen;
       label_8:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -804,7 +991,7 @@ public class php implements phpConstants {
           ;
           break;
         default:
-          jj_la1[33] = jj_gen;
+          jj_la1[34] = jj_gen;
           break label_8;
         }
         jj_consume_token(PUNTO);
@@ -817,16 +1004,23 @@ public class php implements phpConstants {
           break;
         case DOLAR:
           jj_consume_token(DOLAR);
-          jj_consume_token(ID);
+          VIds = jj_consume_token(ID);
+                                                                                ValorIdEcho=VIds.image;
           break;
         default:
-          jj_la1[34] = jj_gen;
+          jj_la1[35] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
       }
     }
     jj_consume_token(PUNTOCOMA);
+                                                                                                                                               System.out.println("*******ECHO CIds*******");
+                                                                                                                                                                                                                                                System.out.println(cadenaCa2); System.out.println("****************");
+                                                                                                                                                                                                                                                System.out.println("!!!!!!!!!!!!"+ValorIdEcho);
+                                                                                                                                                                                                                                                if(ValorIdEcho.equals("a")){
+                                                                                                                                                                                                                                                        System.out.println("!!!!!!!!!!!!"+ValorIdEcho);
+                                                                                                                                                                                                                                                }
   }
 
 ///*******OPERACIONES ARITMETICAS
@@ -867,7 +1061,7 @@ public class php implements phpConstants {
                        OperadorAr=OperA.image;
         break;
       default:
-        jj_la1[37] = jj_gen;
+        jj_la1[38] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -886,7 +1080,7 @@ public class php implements phpConstants {
                                         OperandoAr=OperandA.image;
         break;
       default:
-        jj_la1[38] = jj_gen;
+        jj_la1[39] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -900,7 +1094,7 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[39] = jj_gen;
+        jj_la1[40] = jj_gen;
         break label_10;
       }
     }
@@ -946,7 +1140,7 @@ public class php implements phpConstants {
                         OperadorRe=OperR.image;
       break;
     default:
-      jj_la1[40] = jj_gen;
+      jj_la1[41] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -965,7 +1159,7 @@ public class php implements phpConstants {
                                            OperandoRe =OperandR.image;
       break;
     default:
-      jj_la1[41] = jj_gen;
+      jj_la1[42] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1001,7 +1195,7 @@ public class php implements phpConstants {
                        OperadorLo=OperL.image;
         break;
       default:
-        jj_la1[42] = jj_gen;
+        jj_la1[43] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1018,7 +1212,7 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[43] = jj_gen;
+        jj_la1[44] = jj_gen;
         break label_11;
       }
     }
@@ -1030,7 +1224,7 @@ public class php implements phpConstants {
       jj_consume_token(AMP);
       break;
     default:
-      jj_la1[44] = jj_gen;
+      jj_la1[45] = jj_gen;
       ;
     }
     jj_consume_token(DOLAR);
@@ -1042,7 +1236,7 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[45] = jj_gen;
+        jj_la1[46] = jj_gen;
         break label_12;
       }
       jj_consume_token(COMA);
@@ -1051,7 +1245,7 @@ public class php implements phpConstants {
         jj_consume_token(AMP);
         break;
       default:
-        jj_la1[46] = jj_gen;
+        jj_la1[47] = jj_gen;
         ;
       }
       jj_consume_token(DOLAR);
@@ -1067,7 +1261,21 @@ public class php implements phpConstants {
   }
 
   final public void Constructor() throws ParseException {
-                    Token IdsCons, NumCons;
+    label_13:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PVAR:
+        ;
+        break;
+      default:
+        jj_la1[48] = jj_gen;
+        break label_13;
+      }
+      jj_consume_token(PVAR);
+      jj_consume_token(DOLAR);
+      jj_consume_token(ID);
+      TVariable();
+    }
     jj_consume_token(PFUNCION);
     jj_consume_token(GUIONB);
     jj_consume_token(GUIONB);
@@ -1079,38 +1287,56 @@ public class php implements phpConstants {
       ParametrosFuction();
       break;
     default:
-      jj_la1[47] = jj_gen;
+      jj_la1[49] = jj_gen;
       ;
     }
     jj_consume_token(PARC);
     jj_consume_token(LLAVEA);
-    jj_consume_token(PECHO);
-    jj_consume_token(COMILLADOBLE);
-    label_13:
-    while (true) {
-      IdsCons = jj_consume_token(ID);
-                                                                                   cadenaCa= cadenaCa + IdsCons.image +" ";
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case ID:
-        ;
-        break;
-      default:
-        jj_la1[48] = jj_gen;
-        break label_13;
-      }
-    }
-    jj_consume_token(COMILLADOBLE);
-    jj_consume_token(PUNTOCOMA);
     label_14:
     while (true) {
+      CuerpoConstructor();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PECHO:
+      case PPARENT:
+      case PTHIS:
       case DOLAR:
         ;
         break;
       default:
-        jj_la1[49] = jj_gen;
+        jj_la1[50] = jj_gen;
         break label_14;
       }
+    }
+    jj_consume_token(LLAVEC);
+                                                                                                                  System.out.println("*******ECHO CONST*******"); System.out.println(cadenaCa); System.out.println("****************");
+  }
+
+  final public void CuerpoConstructor() throws ParseException {
+                          Token IdsCons;
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PPARENT:
+      MetParent();
+      break;
+    case PECHO:
+      jj_consume_token(PECHO);
+      jj_consume_token(COMILLADOBLE);
+      label_15:
+      while (true) {
+        IdsCons = jj_consume_token(ID);
+                                            cadenaCa= cadenaCa + IdsCons.image +" ";
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case ID:
+          ;
+          break;
+        default:
+          jj_la1[51] = jj_gen;
+          break label_15;
+        }
+      }
+      jj_consume_token(COMILLADOBLE);
+      jj_consume_token(PUNTOCOMA);
+      break;
+    case DOLAR:
       jj_consume_token(DOLAR);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case ID:
@@ -1120,31 +1346,47 @@ public class php implements phpConstants {
         jj_consume_token(ID);
         jj_consume_token(PARA);
         jj_consume_token(PARC);
-        jj_consume_token(PUNTOCOMA);
         break;
       case PTHIS:
-        MetThis();
+        jj_consume_token(PTHIS);
+        jj_consume_token(ASIG);
+        jj_consume_token(ID);
+        jj_consume_token(IGUAL);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case NUM:
+          jj_consume_token(NUM);
+          break;
+        case DEC:
+          jj_consume_token(DEC);
+          break;
+        case PNULL:
+          jj_consume_token(PNULL);
+          break;
+        case DOLAR:
+          jj_consume_token(DOLAR);
+          jj_consume_token(ID);
+          break;
+        default:
+          jj_la1[52] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
         break;
       default:
-        jj_la1[50] = jj_gen;
+        jj_la1[53] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+      jj_consume_token(PUNTOCOMA);
+      break;
+    case PTHIS:
+      MetThis();
+      break;
+    default:
+      jj_la1[54] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
-    label_15:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case PPARENT:
-        ;
-        break;
-      default:
-        jj_la1[51] = jj_gen;
-        break label_15;
-      }
-      MetParent();
-    }
-    jj_consume_token(LLAVEC);
-                                                                                                                                          System.out.println("*******ECHO CONST*******"); System.out.println(cadenaCa); System.out.println("****************");
   }
 
   final public void MInclude() throws ParseException {
@@ -1152,11 +1394,11 @@ public class php implements phpConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case PARA:
       jj_consume_token(PARA);
-      jj_consume_token(COMILLASIMPLE);
+      jj_consume_token(COMILLADOBLE);
       jj_consume_token(ID);
       jj_consume_token(PUNTO);
       jj_consume_token(ID);
-      jj_consume_token(COMILLASIMPLE);
+      jj_consume_token(COMILLADOBLE);
       jj_consume_token(PARC);
       break;
     case COMILLADOBLE:
@@ -1167,7 +1409,7 @@ public class php implements phpConstants {
       jj_consume_token(COMILLADOBLE);
       break;
     default:
-      jj_la1[52] = jj_gen;
+      jj_la1[55] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1183,6 +1425,7 @@ public class php implements phpConstants {
       jj_consume_token(GUIONB);
       jj_consume_token(PCONST);
       jj_consume_token(PARA);
+      ParametrosFuction();
       jj_consume_token(PARC);
       break;
     case ID:
@@ -1191,7 +1434,7 @@ public class php implements phpConstants {
       jj_consume_token(PARC);
       break;
     default:
-      jj_la1[53] = jj_gen;
+      jj_la1[56] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1221,7 +1464,7 @@ public class php implements phpConstants {
       jj_consume_token(COMILLADOBLE);
       break;
     default:
-      jj_la1[54] = jj_gen;
+      jj_la1[57] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1237,18 +1480,25 @@ public class php implements phpConstants {
     jj_consume_token(LLAVEA);
     SentenciasIF();
     jj_consume_token(LLAVEC);
-    jj_consume_token(PELSE);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case PIF:
-      Elseifs();
+    case PELSE:
+      jj_consume_token(PELSE);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case PIF:
+        Elseifs();
+        break;
+      default:
+        jj_la1[58] = jj_gen;
+        ;
+      }
+      jj_consume_token(LLAVEA);
+      SentenciasIF();
+      jj_consume_token(LLAVEC);
       break;
     default:
-      jj_la1[55] = jj_gen;
+      jj_la1[59] = jj_gen;
       ;
     }
-    jj_consume_token(LLAVEA);
-    SentenciasIF();
-    jj_consume_token(LLAVEC);
   }
 
   final public void Elseifs() throws ParseException {
@@ -1267,87 +1517,201 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[56] = jj_gen;
+        jj_la1[60] = jj_gen;
         break label_16;
       }
     }
   }
 
   final public void ParametrosIF() throws ParseException {
-    jj_consume_token(DOLAR);
-    jj_consume_token(ID);
-    ORe2();
+                     Token IdParam1, IdParam2, NumParam1, DecParam1,IdParam3, IdParam4;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case DOLAR:
       jj_consume_token(DOLAR);
-      jj_consume_token(ID);
-      break;
-    case NUM:
-      jj_consume_token(NUM);
-      break;
-    case DEC:
-      jj_consume_token(DEC);
-      break;
-    case COMILLASIMPLE:
-      jj_consume_token(COMILLASIMPLE);
-      jj_consume_token(ID);
-      jj_consume_token(COMILLASIMPLE);
-      break;
-    case COMILLADOBLE:
-      jj_consume_token(COMILLADOBLE);
-      jj_consume_token(ID);
-      jj_consume_token(COMILLADOBLE);
-      break;
-    default:
-      jj_la1[57] = jj_gen;
-      jj_consume_token(-1);
-      throw new ParseException();
-    }
-    label_17:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case LAND:
-      case LOR:
-      case LXOR:
-      case LNOT:
-      case LAND2:
-      case LOR2:
-        ;
-        break;
-      default:
-        jj_la1[58] = jj_gen;
-        break label_17;
-      }
-      OLog2();
-      jj_consume_token(DOLAR);
-      jj_consume_token(ID);
+      IdParam1 = jj_consume_token(ID);
       ORe2();
+                                     ValorP1= IdParam1.image;
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case DOLAR:
         jj_consume_token(DOLAR);
-        jj_consume_token(ID);
+        IdParam2 = jj_consume_token(ID);
+                                             ValorP2= IdParam2.image;
         break;
       case NUM:
-        jj_consume_token(NUM);
+        NumParam1 = jj_consume_token(NUM);
+                                          ValorP3= NumParam1.image;
         break;
       case DEC:
-        jj_consume_token(DEC);
+        DecParam1 = jj_consume_token(DEC);
+                                          ValorP4= DecParam1.image;
         break;
       case COMILLASIMPLE:
         jj_consume_token(COMILLASIMPLE);
-        jj_consume_token(ID);
+        IdParam3 = jj_consume_token(ID);
         jj_consume_token(COMILLASIMPLE);
+                                                                      ValorP5= IdParam3.image;
         break;
       case COMILLADOBLE:
         jj_consume_token(COMILLADOBLE);
-        jj_consume_token(ID);
+        IdParam4 = jj_consume_token(ID);
         jj_consume_token(COMILLADOBLE);
+                                                                   ValorP6= IdParam4.image;
         break;
       default:
-        jj_la1[59] = jj_gen;
+        jj_la1[61] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+                                                                                              if(ValorP1 != ""){
+                                                                                                                                                                        if(ValorP2 != ""){
+                                                                                                                                                                                if(OperadorRe2.equals("==")){
+                                                                                                                                                                                        if(ValorAsig1.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3);
+                                                                                                                                                                                        }
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(ValorP3 != ""){
+                                                                                                                                                                                if(OperadorRe2.equals("==")){
+                                                                                                                                                                                        if(ValorAsig1.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig2.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig3.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig4.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig5.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig6.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig7.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig8.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig9.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig10.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig11.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig12.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }if(ValorAsig13.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
+                                                                                                                                                                                        }
+                                                                                                                                                                                }if(OperadorRe2.equals("!=")){
+                                                                                                                                                                                        if(Integer.parseInt(ValorAsig1) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig2) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig3) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig4) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig5) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig6) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig7) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig8) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig9) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig10) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig11) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }if(Integer.parseInt(ValorAsig12) != Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" NO ES IGUAL");
+                                                                                                                                                                                        }
+                                                                                                                                                                                }if(OperadorRe2.equals("<")){
+                                                                                                                                                                                        if(Integer.parseInt(ValorAsig1) < Integer.parseInt(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+                                                                                                                                                                                        }
+                                                                                                                                                                                }if(OperadorRe2.equals(">")){
+                                                                                                                                                                                        //JSLFKJASD
+                                                                                                                                                                                }if(OperadorRe2.equals("<=")){
+                                                                                                                                                                                        //SLKFJALSDFA
+                                                                                                                                                                                }if(OperadorRe2.equals(">=")){
+                                                                                                                                                                                        //JSFLKAJSKLDF
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(ValorP4 != ""){
+                                                                                                                                                                                if(OperadorRe2.equals("==")){
+                                                                                                                                                                                        if(ValorAsig1.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3);
+                                                                                                                                                                                        }
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(ValorP5 != ""){
+                                                                                                                                                                                if(OperadorRe2.equals("==")){
+                                                                                                                                                                                        if(ValorAsig1.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3);
+                                                                                                                                                                                        }
+                                                                                                                                                                                }
+                                                                                                                                                                        }if(ValorP6 != ""){
+                                                                                                                                                                                if(OperadorRe2.equals("==")){
+                                                                                                                                                                                        if(ValorAsig1.equals(ValorP3)){
+                                                                                                                                                                                                System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3);
+                                                                                                                                                                                        }
+                                                                                                                                                                                }
+                                                                                                                                                                        }
+                                                                                                                                                                 }
+      label_17:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case LAND:
+        case LOR:
+        case LXOR:
+        case LNOT:
+        case LAND2:
+        case LOR2:
+          ;
+          break;
+        default:
+          jj_la1[62] = jj_gen;
+          break label_17;
+        }
+        OLog2();
+        jj_consume_token(DOLAR);
+        jj_consume_token(ID);
+        ORe2();
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case DOLAR:
+          jj_consume_token(DOLAR);
+          jj_consume_token(ID);
+          break;
+        case NUM:
+          jj_consume_token(NUM);
+          break;
+        case DEC:
+          jj_consume_token(DEC);
+          break;
+        case COMILLASIMPLE:
+          jj_consume_token(COMILLASIMPLE);
+          jj_consume_token(ID);
+          jj_consume_token(COMILLASIMPLE);
+          break;
+        case COMILLADOBLE:
+          jj_consume_token(COMILLADOBLE);
+          jj_consume_token(ID);
+          jj_consume_token(COMILLADOBLE);
+          break;
+        default:
+          jj_la1[63] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+      }
+      break;
+    case PTRUE:
+      jj_consume_token(PTRUE);
+      break;
+    case PFALSE:
+      jj_consume_token(PFALSE);
+      break;
+    default:
+      jj_la1[64] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
@@ -1379,7 +1743,7 @@ public class php implements phpConstants {
       jj_consume_token(COMILLADOBLE);
       break;
     default:
-      jj_la1[60] = jj_gen;
+      jj_la1[65] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1391,88 +1755,110 @@ public class php implements phpConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case IGUAL2:
       OperadorR2 = jj_consume_token(IGUAL2);
-                             OperadorRe2=OperadorR2.image;
+                              OperadorRe2=OperadorR2.image;
       break;
     case IDENT:
       OperadorR2 = jj_consume_token(IDENT);
+                             OperadorRe2=OperadorR2.image;
       break;
     case DIFE1:
       OperadorR2 = jj_consume_token(DIFE1);
+                             OperadorRe2=OperadorR2.image;
       break;
     case DIFE2:
       OperadorR2 = jj_consume_token(DIFE2);
+                             OperadorRe2=OperadorR2.image;
       break;
     case NOIDE:
       OperadorR2 = jj_consume_token(NOIDE);
+                             OperadorRe2=OperadorR2.image;
       break;
     case MENOR:
       OperadorR2 = jj_consume_token(MENOR);
+                             OperadorRe2=OperadorR2.image;
       break;
     case MAYOR:
       OperadorR2 = jj_consume_token(MAYOR);
+                             OperadorRe2=OperadorR2.image;
       break;
     case MENORI:
       OperadorR2 = jj_consume_token(MENORI);
+                              OperadorRe2=OperadorR2.image;
       break;
     case MAYORI:
       OperadorR2 = jj_consume_token(MAYORI);
+                              OperadorRe2=OperadorR2.image;
       break;
     default:
-      jj_la1[61] = jj_gen;
+      jj_la1[66] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
   final public void OLog2() throws ParseException {
+              Token OperadorL2;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case LAND:
-      jj_consume_token(LAND);
+      OperadorL2 = jj_consume_token(LAND);
+                            OperadorLo2 =OperadorL2.image;
       break;
     case LOR:
-      jj_consume_token(LOR);
+      OperadorL2 = jj_consume_token(LOR);
+                           OperadorLo2 =OperadorL2.image;
       break;
     case LXOR:
-      jj_consume_token(LXOR);
+      OperadorL2 = jj_consume_token(LXOR);
+                            OperadorLo2 =OperadorL2.image;
       break;
     case LNOT:
-      jj_consume_token(LNOT);
+      OperadorL2 = jj_consume_token(LNOT);
+                            OperadorLo2 =OperadorL2.image;
       break;
     case LAND2:
-      jj_consume_token(LAND2);
+      OperadorL2 = jj_consume_token(LAND2);
+                             OperadorLo2 =OperadorL2.image;
       break;
     case LOR2:
-      jj_consume_token(LOR2);
+      OperadorL2 = jj_consume_token(LOR2);
+                            OperadorLo2 =OperadorL2.image;
       break;
     default:
-      jj_la1[62] = jj_gen;
+      jj_la1[67] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
   final public void OAr2() throws ParseException {
+             Token OperadorA2;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case POR:
-      jj_consume_token(POR);
+      OperadorA2 = jj_consume_token(POR);
+                           OperadorAr2 = OperadorA2.image;
       break;
     case SUMA:
-      jj_consume_token(SUMA);
+      OperadorA2 = jj_consume_token(SUMA);
+                            OperadorAr2 = OperadorA2.image;
       break;
     case DIV:
-      jj_consume_token(DIV);
+      OperadorA2 = jj_consume_token(DIV);
+                           OperadorAr2 = OperadorA2.image;
       break;
     case POTEN:
-      jj_consume_token(POTEN);
+      OperadorA2 = jj_consume_token(POTEN);
+                             OperadorAr2 = OperadorA2.image;
       break;
     case MOD:
-      jj_consume_token(MOD);
+      OperadorA2 = jj_consume_token(MOD);
+                           OperadorAr2 = OperadorA2.image;
       break;
     case RESTA:
-      jj_consume_token(RESTA);
+      OperadorA2 = jj_consume_token(RESTA);
+                             OperadorAr2 = OperadorA2.image;
       break;
     default:
-      jj_la1[63] = jj_gen;
+      jj_la1[68] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1508,7 +1894,7 @@ public class php implements phpConstants {
           jj_consume_token(COMILLADOBLE);
           break;
         default:
-          jj_la1[64] = jj_gen;
+          jj_la1[69] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -1523,13 +1909,13 @@ public class php implements phpConstants {
           jj_consume_token(DECR);
           break;
         default:
-          jj_la1[65] = jj_gen;
+          jj_la1[70] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         break;
       default:
-        jj_la1[66] = jj_gen;
+        jj_la1[71] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1544,13 +1930,13 @@ public class php implements phpConstants {
         jj_consume_token(PCONTI);
         break;
       default:
-        jj_la1[67] = jj_gen;
+        jj_la1[72] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
       break;
     default:
-      jj_la1[68] = jj_gen;
+      jj_la1[73] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1573,7 +1959,7 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[69] = jj_gen;
+        jj_la1[74] = jj_gen;
         break label_18;
       }
     }
@@ -1592,7 +1978,7 @@ public class php implements phpConstants {
       CuerpoCase();
       break;
     default:
-      jj_la1[70] = jj_gen;
+      jj_la1[75] = jj_gen;
       ;
     }
   }
@@ -1612,14 +1998,14 @@ public class php implements phpConstants {
           jj_consume_token(PCONTI);
           break;
         default:
-          jj_la1[71] = jj_gen;
+          jj_la1[76] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         jj_consume_token(PUNTOCOMA);
         break;
       default:
-        jj_la1[72] = jj_gen;
+        jj_la1[77] = jj_gen;
         ;
       }
       break;
@@ -1638,14 +2024,14 @@ public class php implements phpConstants {
           jj_consume_token(PCONTI);
           break;
         default:
-          jj_la1[73] = jj_gen;
+          jj_la1[78] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         jj_consume_token(PUNTOCOMA);
         break;
       default:
-        jj_la1[74] = jj_gen;
+        jj_la1[79] = jj_gen;
         ;
       }
       break;
@@ -1653,7 +2039,7 @@ public class php implements phpConstants {
       CuerpoIF();
       break;
     default:
-      jj_la1[75] = jj_gen;
+      jj_la1[80] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1671,26 +2057,27 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[76] = jj_gen;
+        jj_la1[81] = jj_gen;
         break label_19;
       }
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case ID:
         IdsImp2 = jj_consume_token(ID);
-                                             System.out.println("**************"); System.out.println(IdsImp2.image); System.out.println("**************");
+                                             VarIdImp2 = VarIdImp2 + IdsImp2.image;
         break;
       case NUM:
         NumImp2 = jj_consume_token(NUM);
-                                System.out.println("**************"); System.out.println(NumImp2.image); System.out.println("**************");
+                                                                VarNumImp2 = VarNumImp2 + NumImp2.image;
         break;
       default:
-        jj_la1[77] = jj_gen;
+        jj_la1[82] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
     }
     jj_consume_token(COMILLADOBLE);
     jj_consume_token(PUNTOCOMA);
+                                                   System.out.println("**************"); System.out.println(VarIdImp2+"-No."+VarNumImp2); System.out.println("**************");
   }
 
 //*****************SENTENCIA WHILE******************************
@@ -1713,7 +2100,7 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[78] = jj_gen;
+        jj_la1[83] = jj_gen;
         break label_20;
       }
     }
@@ -1721,11 +2108,79 @@ public class php implements phpConstants {
   }
 
   final public void CuerpoWh() throws ParseException {
+                 Token IdIm1, IdIm2, IdIm3, IdIm4, IdIm5;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case PECHO:
       jj_consume_token(PECHO);
-      jj_consume_token(DOLAR);
-      jj_consume_token(ID);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case DOLAR:
+        jj_consume_token(DOLAR);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case ID:
+          IdIm1 = jj_consume_token(ID);
+          break;
+        case PTHIS:
+          jj_consume_token(PTHIS);
+          jj_consume_token(ASIG);
+          IdIm2 = jj_consume_token(ID);
+          break;
+        default:
+          jj_la1[84] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      case COMILLADOBLE:
+        jj_consume_token(COMILLADOBLE);
+        IdIm3 = jj_consume_token(ID);
+        jj_consume_token(COMILLADOBLE);
+        label_21:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case PUNTO:
+            ;
+            break;
+          default:
+            jj_la1[85] = jj_gen;
+            break label_21;
+          }
+          jj_consume_token(PUNTO);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case COMILLADOBLE:
+            jj_consume_token(COMILLADOBLE);
+            switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+            case ID:
+              IdIm4 = jj_consume_token(ID);
+              break;
+            case BARRA:
+              jj_consume_token(BARRA);
+              jj_consume_token(SALTO);
+              break;
+            default:
+              jj_la1[86] = jj_gen;
+              jj_consume_token(-1);
+              throw new ParseException();
+            }
+            jj_consume_token(COMILLADOBLE);
+            break;
+          case DOLAR:
+            jj_consume_token(DOLAR);
+            jj_consume_token(PTHIS);
+            jj_consume_token(ASIG);
+            IdIm5 = jj_consume_token(ID);
+            break;
+          default:
+            jj_la1[87] = jj_gen;
+            jj_consume_token(-1);
+            throw new ParseException();
+          }
+        }
+        break;
+      default:
+        jj_la1[88] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       jj_consume_token(PUNTOCOMA);
       break;
     case DOLAR:
@@ -1748,13 +2203,13 @@ public class php implements phpConstants {
           jj_consume_token(DECR);
           break;
         default:
-          jj_la1[79] = jj_gen;
+          jj_la1[89] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
         break;
       default:
-        jj_la1[80] = jj_gen;
+        jj_la1[90] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1770,7 +2225,7 @@ public class php implements phpConstants {
         jj_consume_token(PCONTI);
         break;
       default:
-        jj_la1[81] = jj_gen;
+        jj_la1[91] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1783,7 +2238,7 @@ public class php implements phpConstants {
       SentenciaSW();
       break;
     default:
-      jj_la1[82] = jj_gen;
+      jj_la1[92] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1793,7 +2248,7 @@ public class php implements phpConstants {
   final public void SentenciaDoWh() throws ParseException {
     jj_consume_token(PDO);
     jj_consume_token(LLAVEA);
-    label_21:
+    label_22:
     while (true) {
       CuerpoWh();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1806,8 +2261,8 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[83] = jj_gen;
-        break label_21;
+        jj_la1[93] = jj_gen;
+        break label_22;
       }
     }
     jj_consume_token(LLAVEC);
@@ -1825,7 +2280,7 @@ public class php implements phpConstants {
     ParametrosFOR();
     jj_consume_token(PARC);
     jj_consume_token(LLAVEA);
-    label_22:
+    label_23:
     while (true) {
       CuerpoFor2();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1839,8 +2294,8 @@ public class php implements phpConstants {
         ;
         break;
       default:
-        jj_la1[84] = jj_gen;
-        break label_22;
+        jj_la1[94] = jj_gen;
+        break label_23;
       }
     }
     jj_consume_token(LLAVEC);
@@ -1854,7 +2309,7 @@ public class php implements phpConstants {
       jj_consume_token(IGUAL);
       jj_consume_token(DOLAR);
       jj_consume_token(ID);
-      label_23:
+      label_24:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case POR:
@@ -1866,8 +2321,8 @@ public class php implements phpConstants {
           ;
           break;
         default:
-          jj_la1[85] = jj_gen;
-          break label_23;
+          jj_la1[95] = jj_gen;
+          break label_24;
         }
         OAr2();
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1882,7 +2337,7 @@ public class php implements phpConstants {
           jj_consume_token(DEC);
           break;
         default:
-          jj_la1[86] = jj_gen;
+          jj_la1[96] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -1902,7 +2357,7 @@ public class php implements phpConstants {
         jj_consume_token(PCONTI);
         break;
       default:
-        jj_la1[87] = jj_gen;
+        jj_la1[97] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1918,7 +2373,7 @@ public class php implements phpConstants {
       SentenciaWh();
       break;
     default:
-      jj_la1[88] = jj_gen;
+      jj_la1[98] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1927,12 +2382,128 @@ public class php implements phpConstants {
   final public void MetodoMain() throws ParseException {
     jj_consume_token(DOLAR);
     jj_consume_token(ID);
-    jj_consume_token(IGUAL);
-    jj_consume_token(PNEW);
-    jj_consume_token(ID);
-    jj_consume_token(PARA);
-    jj_consume_token(PARC);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case IGUAL:
+      jj_consume_token(IGUAL);
+      jj_consume_token(PNEW);
+      jj_consume_token(ID);
+      jj_consume_token(PARA);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case NUM:
+      case ID:
+      case DEC:
+      case COMILLADOBLE:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case NUM:
+          jj_consume_token(NUM);
+          break;
+        case ID:
+          jj_consume_token(ID);
+          break;
+        case DEC:
+        case COMILLADOBLE:
+          ParametrosMain();
+          break;
+        default:
+          jj_la1[99] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[100] = jj_gen;
+        ;
+      }
+      jj_consume_token(PARC);
+      break;
+    case ASIG:
+      jj_consume_token(ASIG);
+      jj_consume_token(ID);
+      jj_consume_token(PARA);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case NUM:
+      case ID:
+      case DOLAR:
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case NUM:
+          jj_consume_token(NUM);
+          break;
+        case ID:
+          jj_consume_token(ID);
+          break;
+        case DOLAR:
+          jj_consume_token(DOLAR);
+          jj_consume_token(ID);
+          jj_consume_token(ASIG);
+          jj_consume_token(ID);
+          break;
+        default:
+          jj_la1[101] = jj_gen;
+          jj_consume_token(-1);
+          throw new ParseException();
+        }
+        break;
+      default:
+        jj_la1[102] = jj_gen;
+        ;
+      }
+      jj_consume_token(PARC);
+      break;
+    default:
+      jj_la1[103] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
     jj_consume_token(PUNTOCOMA);
+  }
+
+  final public void ParametrosMain() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NUM:
+      jj_consume_token(NUM);
+      break;
+    case DEC:
+      jj_consume_token(DEC);
+      break;
+    case COMILLADOBLE:
+      jj_consume_token(COMILLADOBLE);
+      jj_consume_token(ID);
+      jj_consume_token(COMILLADOBLE);
+      break;
+    default:
+      jj_la1[104] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    label_25:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMA:
+        ;
+        break;
+      default:
+        jj_la1[105] = jj_gen;
+        break label_25;
+      }
+      jj_consume_token(COMA);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case NUM:
+        jj_consume_token(NUM);
+        break;
+      case DEC:
+        jj_consume_token(DEC);
+        break;
+      case COMILLADOBLE:
+        jj_consume_token(COMILLADOBLE);
+        jj_consume_token(ID);
+        jj_consume_token(COMILLADOBLE);
+        break;
+      default:
+        jj_la1[106] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    }
   }
 
   /** Generated Token Manager. */
@@ -1944,7 +2515,7 @@ public class php implements phpConstants {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[89];
+  final private int[] jj_la1 = new int[107];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1954,13 +2525,13 @@ public class php implements phpConstants {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x4040200,0x4000000,0x40000,0x4040200,0x20000000,0x40580000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40580000,0x0,0x0,0x0,0x4400,0x0,0x0,0x1004400,0x0,0x0,0x0,0x40580000,0x800000,0x40780000,0x200000,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x0,0x4400,0x0,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x10000800,0x8000000,0x0,0x800,0x4400,0x40000000,0x40000000,0x4400,0x0,0x4400,0x4400,0x0,0x0,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40400000,0xc00,0xc00,0x40400000,0x0,0x0,0x0,0x40400000,0x40400000,0x40400000,0x0,0x4400,0x0,0x40400000,};
+      jj_la1_0 = new int[] {0x4040200,0x4000000,0x40000,0x4040200,0x20000000,0x180000,0x40580000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40580000,0x0,0x0,0x0,0x4400,0x0,0x0,0x1004400,0x0,0x0,0x0,0x40580000,0x800000,0x40780000,0x200000,0x0,0x0,0x0,0x0,0x0,0x0,0x800,0x0,0x0,0x4400,0x0,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x80000,0x0,0x18400000,0x800,0x4400,0x10000800,0x18400000,0x0,0x800,0x4400,0x40000000,0x80000000,0x40000000,0x4400,0x0,0x4400,0x0,0x4400,0x0,0x0,0x0,0x4400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40400000,0xc00,0xc00,0x40400000,0x10000800,0x0,0x800,0x0,0x0,0x0,0x0,0x0,0x40400000,0x40400000,0x40400000,0x0,0x4400,0x0,0x40400000,0x4c00,0x4c00,0xc00,0xc00,0x0,0x4400,0x0,0x4400,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x1000,0x0,0x1000,0x1000,0x0,0x2001032,0x600,0x800,0x600,0x180000,0xff9e0600,0xff9e0600,0x800,0x600,0x2001032,0x600,0x1f800000,0x1f800000,0x4000,0x1f800000,0x1f800000,0x7000,0x800,0x200,0x1000,0x2001032,0x0,0x2001032,0x1000,0x60000,0x180000,0x200000,0x200000,0x0,0x5000,0x0,0x200000,0x1f800000,0x1000,0x1f800000,0xe0060000,0x1000,0x0,0x0,0x0,0x800,0x0,0x1000,0x0,0x1000,0x0,0x0,0xc000,0x0,0x6000,0x0,0x0,0x7000,0x0,0x7000,0x7000,0xe0060000,0x0,0x1f800000,0x7000,0x180000,0x180200,0x44,0x1044,0x1,0x8,0x44,0x44,0x44,0x44,0x1044,0x0,0x0,0x1046,0x180000,0x180200,0x44,0x1046,0x1046,0x1056,0x1f800000,0x1000,0x44,0x1056,};
+      jj_la1_1 = new int[] {0x8000,0x0,0x8000,0x8000,0x0,0x0,0x10008032,0x3000,0x4000,0x3000,0xc00000,0xfcf03000,0xfcf03000,0x4000,0x3000,0x10008032,0x3000,0xfc000000,0xfc000000,0x20000,0xfc000000,0xfc000000,0x38000,0x4000,0x1000,0x8000,0x10008032,0x0,0x10008032,0x8000,0x300000,0xc00000,0x1000000,0x1000000,0x0,0x28000,0x0,0x1000000,0xfc000000,0x8000,0xfc000000,0x300000,0x8000,0x0,0x0,0x0,0x4000,0x0,0x0,0x8000,0x8000,0x0,0x8080,0x0,0x8000,0x60000,0x0,0x30000,0x0,0x0,0x0,0x38000,0x0,0x38000,0x8300,0x38000,0x300000,0x0,0xfc000000,0x38000,0xc00000,0xc01000,0x44,0x8044,0x1,0x8,0x44,0x44,0x44,0x44,0x8044,0x0,0x0,0x8046,0x0,0x0,0x0,0x28000,0x28000,0xc00000,0xc01000,0x44,0x8046,0x8046,0x8056,0xfc000000,0x8000,0x44,0x8056,0x20000,0x20000,0x8000,0x8000,0x1000,0x20000,0x4000,0x20000,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x80,0x800,0x0,0x800,0x0,0xbff,0xbff,0x0,0x800,0x80,0x800,0x0,0x0,0x0,0x1000,0x1000,0x0,0x0,0x800,0x400,0x80,0x0,0x80,0x0,0x0,0x0,0x0,0x0,0x1000,0x0,0x0,0x0,0x0,0x0,0x0,0xf,0x0,0x3f0,0x3f0,0x400,0x0,0x400,0x400,0x0,0x0,0x0,0x0,0x0,0x10000,0x0,0x0,0x0,0x0,0x3f0,0x0,0x0,0xf,0x3f0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x4000,0x0,0x4000,0x0,0x5fff,0x5fff,0x0,0x4000,0x400,0x4000,0x0,0x0,0x0,0x8000,0x8000,0x0,0x0,0x4000,0x2000,0x400,0x0,0x400,0x0,0x0,0x0,0x0,0x0,0x8000,0x0,0x0,0x0,0x0,0x0,0x0,0x7f,0x0,0x1f80,0x1f80,0x2000,0x0,0x2000,0x0,0x2000,0x0,0x0,0x0,0x0,0x0,0x0,0x80000,0x0,0x0,0x0,0x0,0x0,0x1f80,0x0,0x0,0x0,0x7f,0x1f80,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8000,0x10000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4000,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -1974,7 +2545,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 89; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 107; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1988,7 +2559,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 89; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 107; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -1998,7 +2569,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 89; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 107; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -2008,7 +2579,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 89; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 107; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -2017,7 +2588,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 89; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 107; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -2026,7 +2597,7 @@ public class php implements phpConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 89; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 107; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -2077,12 +2648,12 @@ public class php implements phpConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[82];
+    boolean[] la1tokens = new boolean[85];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 89; i++) {
+    for (int i = 0; i < 107; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -2097,7 +2668,7 @@ public class php implements phpConstants {
         }
       }
     }
-    for (int i = 0; i < 82; i++) {
+    for (int i = 0; i < 85; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

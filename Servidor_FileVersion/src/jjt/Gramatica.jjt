@@ -5,7 +5,8 @@ options {
 }
 
 PARSER_BEGIN(php)
-package Javacc;
+
+package jjt;
 
 import java.util.*;
 import servidor_fileversion.Propiedades;
@@ -16,16 +17,18 @@ public class php{
 	public Propiedades propiedad = new Propiedades();
 	public TablaSimbolos TS = new TablaSimbolos();
 	///Variables NORMALES
-	public static String VerVar="" ,VerVar2="",VerVar3="",VerVar4="",VerVar5="",VerVar6="",VerVar7="",VerVar8="",VerVar9="",VerVar10="", VerVar11="" ,VerVar12="",VerVar13="",VerVar14="",VerVar15="",VerVar16="",VerVar17="",VerVar18="",VerVar19="",VerVar20="",VerVar21="",VerVar22="",VerVar23="",VerVar24="",VerVar25="", VerVarOtr="";
-	public static String OperadorAr="", OperandoAr="", OperadorRe="", OperandoRe="", OperadorLo="", OperandoLo="", OperadorRe2="", OperadorAr2="", OperadorLo2="";
+	public static String OperadorAr="", OperandoAr="", OperadorRe="", OperandoRe="", OperadorLo="", OperandoLo="", OperadorRe2="", OperadorAr2="", OperadorLo2="", OpeMenosAr="", IdMenosAr="", ValorIdCWh="";
 	//NUMEROS ENTEROS
-	public static String ValorAsig1="", ValorAsig2="", ValorAsig3="", ValorAsig4="", ValorAsig5="", ValorAsig6="", ValorAsig7="", ValorAsig8="", ValorAsig9="", ValorAsig10="", ValorAsig11="", ValorAsig12="", ValorAsig13="", ValorAsig14="", ValorAsig15="", ValorAsig16="", ValorAsig17="", Simb="";
+	public static String VerVar="" ,VerVar2="",VerVar3="",VerVar4="",VerVar5="",VerVar6="",VerVar7="",VerVar8="",VerVar9="",VerVar10="", VerVar11="" ,VerVar12="",VerVar13="",VerVar14="",VerVar15="",VerVar16="",VerVar17="",VerVar18="",VerVar19="",VerVar20="",VerVar21="",VerVar22="",VerVar23="",VerVar24="",VerVar25="", VerVarOtr="";
+	public static String ValorAsig1="", ValorAsig2="", ValorAsig3="", ValorAsig4="", ValorAsig5="", ValorAsig6="", ValorAsig7="", ValorAsig8="", ValorAsig9="", ValorAsig10="", ValorAsig11="", ValorAsig12="", ValorAsig13="", ValorAsig14="", ValorAsig15="", ValorAsig16="",Simb="";
 	//NUMEROS PUNTO FLOTANTE
+	//public static String VerVarF="" ,VerVarF2="",VerVarF3="",VerVarF4="",VerVarF5="",VerVarF6="",VerVarF7="",VerVarF8="",VerVarF9="",VerVarF10="", VerVarF11="", VerVarF12="", VerVarF13="", VerVarF14="", VerVarF15="", VerVarF16="", VerVarF17="", VerVarF18="", VerVarF19="", VerVarF20="", VerVarF21="", VerVarF22="", VerVarF23="", VerVarF24="", VerVarF25="", VerVarFOtr="";
 	public static String ValorAsigF1="", ValorAsigF2="", ValorAsigF3="", ValorAsigF4="", ValorAsigF5="", ValorAsigF6="", ValorAsigF7="", ValorAsigF8="", ValorAsigF9="", ValorAsigF10="", ValorAsigF11="", ValorAsigF12="", ValorAsigF13="", ValorAsigF14="", ValorAsigF15="", ValorAsigF16="";
-	public static String ResulVar1="", ValorIdEcho="", VarIdImp2="", VarNumImp2="";
 	//VARIABLES PARA ALMACENAR PARAMETROS DEL IF
-	public static String ValorP1="", ValorP2="", ValorP3="", ValorP4="", ValorP5="", ValorP6="", ValorP7="", ValorP8="", ValorP9="", ValorP10="";
-	public static String VerVar30 ="";
+	public static String ValorP1="", ValorP2="", ValorP3="", ValorP4="", ValorP5="", ValorP6="", ValorP7="", ValorP8="", ValorP9="", ValorP10="", ValorP11="", ValorP12="";
+	public static String VerVar30 ="", ResulVar1="", ValorIdEcho="", VarIdImp2="", VarNumImp2="";
+	//VALORES IF
+	public static String ValIF1="", ValIF2="", ValIF3="", ValIF4="", ValIF5="", ValIF6="", ValIF7="", ValIF8="", ValIF9="", ValIF10="", ResultIf1="", ResultIf2="", ResultIf3="", ValInDecIf="";
 	//VARIABLES PARA ID+
 	public static String cadenaCa ="", cadenaCa2="";
 	public static void main(String[] args) throws ParseException{
@@ -38,15 +41,20 @@ public class php{
 								+"parent ::__construct ($b, $c, $d);"
 								+"$this ->a = $a; }"
 								+"function imprimir(){"
-								+"$a = 9;"
+								+"$a = 5;"
+								+"$b = 8.5;"
+								+"$c = 10;  $f;"
 								+"while (true ){"
-								+"if ($a < 10){break ;}"
+								+"if ($a != 5.5){ $f= 60 + 60;"
+								+"break ;}"
+								+"-$a; -$b;  echo $a;   echo $b; echo $f;"
 								+"echo \"color\" . $this ->b . \" marca \". $this ->c . \" anio \" . $this ->d . \" recorrido \".$this ->a . \" \\n \";"
 								+"$a ++;}"
 								+"}"
 								+"} "
 								+"?>"));
-			analizador.ProgramaInicio();
+			SimpleNode n = analizador.ProgramaInicio();
+			n.dump("");
 			System.out.println("------Correctamente Analizado------");
 		}catch(ParseException e){
 			System.out.println(e.getMessage());
@@ -55,8 +63,9 @@ public class php{
 			System.out.println("**Ha ocurrido un Error Lexico");
 			System.out.println(e.getMessage());
 		}catch(Exception err){
-			System.out.println(err);
-			System.out.println("**Posible Error Semantico");
+			System.out.println(err.getMessage());
+			System.out.println("***Posible Error Semantico");
+			err.printStackTrace();
 		}
 	}
 }
@@ -173,10 +182,12 @@ TOKEN:
 	|<GUIONB: "_"> {System.out.println("GuionBajo -> "+ image + "\r\n");}
 	|<DOSP: ":"> {System.out.println("Dos_Puntos -> "+ image + "\r\n");}
 }
+
 ///INICIO DE GRAMATICA
-void ProgramaInicio():{} //Aqui se declaran variables y objetos de javacc
+SimpleNode ProgramaInicio():{} //Aqui se declaran variables y objetos de javacc
 {
 	<TAGINICIO>(CuerpoPrograma())+<TAGFIN>
+	{ return jjtThis; }
 }
 
 void CuerpoPrograma():{Token T1;}
@@ -203,7 +214,7 @@ void CuerpoClase():{}
 
 void CVariables():{Token Ids, InDe=null;}
 {
-	 <PVAR><DOLAR> Ids = <ID> {/*propiedad.setNombre(Ids.image);*/ if(Ids.image.equals("a")){VerVar=Ids.image;} if(Ids.image.equals("b")){VerVar2=Ids.image;} if(Ids.image.equals("c")){VerVar3=Ids.image;} 
+	<PVAR><DOLAR> Ids = <ID> {/*propiedad.setNombre(Ids.image);*/ if(Ids.image.equals("a")){VerVar=Ids.image;} if(Ids.image.equals("b")){VerVar2=Ids.image;} if(Ids.image.equals("c")){VerVar3=Ids.image;} 
 	 														   if(Ids.image.equals("d")){VerVar4=Ids.image;} if(Ids.image.equals("e")){VerVar5=Ids.image;} if(Ids.image.equals("f")){VerVar6=Ids.image;} 
 	 														   if(Ids.image.equals("g")){VerVar7=Ids.image;} if(Ids.image.equals("h")){VerVar8=Ids.image;} if(Ids.image.equals("i")){VerVar9=Ids.image;} 
 	 														   if(Ids.image.equals("j")){VerVar10=Ids.image;} if(Ids.image.equals("k")){VerVar11=Ids.image;} if(Ids.image.equals("l")){VerVar12=Ids.image;} 
@@ -215,7 +226,7 @@ void CVariables():{Token Ids, InDe=null;}
 	 						  }
 	 					(TVariable())?
 	 					(<COMA><DOLAR> Ids =<ID>(TVariable())?)*  /*VARIABLES GLOBALES  */ 
-	|<DOLAR> Ids = <ID> (TVariable() {if(Ids.image.equals("a")){VerVar=Ids.image;} if(Ids.image.equals("b")){VerVar2=Ids.image;} if(Ids.image.equals("c")){VerVar3=Ids.image;} 
+	|<DOLAR> Ids = <ID> {if(Ids.image.equals("a")){VerVar=Ids.image; System.out.println("¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡"+VerVar); } if(Ids.image.equals("b")){VerVar2=Ids.image;} if(Ids.image.equals("c")){VerVar3=Ids.image;} 
 	 									if(Ids.image.equals("d")){VerVar4=Ids.image;} if(Ids.image.equals("e")){VerVar5=Ids.image;} if(Ids.image.equals("f")){VerVar6=Ids.image;} 
 	 									if(Ids.image.equals("g")){VerVar7=Ids.image;} if(Ids.image.equals("h")){VerVar8=Ids.image;} if(Ids.image.equals("i")){VerVar9=Ids.image;} 
 	 									if(Ids.image.equals("j")){VerVar10=Ids.image;} if(Ids.image.equals("k")){VerVar11=Ids.image;} if(Ids.image.equals("l")){VerVar12=Ids.image;} 
@@ -224,11 +235,12 @@ void CVariables():{Token Ids, InDe=null;}
 	 									if(Ids.image.equals("s")){VerVar19=Ids.image;} if(Ids.image.equals("t")){VerVar20=Ids.image;} if(Ids.image.equals("u")){VerVar21=Ids.image;} 
 	 									if(Ids.image.equals("w")){VerVar22=Ids.image;} if(Ids.image.equals("x")){VerVar23=Ids.image;} if(Ids.image.equals("y")){VerVar24=Ids.image;} 
 	 									if(Ids.image.equals("z")){VerVar25=Ids.image;} else {VerVarOtr=Ids.image;} }
+	 					(TVariable() 
 						|OAr()<PUNTOCOMA>
 						|ORe()<PUNTOCOMA>
 						|OLog()<PUNTOCOMA>
 						|(InDe = <INC>  
-							|InDe = <DECR>{Simb = InDe.image; System.out.println("---PASA_AQUI--"); if(Simb.equals("++")){
+							|InDe = <DECR>{Simb = InDe.image;  if(Simb.equals("++")){
 																				System.out.println("%%%%%%%%%%"+Simb);
 																				if(VerVar != ""){
 																					if(ValorAsig1 != ""){
@@ -241,7 +253,7 @@ void CVariables():{Token Ids, InDe=null;}
 																						float RES = variableL2 + 1;
 																						System.out.println(VerVar +" = "+ Simb + "-->" + RES); System.out.println("*******************");
 																					}
-																				}/*if(VerVar2 != ""){
+																				}if(VerVar2 != ""){
 																				  	if(ValorAsig2 != ""){
 																						int variableL = Integer.parseInt(ValorAsig2); System.out.println("*********DEC-INC2++********"); 
 																						int RES = variableL + 1;
@@ -313,8 +325,8 @@ void CVariables():{Token Ids, InDe=null;}
 																					}
 																				}if(VerVarOtr != ""){
 																					System.out.println("----------> " +VerVarOtr);
-																				}*/
-																			}if(Simb.equals("--")){
+																				}
+																}if(Simb.equals("--")){
 																				   	System.out.println("%%%%%%%%%%"+Simb);
 																				   	if(VerVar != ""){
 																						if(ValorAsig1 != ""){
@@ -398,8 +410,8 @@ void CVariables():{Token Ids, InDe=null;}
 																							System.out.println(VerVar8 +" = "+ Simb + "-->" + RES); System.out.println("*******************");
 																						}
 																					}
-																				}
-																			})<PUNTOCOMA>)? 
+																}
+												})<PUNTOCOMA>)? 
 						(<COMA><DOLAR><ID>(TVariable())?)*  /*VARIABLES LOCALES */
 	|DecFunction()
 	|OperacionesArit1()
@@ -414,7 +426,7 @@ void TVariable():{}
 {
 	(AsignacionVar()|<PUNTOCOMA>)
 }
-void AsignacionVar():{Token IdAsgi, ValAsig;}
+void AsignacionVar():{Token IdAsgi, ValAsig, ValDecAsig;}
 {
 	 <IGUAL>(<COMILLASIMPLE>IdAsgi=<ID><COMILLASIMPLE>{ValorAsig1=IdAsgi.image; System.out.println("*********VAR IDS SIM********"); System.out.println(VerVar +" = "+ ValorAsig1); System.out.println("*******************");}
 	 	     |<PNEW> <ID><PARA><PARC>
@@ -426,57 +438,57 @@ void AsignacionVar():{Token IdAsgi, ValAsig;}
 	 	     						 }if(ValorAsig14.equals("") && ValorAsig13 != ""){
 	 	     							ValorAsig14=ValAsig.image;
 	 	     						 }if(ValorAsig13.equals("") && ValorAsig12 != ""){
-	 	     							ValorAsig13=ValAsig.image;
+	 	     							ValorAsig13=ValAsig.image; System.out.println("*********VAR NUM13********");
 	 	     						 }if(ValorAsig12.equals("") && ValorAsig11 != ""){
-	 	     							ValorAsig12=ValAsig.image;
+	 	     							ValorAsig12=ValAsig.image; System.out.println("*********VAR NUM12********");
 	 	     						 }if(ValorAsig11.equals("") && ValorAsig10 != ""){
-	 	     							ValorAsig11=ValAsig.image;
+	 	     							ValorAsig11=ValAsig.image; System.out.println("*********VAR NUM11********");
 	 	     						 }if(ValorAsig10.equals("") && ValorAsig9 != ""){
-	 	     							ValorAsig10=ValAsig.image;
-	 	     						 }if(ValorAsig9.equals("") && ValorAsig8 != ""){
-	 	     							ValorAsig9=ValAsig.image;
+	 	     							ValorAsig10=ValAsig.image; System.out.println("*********VAR NUM10********");
+	 	     						 }if(ValorAsig9.equals("") && ValorAsig8 != ""){ 
+	 	     							ValorAsig9=ValAsig.image; System.out.println("*********VAR NUM9********");
 	 	     						 }if(ValorAsig8.equals("") && ValorAsig7 != ""){
-	 	     							ValorAsig8=ValAsig.image;
+	 	     							ValorAsig8=ValAsig.image;System.out.println("*********VAR NUM8********");
 	 	     						 }if(ValorAsig7.equals("") && ValorAsig6 != ""){
-	 	     							ValorAsig7=ValAsig.image;
+	 	     							ValorAsig7=ValAsig.image; System.out.println("*********VAR NUM7********");
 	 	     						 }if(ValorAsig6.equals("") && ValorAsig5 != ""){
-	 	     							ValorAsig6=ValAsig.image;
+	 	     							ValorAsig6=ValAsig.image; System.out.println("*********VAR NUM6********");
 	 	     						 }if(ValorAsig5.equals("") && ValorAsig4 != ""){
-	 	     							ValorAsig5=ValAsig.image;
+	 	     							ValorAsig5=ValAsig.image; System.out.println("*********VAR NUM5********");
 	 	     						 }if(ValorAsig4.equals("") && ValorAsig3 != ""){
-	 	     							ValorAsig4=ValAsig.image;
+	 	     							ValorAsig4=ValAsig.image; System.out.println("*********VAR NUM4********");
 	 	     						 }if(ValorAsig3.equals("") && ValorAsig2 != ""){
-	 	     							ValorAsig3=ValAsig.image;
+	 	     							ValorAsig3=ValAsig.image; System.out.println("*********VAR NUM3********");
 	 	     						 }if(ValorAsig2.equals("") && ValorAsig1 != ""){
-	 	     							ValorAsig2=ValAsig.image;
+	 	     							ValorAsig2=ValAsig.image; System.out.println("*********VAR NUM2********");
 	 	     						 }if(ValorAsig1.equals("")){
-	 	     							ValorAsig1=ValAsig.image; System.out.println("%%%%%%"+VerVar);
+	 	     							ValorAsig1=ValAsig.image; System.out.println("*********VAR NUM1********");
 	 	     						 }
-	 	     					    System.out.println("*********VAR NUM********"); System.out.println(VerVar +" = "+ ValorAsig1); //System.out.println(VerVar3 +" = "+ ValorAsig2); 
-	 	     					    System.out.println("*******************");}
-	 	     |ValAsig=<DEC>(OAr())? {if(ValorAsigF10.equals("") && ValorAsigF9 != "" && ValorAsig10 != ""){
-	 	     							ValorAsigF10=ValAsig.image;
-	 	     						 }if(ValorAsigF9.equals("") && ValorAsigF8 != "" && ValorAsig9 != ""){
-	 	     							ValorAsigF9=ValAsig.image;
-	 	     						 }if(ValorAsigF8.equals("") && ValorAsigF7 != "" && ValorAsig8 != ""){
-	 	     							ValorAsigF8=ValAsig.image;
-	 	     						 }if(ValorAsigF7.equals("") && ValorAsigF6 != "" && ValorAsig7 != ""){
-	 	     							ValorAsigF7=ValAsig.image;
-	 	     						 }if(ValorAsigF6.equals("") && ValorAsigF5 != "" && ValorAsig6 != ""){
-	 	     							ValorAsigF6=ValAsig.image;
-	 	     						 }if(ValorAsigF5.equals("") && ValorAsigF4 != "" && ValorAsig5 != ""){
-	 	     							ValorAsigF5=ValAsig.image;
-	 	     						 }if(ValorAsigF4.equals("") && ValorAsigF3 != "" && ValorAsig4 != ""){
-	 	     							ValorAsigF4=ValAsig.image;
-	 	     						 }if(ValorAsigF3.equals("") && ValorAsigF2 != "" && ValorAsig3 != ""){
-	 	     							ValorAsigF3=ValAsig.image;
-	 	     						 }if(ValorAsigF2.equals("") && ValorAsigF1 != "" && ValorAsig2 != ""){
-	 	     							ValorAsigF2=ValAsig.image;
-	 	     						 }if(ValorAsigF1.equals("") && ValorAsig1 != ""){
-	 	     							ValorAsigF1=ValAsig.image;
+	 	     					    //System.out.println("*********VAR NUM********"); System.out.println(VerVar +" = "+ ValorAsig1);System.out.println("*******************");
+	 	     					}
+	 	     |ValDecAsig=<DEC>(OAr())? {if(ValorAsigF10.equals("") && ValorAsigF9 != "" /*&& ValorAsig10 != ""*/){
+	 	     							ValorAsigF10=ValDecAsig.image; System.out.println("*********VAR FLOAT9********");
+	 	     						 }if(ValorAsigF9.equals("") && ValorAsigF8 != "" /*&& ValorAsig9 != ""*/){
+	 	     							ValorAsigF9=ValDecAsig.image; System.out.println("*********VAR FLOAT8********");
+	 	     						 }if(ValorAsigF8.equals("") && ValorAsigF7 != "" /*&& ValorAsig8 != ""*/){
+	 	     							ValorAsigF8=ValDecAsig.image; System.out.println("*********VAR FLOAT7********");
+	 	     						 }if(ValorAsigF7.equals("") && ValorAsigF6 != "" /*&& ValorAsig7 != ""*/){
+	 	     							ValorAsigF7=ValDecAsig.image; System.out.println("*********VAR FLOAT6********");
+	 	     						 }if(ValorAsigF6.equals("") && ValorAsigF5 != "" /*&& ValorAsig6 != ""*/){
+	 	     							ValorAsigF6=ValDecAsig.image;  System.out.println("*********VAR FLOAT5********");
+	 	     						 }if(ValorAsigF5.equals("") && ValorAsigF4 != "" /*&& ValorAsig5 != ""*/){
+	 	     							ValorAsigF5=ValDecAsig.image; System.out.println("*********VAR FLOAT4********");
+	 	     						 }if(ValorAsigF4.equals("") && ValorAsigF3 != "" /*&& ValorAsig4 != ""*/){
+	 	     							ValorAsigF4=ValDecAsig.image; System.out.println("*********VAR FLOAT3********");
+	 	     						 }if(ValorAsigF3.equals("") && ValorAsigF2 != "" /*&& ValorAsig3 != ""*/){
+	 	     							ValorAsigF3=ValDecAsig.image; System.out.println("*********VAR FLOAT2********");
+	 	     						 }if(ValorAsigF2.equals("") && ValorAsigF1 != "" /*&& ValorAsig2 != ""*/){
+	 	     							ValorAsigF2=ValDecAsig.image; System.out.println("*********VAR FLOAT1********");
+	 	     						 }if(ValorAsigF1.equals("") /*&& ValorAsig1 != ""*/){
+	 	     							ValorAsigF1=ValDecAsig.image; /*System.out.println("&&&&&&& "+ValorAsigF1+"-"+ValDecAsig.image);*/System.out.println("*********VAR FLOAT1********");
 	 	     						 }
-	 	     					    System.out.println("*********VAR FLOAT********"); System.out.println(VerVar2 +" = "+ ValorAsigF1); 
-	 	     					    System.out.println("*******************");}
+	 	     					    //System.out.println("*********VAR FLOAT1********"); System.out.println(VerVar2 +" = "+ ValDecAsig.image); System.out.println(VerVar2 +" = "+ ValorAsigF2); System.out.println("*******************");
+	 	     					}
 	 	     |<DOLAR>IdAsgi=<ID>(OAr()
 	 	     				|<PUNTO>(<COMILLADOBLE><ID><COMILLADOBLE>|<NUM>|<DEC>))?)<PUNTOCOMA>
 	|<ASIG><ID><PARA><DOLAR><ID>(<COMA><DOLAR><ID>)*<PARC><PUNTOCOMA>
@@ -512,11 +524,12 @@ void AsignarMatVect():{}
 {
 	<DOLAR><ID><CORCHA><NUM><CORCHC>(<CORCHA><NUM><CORCHC>)?<IGUAL><NUM><PUNTOCOMA>
 }
-void Imprimir():{Token CIds, VIds=null;} /*IMPRESION MATRIZ*/
+void Imprimir():{Token CIds, VIds1=null, VIds2;} /*IMPRESION MATRIZ*/
 {
-	<PECHO><DOLAR><ID>(<CORCHA><NUM><CORCHC>(<CORCHA><NUM><CORCHC>)?
+	<PECHO><DOLAR>VIds2=<ID>
+						(<CORCHA><NUM><CORCHC>(<CORCHA><NUM><CORCHC>)?
 						|(<PUNTO>(<COMILLADOBLE><BARRA><SALTO><COMILLADOBLE>
-							      |<DOLAR>VIds=<ID>{ValorIdEcho=VIds.image;}))*
+							      |<DOLAR>VIds1=<ID>{ValorIdEcho=VIds1.image;}))*
 						|<COMILLADOBLE>(CIds=<ID>{cadenaCa2= cadenaCa2 + CIds.image +" ";})+<COMILLADOBLE>)<PUNTOCOMA>{System.out.println("*******ECHO CIds*******"); 
 																														System.out.println(cadenaCa2); System.out.println("****************");
 																														System.out.println("!!!!!!!!!!!!"+ValorIdEcho);
@@ -526,9 +539,9 @@ void Imprimir():{Token CIds, VIds=null;} /*IMPRESION MATRIZ*/
 																													  }
 }
 ///*******OPERACIONES ARITMETICAS
-void OperacionesArit1():{}
+void OperacionesArit1():{Token IdOp1,OperatorMinus;}
 {
-	 <RESTA><DOLAR><ID><PUNTOCOMA>
+	 OperatorMinus=<RESTA><DOLAR>IdOp1=<ID><PUNTOCOMA> {OpeMenosAr= OperatorMinus.image; IdMenosAr=IdOp1.image;}
 	
 }
 void OAr():{Token OperA; Token OperandA;} /// OPERACIONES ARITMETICAS CON OPERANDOS
@@ -611,11 +624,11 @@ void MetThis():{}
 //*****************SENTENCIAS IF*******************************
 void CuerpoIF():{}
 {
-	<PIF><PARA>ParametrosIF()<PARC><LLAVEA>SentenciasIF()<LLAVEC>(<PELSE>(Elseifs())?<LLAVEA>SentenciasIF()<LLAVEC>)?/*(<PELSE><LLAVEA><LLAVEC>)?*/
+	<PIF><PARA>ParametrosIF()<PARC><LLAVEA>(SentenciasIF())+<LLAVEC>(<PELSE>(Elseifs())?<LLAVEA>(SentenciasIF())+<LLAVEC>)?/*(<PELSE><LLAVEA><LLAVEC>)?*/
 }
 void Elseifs():{}
 {
-	(<PIF><PARA>ParametrosIF()<PARC><LLAVEA>SentenciasIF()<LLAVEC><PELSE>)+
+	(<PIF><PARA>ParametrosIF()<PARC><LLAVEA>(SentenciasIF())+<LLAVEC><PELSE>)+
 }
 
 void ParametrosIF():{Token IdParam1, IdParam2, NumParam1, DecParam1,IdParam3, IdParam4;}
@@ -623,7 +636,7 @@ void ParametrosIF():{Token IdParam1, IdParam2, NumParam1, DecParam1,IdParam3, Id
 	(<DOLAR>IdParam1=<ID>ORe2() {ValorP1= IdParam1.image;}
 		      (<DOLAR>IdParam2=<ID> {ValorP2= IdParam2.image;}
 		      	|NumParam1=<NUM> {ValorP3= NumParam1.image;}
-		      	|DecParam1=<DEC> {ValorP4= DecParam1.image;}
+		      	|DecParam1=<DEC> {ValorP4= DecParam1.image; }
 		      	|<COMILLASIMPLE>IdParam3=<ID><COMILLASIMPLE> {ValorP5= IdParam3.image;}
 		      	|<COMILLADOBLE>IdParam4=<ID><COMILLADOBLE>{ValorP6= IdParam4.image;}){if(ValorP1 != ""){
 		      																			if(ValorP2 != ""){
@@ -632,7 +645,7 @@ void ParametrosIF():{Token IdParam1, IdParam2, NumParam1, DecParam1,IdParam3, Id
 		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3);
 		      																					}
 		      																				}
-		      																			}if(ValorP3 != ""){
+		      																			}if(ValorP3 != ""){ //PARA NUMEROS ENTEROS
 		      																				if(OperadorRe2.equals("==")){
 		      																					if(ValorAsig1.equals(ValorP3)){
 		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES IGUAL");
@@ -690,21 +703,241 @@ void ParametrosIF():{Token IdParam1, IdParam2, NumParam1, DecParam1,IdParam3, Id
 		      																				}if(OperadorRe2.equals("<")){
 		      																					if(Integer.parseInt(ValorAsig1) < Integer.parseInt(ValorP3)){
 		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig2) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig3) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig4) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig5) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig6) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig7) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig8) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig9) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig10) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
+		      																					}if(Integer.parseInt(ValorAsig11) < Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR");
 		      																					}
 		      																				}if(OperadorRe2.equals(">")){
-		      																					//JSLFKJASD
+		      																					if(Integer.parseInt(ValorAsig1) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig2) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig3) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig4) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig5) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig6) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig7) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig8) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig9) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig10) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}if(Integer.parseInt(ValorAsig11) > Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR");
+		      																					}
 		      																				}if(OperadorRe2.equals("<=")){
-		      																					//SLKFJALSDFA
+		      																					if(Integer.parseInt(ValorAsig1) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig2) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig3) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig4) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig5) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig6) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig7) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig8) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig9) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig10) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig11) <= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MENOR IGUAL QUE");
+		      																					}
 		      																				}if(OperadorRe2.equals(">=")){
-		      																					//JSFLKAJSKLDF
-		      																				}
-		      																			}if(ValorP4 != ""){
-		      																				if(OperadorRe2.equals("==")){
-		      																					if(ValorAsig1.equals(ValorP3)){
-		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3);
+		      																					if(Integer.parseInt(ValorAsig1) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig2) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig3) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig4) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig5) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig6) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig7) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig8) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig9) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig10) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
+		      																					}if(Integer.parseInt(ValorAsig11) >= Integer.parseInt(ValorP3)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3 +" ES MAYOR IGUAL QUE");
 		      																					}
 		      																				}
-		      																			}if(ValorP5 != ""){
+		      																			}/*if(ValorP4 != ""){   //PARA NUMEROS DECIMALES
+		      																				if(OperadorRe2.equals("==")){
+		      																					if(ValorAsigF1.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF2.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF3.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF4.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF5.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF6.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF7.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF8.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF9.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF10.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF11.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}if(ValorAsigF12.equals(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES IGUAL");
+		      																					}
+		      																				}if(OperadorRe2.equals("!=")){
+		      																					if(Float.parseFloat(ValorAsigF1) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF2) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF3) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF4) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF5) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF6) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF7) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF8) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF9) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}if(Float.parseFloat(ValorAsigF10) != Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES DIFERENTE");
+		      																					}
+		      																				}if(OperadorRe2.equals("<")){
+		      																					if(Float.parseFloat(ValorAsigF1) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF2) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF3) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF4) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF5) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF6) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF7) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF8) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF9) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF10) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}if(Float.parseFloat(ValorAsigF11) < Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR");
+		      																					}
+		      																				}if(OperadorRe2.equals(">")){
+		      																					if(Float.parseFloat(ValorAsigF1) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF2) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF3) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF4) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF5) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF6) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF7) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF8) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF9) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}if(Float.parseFloat(ValorAsigF10) > Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR");
+		      																					}
+		      																				}if(OperadorRe2.equals("<=")){
+		      																					if(Float.parseFloat(ValorAsigF1) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF2) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF3) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF4) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF5) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF6) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF7) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF8) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF9) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF10) <= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MENOR QUE");
+		      																					}
+		      																				}if(OperadorRe2.equals(">=")){
+		      																					if(Float.parseFloat(ValorAsigF1) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF2) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF3) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF4) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF5) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF6) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF7) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF8) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF9) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}if(Float.parseFloat(ValorAsigF10) >= Float.parseFloat(ValorP4)){
+		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP4 +" ES MAYOR QUE");
+		      																					}
+		      																				}
+		      																			}*/if(ValorP5 != ""){
 		      																				if(OperadorRe2.equals("==")){
 		      																					if(ValorAsig1.equals(ValorP3)){
 		      																						System.out.println("---------> "+ValorP1 + OperadorRe2 + ValorP3);
@@ -754,7 +987,7 @@ void OAr2():{Token OperadorA2;} /// OPERACIONES ARITMETICAS SIN OPERANDOS
 	|OperadorA2=<MOD> {OperadorAr2 = OperadorA2.image;}
 	|OperadorA2=<RESTA> {OperadorAr2 = OperadorA2.image;})
 }
-void SentenciasIF():{}
+void SentenciasIF():{Token IdIf1, IdIf2, IdIf3, IdIf4, IdIf5=null, NumIf1, DecIf1, NumIf2, DecIf2, InDecIf, NumIf3, DecIf3, NumIf4 =null;}
 {
 	(<DOLAR><ID>(<IGUAL>(<DOLAR><ID>|<NUM>|<DEC>|<COMILLASIMPLE><ID><COMILLASIMPLE>|<COMILLADOBLE><ID><COMILLADOBLE>|(OAr2()(<DOLAR><ID>|<NUM>|<DEC>))*)|(<INC>|<DECR>))|(<PBREAK>|<PCONTI>))<PUNTOCOMA>
 }
@@ -787,16 +1020,89 @@ void SentenciaWh():{}
 }
 void CuerpoWh():{Token IdIm1, IdIm2, IdIm3, IdIm4, IdIm5;}
 {
-	 <PECHO>(<DOLAR>(IdIm1=<ID>
+	 <PECHO>(<DOLAR>(IdIm1=<ID> {if(OpeMenosAr !="" && IdMenosAr !=""){
+									ValorIdCWh = IdIm1.image;
+									if(ValorIdCWh.equals(IdMenosAr)){
+										if(ValorAsig1 != ""){
+											int resultadoOp1 = 0- Integer.parseInt(ValorAsig1);
+											System.out.println("*******-$ID1*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsig2 != ""){
+											int resultadoOp1 = 0- Integer.parseInt(ValorAsig2);
+											System.out.println("*******-$ID2*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsig3 != ""){
+											int resultadoOp1 = 0- Integer.parseInt(ValorAsig3);
+											System.out.println("*******-$ID3*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsig4 != ""){
+											int resultadoOp1 = 0- Integer.parseInt(ValorAsig4);
+											System.out.println("*******-$ID4*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsig5 != ""){
+											int resultadoOp1 = 0- Integer.parseInt(ValorAsig5);
+											System.out.println("*******-$ID5*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsig6 != ""){
+											int resultadoOp1 = 0- Integer.parseInt(ValorAsig6);
+											System.out.println("*******-$ID6*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsig7 != ""){
+											int resultadoOp1 = 0- Integer.parseInt(ValorAsig7);
+											System.out.println("*******-$ID7*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsig8 != ""){
+											int resultadoOp1 = 0- Integer.parseInt(ValorAsig8);
+											System.out.println("*******-$ID8*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}
+										//PARA VALORES DECIMALES
+										if(ValorAsigF1 != ""){
+											float resultadoOp1 = 0- Float.parseFloat(ValorAsigF1);
+											System.out.println("*******-$ID1*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsigF2 != ""){
+											float resultadoOp1 = 0- Float.parseFloat(ValorAsigF2);
+											System.out.println("*******-$ID2*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsigF3 != ""){
+											float resultadoOp1 = 0- Float.parseFloat(ValorAsigF3);
+											System.out.println("*******-$ID3*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsigF4 != ""){
+											float resultadoOp1 = 0- Float.parseFloat(ValorAsigF4);
+											System.out.println("*******-$ID4*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsigF5 != ""){
+											float resultadoOp1 = 0- Float.parseFloat(ValorAsigF5);
+											System.out.println("*******-$ID5*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsigF6 != ""){
+											float resultadoOp1 = 0- Float.parseFloat(ValorAsigF6);
+											System.out.println("*******-$ID6*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsigF7 != ""){
+											float resultadoOp1 = 0- Float.parseFloat(ValorAsigF7);
+											System.out.println("*******-$ID7*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}if(ValorAsigF8 != ""){
+											float resultadoOp1 = 0- Float.parseFloat(ValorAsigF8);
+											System.out.println("*******-$ID8*********");
+											System.out.println(resultadoOp1);System.out.println("********************");
+										}
+									}
+								}
+								}
 	 	            |<PTHIS><ASIG>IdIm2=<ID>)
 	        |(<COMILLADOBLE>IdIm3=<ID><COMILLADOBLE>)(<PUNTO>(<COMILLADOBLE>(IdIm4=<ID>
 	        																|<BARRA><SALTO>)<COMILLADOBLE>
 	        												  |<DOLAR><PTHIS><ASIG>IdIm5=<ID>))*)<PUNTOCOMA>
-	 //SUMATORIA DE 
+	//OPERACIONES ARITMETICAS
 	|<DOLAR><ID>(<IGUAL><DOLAR><ID>OAr()
 				|(<INC>|<DECR>))<PUNTOCOMA>
 	|(<PBREAK>|<PCONTI>)<PUNTOCOMA>
 	|CuerpoIF()
+	|OperacionesArit1()
 	|SentenciaSW()
 }
 
